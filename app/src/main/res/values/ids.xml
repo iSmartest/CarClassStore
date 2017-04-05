@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="gridview" type="id"/>
+    <item name="listview" type="id"/>
+    <item name="webview" type="id"/>
+    <item name="activity_leave_ll_1" type="id"/>
+    <item type="id" name="tag_discuss"></item>
+    <item type="id" name="tag_album_position"></item>
+    <item type="id" name="tag_album"></item>
+    <item name="POSITION" type="id"/>
+    <item name="CHOICE" type="id"/>
+</resources>

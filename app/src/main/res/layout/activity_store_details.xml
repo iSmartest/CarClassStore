@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/search_background">
+    <include layout="@layout/activity_base"/>
+    <include layout="@layout/include_store_details"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/linear_shopping_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/white_smoke">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/s_home2"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="￥200"
+                android:textSize="20sp"
+                android:textColor="@color/btn_login_color"
+                android:gravity="center"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_immediately_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="立即支付"
+            android:textSize="20sp"
+            android:textColor="@color/white_smoke"
+            android:background="@color/pay_background"
+            android:layout_weight="1"
+            android:gravity="center"/>
+    </LinearLayout>
+</RelativeLayout>

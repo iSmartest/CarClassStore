@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <GridView
+        android:id="@+id/activity_add_photo_gv_gv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="@android:color/transparent"
+        android:horizontalSpacing="2dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:verticalSpacing="2dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white_smoke">
+
+        <Button
+            android:id="@+id/activity_add_photo_btn_preview"
+            style="@style/PinkTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="预览" />
+
+        <RelativeLayout
+            android:id="@+id/activity_add_photo_rl_accomplish"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/activity_add_photo_tv_sure"
+                style="@style/PinkTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:text="完成" />
+
+            <TextView
+                android:id="@+id/activity_add_photo_tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/chioce_photo_num_bg"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:textColor="@color/white_smoke"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
