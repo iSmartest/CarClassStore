@@ -9,7 +9,7 @@ package com.lixin.carclassstore.bean;
 public class HoneBean {
     private String result;
     private String resultNote;
-    private ServerBean serve;
+
 
     public String getResult() {
         return result;
@@ -27,19 +27,13 @@ public class HoneBean {
         this.resultNote = resultNote;
     }
 
-    public ServerBean getServe() {
-        return serve;
-    }
 
-    public void setServe(ServerBean serve) {
-        this.serve = serve;
-    }
 
     @Override
     public String toString() {
         return "HomeNewsBean [result=" + result
                 + ", resultNote=" + resultNote
-                + ", serve=" + serve + "]";
+                + "]";
     }
 }
 

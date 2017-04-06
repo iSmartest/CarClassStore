@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.lixin.carclassstore.R;
+import com.lixin.carclassstore.bean.UserInfo;
 import com.lixin.carclassstore.dialog.TipsDialog;
 import com.lixin.carclassstore.utils.CommonLog;
 
@@ -124,5 +125,28 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
     public void setTitleText(String string) {
         TextView titleTv = (TextView) findViewById(R.id.tv_base_titleText);
         titleTv.setText(string);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (outState == null)
+            return;
+        outState.putString("UserId", UserInfo.UserId);
+        outState.putString("UserName", UserInfo.UserName);
+        outState.putString("Telephone", UserInfo.Telephone);
+        outState.putString("Password", UserInfo.Password);
+        outState.putString("ImageUrl", UserInfo.ImageUrl);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            UserInfo.UserId = savedInstanceState.getString("UserId");
+            UserInfo.UserName = savedInstanceState.getString("UserName");
+            UserInfo.Telephone = savedInstanceState.getString("Telephone");
+            UserInfo.Password = savedInstanceState.getString("Password");
+            UserInfo.ImageUrl = savedInstanceState.getString("ImageUrl");
+        }
     }
 }

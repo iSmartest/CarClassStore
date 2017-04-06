@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include layout="@layout/activity_base"/>
+    <LinearLayout
+        android:id="@+id/linear_fault_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:textSize="16dp"
+            android:textColor="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="故障类别" />
+
+        <TextView
+            android:id="@+id/text_fault_category"
+            android:textSize="16dp"
+            android:textColor="@color/gray"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:gravity="right" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/app_kind_jiantou" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_current_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:textSize="16dp"
+            android:textColor="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="当前位置" />
+
+        <TextView
+            android:id="@+id/text_current_location"
+            android:textSize="16dp"
+            android:textColor="@color/gray"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:gravity="right" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/app_kind_jiantou" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="故障描述"
+            android:textSize="16sp"
+           android:layout_marginLeft="8dp"/>
+        <EditText
+            android:id="@+id/a_feedback_edt_content"
+            style="@style/DefaultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white_smoke"
+            android:gravity="left|top"
+            android:hint="请输入故障信息描述"
+            android:layout_weight="1"
+            android:maxLines="12"
+            android:minLines="12"
+            android:layout_marginLeft="8dp"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:textColorHint="@color/hint_text_color_default" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/a_feedback_btn"
+        android:background="@color/btn_login_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginTop="48dp"
+        android:textSize="16sp"
+        android:textColor="@color/white_smoke"
+        android:text="提交" />
+</LinearLayout>

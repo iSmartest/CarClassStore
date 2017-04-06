@@ -66,7 +66,40 @@
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.ForgetPwdActivity"/>
         <activity android:name=".activity.LoginActivity"/>
-
+        <activity android:name=".activity.SetUpActivity"/>
+        <activity android:name=".activity.BuyInsuranceActivity"/>
+        <activity android:name=".activity.CarStoreActivity"/>
+        <activity android:name=".activity.CheckViolationWebActivity"/>
+        <activity android:name=".activity.CustomerServiceActivity"/>
+        <activity android:name=".activity.NewCarActivity"/>
+        <!--<activity android:name=".activity.UsedCarActivity"/>-->
+        <activity android:name=".activity.BaseActivity"/>
+        <activity android:name=".activity.StoreActivity"/>
+        <activity android:name=".activity.CarSeriesActivity"/>
+        <activity android:name=".activity.NewCarDetailsActivity"/>
+        <activity android:name=".activity.NewCarModelsActivity"/>
+        <!--<activity android:name=".activity.UsedCarSeriesActivity"/>-->
+        <!--<activity android:name=".activity.UsedCarBrandActivity"/>-->
+        <!--<activity android:name=".activity.UsedCarDetailsActivity"/>-->
+        <!--<activity android:name=".activity.UsedCarListActivity"/>-->
+        <activity android:name=".activity.ServiceClassActivity"/>
+        <activity android:name=".activity.StoreDetailsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".activity.OrderPaymentActivity"/>
+        <activity android:name=".activity.ShoppingCartActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <!--<activity android:name=".activity.MyCollectionActivity"-->
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>-->
+        <!--<activity android:name=".activity.MyReleaseActivity"-->
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>-->
+        <activity android:name=".activity.SetPasswordQuestionActivity"/>
+        <activity android:name=".activity.SetPasswordActivity"/>
+        <!--<activity android:name=".activity.MoneySafeActivity"/>-->
+        <!--<activity android:name=".activity.RoadRescueActivity"/>-->
+        <!--<activity android:name=".activity.ReleaseRescueInformationActivity"/>-->
+        <!--<activity android:name=".activity.FaultCategoryActivity"/>-->
+        <!--<activity android:name=".activity.CurrentLocationActivity"/>-->
+        <!--<activity android:name=".activity.CustomerComplaintActivity"/>-->
     </application>
 
 </manifest>

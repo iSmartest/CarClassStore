@@ -17,4 +17,28 @@ public class UserLoginBean {
         public String useridentity;
         public String openId;//:""开启即时通信
     }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getResultNote() {
+        return resultNote;
+    }
+
+    public void setResultNote(String resultNote) {
+        this.resultNote = resultNote;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 }

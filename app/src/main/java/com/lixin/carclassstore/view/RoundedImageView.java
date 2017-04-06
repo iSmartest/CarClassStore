@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.lixin.carclassstore.R;
 
+
 public class RoundedImageView extends ImageView
 {
 

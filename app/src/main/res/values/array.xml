@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="home_functions">
+        <item>换轮胎</item>
+        <item>做保养</item>
+        <item>洗车</item>
+        <item>找客服</item>
         <item>新车</item>
         <item>二手车</item>
         <item>维修保养</item>
