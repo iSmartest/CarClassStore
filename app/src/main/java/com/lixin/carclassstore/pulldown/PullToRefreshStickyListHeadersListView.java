@@ -10,8 +10,8 @@ import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.lixin.chepinstore.R;
-import com.lixin.chepinstore.pulldown.stickygridheaders.StickyListHeadersListView;
+import com.lixin.carclassstore.R;
+import com.lixin.carclassstore.pulldown.stickygridheaders.StickyListHeadersListView;
 
 
 public class PullToRefreshStickyListHeadersListView extends PullToRefreshBase<StickyListHeadersListView> implements

@@ -2,30 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/search_background">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white_smoke">
         <TextView
             android:id="@+id/text_service_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="服务类别"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/black"/>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="30dp"
-            android:background="@color/gray"/>
-        <TextView
-            android:id="@+id/text_default_sort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="默认排序"
+            android:text="不限种类"
             android:textSize="16sp"
             android:layout_weight="1"
             android:gravity="center"
@@ -38,7 +27,7 @@
             android:id="@+id/text_screening_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="筛选方式"
+            android:text="排列方式"
             android:textSize="16sp"
             android:layout_weight="1"
             android:gravity="center"
@@ -48,10 +37,15 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
-    <ListView
-        android:id="@+id/list_store"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp">
+        <com.lixin.carclassstore.pulldown.PullToRefreshListView
+            android:id="@+id/pull_to_refresh_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.lixin.carclassstore.pulldown.PullToRefreshListView>
+    </LinearLayout>
+
 </LinearLayout>

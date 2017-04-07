@@ -25,9 +25,6 @@ public class MainActivity extends BaseActivity {
         initView();
         initFragment();
         refreshView();
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.activity_new_main_layout_content, new StoreFragment()).commit();
-        }
     }
     private void initView() {
         mTextView = new TextView[4];

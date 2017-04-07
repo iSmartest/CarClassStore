@@ -3,11 +3,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.activity.BuyInsuranceActivity;
 import com.lixin.carclassstore.activity.CarStoreActivity;
@@ -15,15 +18,37 @@ import com.lixin.carclassstore.activity.CheckViolationWebActivity;
 import com.lixin.carclassstore.activity.CustomerServiceActivity;
 import com.lixin.carclassstore.activity.NewCarActivity;
 import com.lixin.carclassstore.activity.StoreActivity;
+import com.lixin.carclassstore.bean.JavaBean;
+import com.lixin.carclassstore.http.StringCallback;
+import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.ToastUtils;
+import com.sina.weibo.sdk.utils.LogUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
+
 /**
  * Created by 小火
  * Create time on  2017/4/1
  * My mailbox is 1403241630@qq.com
  */
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private View[] funcViews = new View[21];
     private String[] funcTxts;
+    private String[] topTexts = new String[4];
+    private JavaBean javaBean;
     private View view;
+    private String result;
+    private String resultNote;
+    private String serve;
+    private List<JavaBean.Serve.rotateAdvertisement> imageList = new ArrayList<>();
+    private List<JavaBean.Serve.serveTop> topList = new ArrayList<>();
+    private List<JavaBean.Serve.serveBottom> bottomList = new ArrayList<>();
+    private List<JavaBean.Serve.CheckAdvertisement.checkServes> checkServesList = new ArrayList<>();
     private int[] bigBGs = new int[]{
             R.drawable.s_home2,
             R.drawable.s_home2,
@@ -48,15 +73,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             R.drawable.s_home2
 
     };
-    String Url = "http://116.255.239.201:8080/carmallService/service.action";
+
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home,container,false);
-
+        initData();
         initView();
+        getdata();
         return view;
+    }
+
+    private void initData() {
+
     }
 
     private void initView() {
@@ -94,8 +125,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             funcViews[i].setId(i);
 
         }
-
-
     }
     @Override
     public void onClick(View v) {
@@ -142,5 +171,43 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(getActivity(),CarStoreActivity.class));
                 break;
         }
+    }
+    private void getdata() {
+        Map<String, String> params = new HashMap<>();
+        String json="{\"cmd\":\"getAppLaunchInfo\"}";
+        params.put("json", json);
+        dialog.show();
+        OkHttpUtils//
+                .post()//
+                .url(context.getString(R.string.url))//
+                .params(params)//
+                .build()//
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtils.showMessageLong(context, "网络异常");
+                        dialog.dismiss();
+                    }
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Gson gson = new Gson();
+                        dialog.dismiss();
+                        javaBean = gson.fromJson(response, JavaBean.class);
+                        Log.i("wwww", "onResponse: " + javaBean.getServe());
+                        JavaBean.Serve serve = gson.fromJson(response, JavaBean.Serve.class);
+                        Log.i("qqqqq", "onResponse: " + serve);
+                        imageList = serve.rotateAdvertisement;//轮播图集合
+                        Log.i("qqqq", "imageList: " + imageList.get(0).getServeIcon());
+                        topList = serve.serveTop;
+                        Log.i("qqqq", "topList: " + topList.get(0).getServeIcon());
+                        bottomList = serve.serveBottom;
+                        Log.i("qqqq", "bottomList: " + bottomList.get(0).getServeIcon());
+                        checkServesList = serve.checkAdvertisement.checkServes;
+                        Log.i("qqqq", "checkServesList: " + checkServesList.get(0).getServeIcon());
+//                        shopMeunList = javaBean.shopMeun;
+//                        filtrateList = javaBean.filtrate;
+
+                    }
+                });
     }
 }

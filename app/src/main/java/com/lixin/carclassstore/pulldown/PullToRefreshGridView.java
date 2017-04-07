@@ -6,7 +6,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.widget.GridView;
 
-import com.lixin.chepinstore.R;
+import com.lixin.carclassstore.R;
 
 
 public class PullToRefreshGridView extends PullToRefreshAdapterViewBase<GridView>

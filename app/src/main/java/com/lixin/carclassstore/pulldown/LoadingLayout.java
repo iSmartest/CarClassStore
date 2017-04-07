@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.lixin.chepinstore.R;
+import com.lixin.carclassstore.R;
 
 
 @SuppressLint("ViewConstructor")

@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
+
 public class PullToRefreshSwipeMenuListView extends
 		PullToRefreshAdapterViewBase<SwipeMenuListView> {
 	class InternalListView extends SwipeMenuListView implements EmptyViewMethodAccessor {

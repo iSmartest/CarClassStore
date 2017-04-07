@@ -24,7 +24,7 @@ import java.util.List;
 public class StoreActivity extends BaseActivity implements View.OnClickListener{
     private TextView text_service_class;
     private ListView list_store;
-    private List<StoreBean> mList = new ArrayList<>();
+    private List<StoreBean.shopList> mList = new ArrayList<>();
     private StoreAdapter storeAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,23 +33,10 @@ public class StoreActivity extends BaseActivity implements View.OnClickListener{
         setTitleText("门店");
         hideBack(false);
         initView();
-        initData();
         storeAdapter = new StoreAdapter(StoreActivity.this,mList);
         storeAdapter.setStoreBeanList(mList);
         list_store.setAdapter(storeAdapter);
     }
-
-    private void initData() {
-        for (int i = 0; i < 7; i++) {
-            StoreBean storeBean = new StoreBean();
-            storeBean.setTitle("摩卡汽车服务中心");
-            storeBean.setNum("500");
-            storeBean.setScore("4.6");
-            storeBean.setAddress("云南省曲靖市特立卡尔街105号");
-            mList.add(storeBean);
-        }
-    }
-
     private void initView() {
         text_service_class = (TextView) findViewById(R.id.text_service_class);
         text_service_class.setOnClickListener(this);

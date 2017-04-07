@@ -15,17 +15,18 @@
     <string name="error_connect_fail">连接服务器失败</string>
     <string name="error_service_interactive_fail">与服务器交互失败</string>
     <string name="no_data">暂无相关内容</string>
-
+    <string name="no_more_data">没有了哦！</string>
     <string name="error_input_phone">请输入正确的手机号码</string>
     <string name="error_input_pwd_fail_info_tips">请输入6-20位英文字母或数字</string>
     <string name="error_input_verification">请输入验证码</string>
     <string name="error_input_verification_fail_info">验证码错误:验证码由4位数字组成</string>
     <string name="sure_to_do_sth">您确定要%s吗？</string>
-    <string name="url">请求地址</string>
+    <string name="url">http://116.255.239.201:8080/carmallService/service.action</string>
     <string name="juhe_url">聚合验证码地址</string>
     <string name="ok_to_exit_it">确定退出吗?</string>
     <string name="only_can_chose_nine">你最多可以选择9张图片</string>
-
+    <string name="error_download_success_format">下载成功，文件保存于:%s</string>
+    <string name="error_download_fail">下载失败</string>
     <string name="pull_to_refresh_loading">正在加载中</string>
     <string name="pull_to_refresh_header_1">下拉可以刷新</string>
     <string name="pull_to_refresh_header_2">松开后刷新</string>

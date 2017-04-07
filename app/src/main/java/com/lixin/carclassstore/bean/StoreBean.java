@@ -1,74 +1,73 @@
 package com.lixin.carclassstore.bean;
 
+import java.util.List;
+
 /**
  * Created by 小火
  * Create time on  2017/3/29
  * My mailbox is 1403241630@qq.com
  */
 
-public class StoreBean
-{
-    private int state;
-    private String image;
-    private String title;
-    private String num;
-    private String score;
-    private String address;
-    public void  StoreBeanList(int state ,String image,String title,String num,String score,
-             String address){
-        this.state = state;
-        this.image = image;
-        this.title = title;
-        this.num = num;
-        this.score = score;
-        this.address = address;
+public class StoreBean {
+    public String result; //0成功1失败"0"
+    public String resultNote;//"失败原因"
+    public String totalPage;//总页数 5
+    public List<shopList> shop;
+    public class shopList{
+        public String shopid;
+        public String shopIcon;
+        public String shopName;
+        public String shopLocaltion;
+        public String sellerNum;
+        public String shopCommentNum;
+
+        public String getShopid() {
+            return shopid;
+        }
+
+        public void setShopid(String shopid) {
+            this.shopid = shopid;
+        }
+
+        public String getShopIcon() {
+            return shopIcon;
+        }
+
+        public void setShopIcon(String shopIcon) {
+            this.shopIcon = shopIcon;
+        }
+
+        public String getShopName() {
+            return shopName;
+        }
+
+        public void setShopName(String shopName) {
+            this.shopName = shopName;
+        }
+
+        public String getShopLocaltion() {
+            return shopLocaltion;
+        }
+
+        public void setShopLocaltion(String shopLocaltion) {
+            this.shopLocaltion = shopLocaltion;
+        }
+
+        public String getSellerNum() {
+            return sellerNum;
+        }
+
+        public void setSellerNum(String sellerNum) {
+            this.sellerNum = sellerNum;
+        }
+
+        public String getShopCommentNum() {
+            return shopCommentNum;
+        }
+
+        public void setShopCommentNum(String shopCommentNum) {
+            this.shopCommentNum = shopCommentNum;
+        }
     }
 
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

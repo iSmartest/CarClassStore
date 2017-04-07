@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.bean.StoreBean;
+import com.lixin.carclassstore.tools.ImageManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,14 +23,14 @@ import java.util.List;
 
 public class StoreAdapter extends BaseAdapter{
 
-    private List<StoreBean> storeBeanList;
+    private List<StoreBean.shopList> storeBeanList;
     private Context context;
 
-    public StoreAdapter(Context context, List<StoreBean> list) {
+    public StoreAdapter(Context context, List<StoreBean.shopList> list) {
         this.context = context;
         this.storeBeanList = list;
     }
-    public void setStoreBeanList(List<StoreBean> storeBean){
+    public void setStoreBeanList(List<StoreBean.shopList> storeBean){
         this.storeBeanList = storeBean;
     }
 
@@ -38,7 +40,7 @@ public class StoreAdapter extends BaseAdapter{
     }
 
     @Override
-    public StoreBean getItem(int position) {
+    public StoreBean.shopList getItem(int position) {
         return storeBeanList.get(position);
     }
 
@@ -61,18 +63,25 @@ public class StoreAdapter extends BaseAdapter{
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            final StoreBean storeBean = (StoreBean) storeBeanList.get(position);
-            String imag = storeBean.getImage();
-//            ImageManager.imageLoader.displayImage(imag,mViewHolder.iv_car_picture,ImageManager.options3);
-            viewHolder.text_sales_num.setText("销量" + storeBean.getNum());
-            viewHolder.text_store_name.setText(storeBean.getTitle());
-            viewHolder.text_store_score.setText(storeBean.getScore());
-            viewHolder.text_store_address.setText(storeBean.getAddress());
+            final StoreBean.shopList mShopList = storeBeanList.get(position);
+            String imag = mShopList.getShopIcon();
+            ImageManager.imageLoader.displayImage(imag,viewHolder.iv_car_picture,ImageManager.options3);
+            viewHolder.text_sales_num.setText("销量" + mShopList.getSellerNum());
+            viewHolder.text_store_name.setText(mShopList.getShopName());
+            viewHolder.text_store_score.setText(mShopList.getShopCommentNum());
+            viewHolder.text_store_address.setText(mShopList.getShopLocaltion());
         }
         return convertView;
     }
     class ViewHolder{
         ImageView iv_car_picture;
         TextView text_store_name,text_store_score,text_sales_num,text_store_address;
+    }
+    public void updateList(List<StoreBean.shopList> newList) {
+        if (newList == null)
+            storeBeanList = new ArrayList<>();
+        else
+            storeBeanList = newList;
+        notifyDataSetChanged();
     }
 }

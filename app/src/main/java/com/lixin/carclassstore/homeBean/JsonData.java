@@ -44,8 +44,6 @@ public class JsonData {
         this.storeMenuData = storeMenuData;
     }
 
-
-
     public String getResult() {
         return result;
     }

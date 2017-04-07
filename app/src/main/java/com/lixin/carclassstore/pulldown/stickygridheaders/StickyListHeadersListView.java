@@ -23,9 +23,8 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
-
-import com.lixin.chepinstore.R;
-import com.lixin.chepinstore.pulldown.stickygridheaders.WrapperViewList.LifeCycleListener;
+import com.lixin.carclassstore.pulldown.stickygridheaders.WrapperViewList.LifeCycleListener;
+import com.lixin.carclassstore.R;
 
 
 /**
@@ -849,6 +848,7 @@ public class StickyListHeadersListView extends FrameLayout {
         mList.setSelectionAfterHeaderView();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void setSelectionFromTop(int position, int y) {
         y += mAdapter == null ? 0 : getHeaderOverlap(position);
         y -= mClippingToPadding ? 0 : mPaddingTop;
