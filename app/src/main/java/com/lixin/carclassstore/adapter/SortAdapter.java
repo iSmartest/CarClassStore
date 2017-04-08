@@ -70,7 +70,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 		}
 	
 		viewHolder.tvTitle.setText(this.list.get(position).getName());
-		
+
 		return view;
 
 	}

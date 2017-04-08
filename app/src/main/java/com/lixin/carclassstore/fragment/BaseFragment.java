@@ -20,7 +20,7 @@ public class BaseFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context=getActivity();
+        context = getActivity();
         dialog = ProgressDialog.createLoadingDialog(context, "加载中.....");
     }
 }

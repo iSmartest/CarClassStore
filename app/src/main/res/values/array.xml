@@ -15,13 +15,12 @@
         <item>全场送机油</item>
         <item>电瓶立减50</item>
         <item>贴膜免费施工</item>
-        <item></item>
         <item>镀晶免费施工</item>
         <item>车品商城</item>
         <item>轮胎特价</item>
         <item>车灯9.9起</item>
         <item>空调冷剂</item>
-        <item>更多</item>
+
     </string-array>
     <string-array name="mine_functions">
         <item>购物车</item>

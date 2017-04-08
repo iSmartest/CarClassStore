@@ -17,11 +17,45 @@ public class JavaBean {
         public List<rotateAdvertisement> rotateAdvertisement;
         public List<serveBottom> serveBottom;
         public CheckAdvertisement checkAdvertisement;
+
+        public CheckAdvertisement getCheckAdvertisement() {
+            return checkAdvertisement;
+        }
+
+        public void setCheckAdvertisement(CheckAdvertisement checkAdvertisement) {
+            this.checkAdvertisement = checkAdvertisement;
+        }
+
         public class CheckAdvertisement{
             private String serveType;//跳转到商城列表时用
             private String serveIcon; //服务的头标
             private String serveTypeId;//商品类别id
             public List<checkServes> checkServes;
+
+            public String getServeType() {
+                return serveType;
+            }
+
+            public void setServeType(String serveType) {
+                this.serveType = serveType;
+            }
+
+            public String getServeIcon() {
+                return serveIcon;
+            }
+
+            public void setServeIcon(String serveIcon) {
+                this.serveIcon = serveIcon;
+            }
+
+            public String getServeTypeId() {
+                return serveTypeId;
+            }
+
+            public void setServeTypeId(String serveTypeId) {
+                this.serveTypeId = serveTypeId;
+            }
+
             public class checkServes{
                 private String serveIcon; //服务的头标
                 private String serveType; //服务的标题

@@ -149,11 +149,14 @@
             android:layout_gravity="center"
             android:layout_weight="1" />
     </LinearLayout>
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@mipmap/image_new_vip"
-        android:scaleType="fitXY"/>
+        android:layout_height="130dp">
+        <com.lixin.carclassstore.view.viewPage.ImageSlideshow
+            android:id="@+id/is_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"/>
+    </FrameLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -229,13 +232,22 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/gray"/>
-        <include
-            android:id="@+id/iv_car"
-            layout="@layout/include_imagetext"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:gravity="center">
+                <ImageView
+                    android:id="@+id/iv_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:duplicateParentState="true"
+                    android:scaleType="fitXY"
+                    tools:ignore="ContentDescription"/>
+        </LinearLayout>
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -299,14 +311,39 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/gray"/>
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:gravity="center"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/include_imagetext_view_image"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="5dp"
+            android:duplicateParentState="true"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription"
+            android:src="@mipmap/gengduo"/>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/include_imagetext_textview_text"
+        style="@style/DefaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/s_text_click"
+        android:textSize="14sp"
+        android:text="更多"/>
+</LinearLayout>
 
-        <include
-            android:id="@+id/text_more"
-            layout="@layout/include_imagetext"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

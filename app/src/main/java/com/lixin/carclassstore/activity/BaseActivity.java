@@ -1,5 +1,7 @@
 package com.lixin.carclassstore.activity;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,16 +18,20 @@ import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.bean.UserInfo;
 import com.lixin.carclassstore.dialog.TipsDialog;
 import com.lixin.carclassstore.utils.CommonLog;
+import com.lixin.carclassstore.view.ProgressDialog;
 
 public class BaseActivity extends FragmentActivity implements OnClickListener {
     private boolean override;
+    protected Context context;
+    protected Dialog dialog1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //页面启动 记录日志
         setContentView(R.layout.activity_base);
         CommonLog.i(getClass().getName());
-
+        context = this;
+        dialog1 = ProgressDialog.createLoadingDialog(context, "加载中.....");
     }
 
     public void hideBack(boolean show) {
@@ -56,7 +62,7 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(BaseActivity.this, "点击了添加", Toast.LENGTH_SHORT).show();
-
+                    startActivity(new Intent(BaseActivity.this,CarStyleChooseActivity.class));
                 }
             });
         }else{

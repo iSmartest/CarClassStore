@@ -107,6 +107,7 @@
         <activity android:name=".activity.CheckViolationWebActivity"/>
         <activity android:name=".activity.CustomerServiceActivity"/>
         <activity android:name=".activity.NewCarActivity"/>
+        <activity android:name=".activity.CarStyleChooseActivity"/>
         <!--<activity android:name=".activity.UsedCarActivity"/>-->
         <activity android:name=".activity.BaseActivity"/>
         <activity android:name=".activity.StoreActivity"/>

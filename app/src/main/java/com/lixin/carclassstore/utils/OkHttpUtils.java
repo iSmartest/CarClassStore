@@ -2,6 +2,8 @@ package com.lixin.carclassstore.utils;
 
 
 
+import android.util.Log;
+
 import com.lixin.carclassstore.budiler.Callback;
 import com.lixin.carclassstore.budiler.HeadBuilder;
 import com.lixin.carclassstore.budiler.OtherRequestBuilder;
@@ -189,6 +191,7 @@ public class OkHttpUtils
             public void run()
             {
                 callback.onResponse(object, id);
+                Log.i("wwww", "json: " + object);
                 callback.onAfter(id);
             }
         });

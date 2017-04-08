@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.bean.StoreBean;
 import com.lixin.carclassstore.tools.ImageManager;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class StoreAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
             final StoreBean.shopList mShopList = storeBeanList.get(position);
             String imag = mShopList.getShopIcon();
-            ImageManager.imageLoader.displayImage(imag,viewHolder.iv_car_picture,ImageManager.options3);
+            Picasso.with(context).load(imag).into(viewHolder.iv_car_picture);
             viewHolder.text_sales_num.setText("销量" + mShopList.getSellerNum());
             viewHolder.text_store_name.setText(mShopList.getShopName());
             viewHolder.text_store_score.setText(mShopList.getShopCommentNum());
