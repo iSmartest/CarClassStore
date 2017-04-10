@@ -157,7 +157,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             return;
         }
         try {
-            userLogin(userphone, Md5Util.md5Encode(password), token);
+            userLogin(userphone, Md5Util.md5Encode(password));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -175,7 +175,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            String screen_name = null, profile_image_url = null, openid = null;
+            String screen_name = null, profile_image_url = null, openid = null,phoneNum = null;
             if (SHARE_MEDIA.QQ.equals(share_media)) {
                 screen_name = map.get("screen_name");//昵称
                 profile_image_url = map.get("profile_image_url");//头像
@@ -184,8 +184,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 screen_name = map.get("screen_name");//昵称
                 profile_image_url = map.get("profile_image_url");//头像
                 openid = map.get("openid");//第三方平台id
+                phoneNum = map.get("phoneNum");
             }
-            thirdLogin(openid, screen_name, profile_image_url);
+            thirdLogin(openid, screen_name, profile_image_url,phoneNum);
         }
 
         @Override
@@ -220,16 +221,15 @@ public class LoginActivity extends Activity implements View.OnClickListener{
      * 用户登录
      * @param phone
      * @param password
-     * @param token
      */
-    private void userLogin(String phone, String password, String token) {
+    private void userLogin(String phone, String password) {
         Map<String, String> params = new HashMap<>();
         /*params.put("cmd", "userLogin");
         params.put("phone", phone);
         params.put("password", password);*/
         //params.put("token", "123123");
         String json="{\"cmd\":\"userLogin\",\"phone\":\"" + phone + "\",\"password\":\""
-                + password + "\",\"token\":\"" + token + "\"}";
+                + password + "\"}";
         params.put("json", json);
         dialog.show();
         OkHttpUtils.post().url(getString(R.string.url)).params(params).build()
@@ -244,15 +244,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         Gson gson = new Gson();
                         UserLoginBean bean = gson.fromJson(response, UserLoginBean.class);
                         if ("0".equals(bean.result)) {
-                            SharedPreferencesUtil.putSharePre(context, "uid", bean.userInfo.uid);
-                            SharedPreferencesUtil.putSharePre(context, "phoneNum", bean.userInfo.phoneNum);
-                            SharedPreferencesUtil.putSharePre(context, "nickName", bean.userInfo.nickName);
-                            SharedPreferencesUtil.putSharePre(context, "isLogin", true);
+                            SharedPreferencesUtil.putSharePre(context, "uid", bean.uid);
                             ToastUtils.showMessageShort(context, "登录成功");
-                            String openId = SharedPreferencesUtil.getSharePreStr(context, "openId");
-//                            YWSDKUtil.loginYM(openId, context);
-                            LogUtil.d("openId",bean.userInfo.openId);
-                            SharedPreferencesUtil.putSharePre(context,"openId",bean.userInfo.openId);
                             MyApplication.openActivity(context, MainActivity.class);
                             finish();
                             dialog.dismiss();
@@ -280,10 +273,10 @@ public class LoginActivity extends Activity implements View.OnClickListener{
      * @param nickName
      * @param userIcon
      */
-    private void thirdLogin(String thirdUid, final String nickName, String userIcon) {
+    private void thirdLogin(String thirdUid, final String nickName, String userIcon,String phoneNum) {
         Map<String, String> params = new HashMap<>();
         String json="{\"cmd\":\"thirdLogin\",\"thirdUid\":\"" + thirdUid + "\",\"nickName\":\""
-                + nickName + "\",\"userIcon\":\"" + userIcon + "\",\"token\":\"" + token + "\"}";
+                + nickName + "\",\"userIcon\":\"" + userIcon + "\",\"phoneNum\":\"" + phoneNum + "\"}";
         params.put("json", json);
         dialog.show();
         OkHttpUtils.post().url(getString(R.string.url)).params(params).build()
@@ -298,12 +291,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         Gson gson = new Gson();
                         UserLoginBean bean = gson.fromJson(response, UserLoginBean.class);
                         if ("0".equals(bean.result)) {
-                            SharedPreferencesUtil.putSharePre(context, "uid", bean.userInfo.uid);
-                            SharedPreferencesUtil.putSharePre(context, "phoneNum", bean.userInfo.phoneNum);
-                            SharedPreferencesUtil.putSharePre(context, "openId", bean.userInfo.openId);
+                            SharedPreferencesUtil.putSharePre(context, "uid", bean.uid);
+                            SharedPreferencesUtil.putSharePre(context, "isFirst", bean.isFirst);
                             ToastUtils.showMessageShort(context, "登录成功");
-                            LogUtil.d("openId",bean.userInfo.openId);
-                            SharedPreferencesUtil.putSharePre(context,"openId",bean.userInfo.openId);
                             MyApplication.openActivity(context, MainActivity.class);
                             finish();
                             dialog.dismiss();
@@ -325,7 +315,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         public void sure() {
                             dialog.dismiss();
                             finish();
-//                            MyApplication.getApplication().exit();
+                            MyApplication.getApplication().exit();
                         }
                     });
                 dialog.show();
@@ -333,7 +323,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 setResult(RESULT_CANCELED);
                 finish();
             }
-
         }
         return super.onKeyDown(keyCode, event);
     }

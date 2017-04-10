@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
@@ -38,7 +39,6 @@ import okhttp3.Call;
 public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private View[] funcViews = new View[19];
     private String[] funcTxts;
-    private String[] topTexts = new String[4];
     private JavaBean javaBean;
     private View view;
     private String result;
@@ -50,9 +50,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private List<JavaBean.Serve.CheckAdvertisement.checkServes> checkServesList = new ArrayList<>();
     private JavaBean.Serve.CheckAdvertisement checkAdvertisements ;
     private ImageView iv_car;
+    private ListView list_activity;
+    private View head;
+    private View foot;
     private ImageSlideshow imageSlideshow;
     private List<String> imageUrlList;
     private List<String> titleList ;
+    TextView text_home_head01,text_home_head02,text_home_head03;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,6 +108,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         funcViews[16] = view.findViewById(R.id.text_special_offer);
         funcViews[17] = view.findViewById(R.id.text_automative_lighting);
         funcViews[18] = view.findViewById(R.id.text_refrigerator);
+        list_activity = (ListView) view.findViewById(R.id.list_activity);
+        head = LayoutInflater.from(getActivity()).inflate(R.layout.home_list_head,null);
+        text_home_head01 = (TextView) head.findViewById(R.id.text_home_head01);
+        text_home_head02 = (TextView) head.findViewById(R.id.text_home_head02);
+        text_home_head03 = (TextView) head.findViewById(R.id.text_home_head03);
+        foot = LayoutInflater.from(getActivity()).inflate(R.layout.home_list_head,null);
+        text_home_head01 = (TextView) foot.findViewById(R.id.text_home_head01);
+        text_home_head02 = (TextView) foot.findViewById(R.id.text_home_head02);
+        text_home_head03 = (TextView) foot.findViewById(R.id.text_home_head03);
+        if (head != null){
+            list_activity.addHeaderView(head);
+            list_activity.addFooterView(foot);
+        }
     }
     //主页面数据加载
     private void initData() {
@@ -209,6 +226,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 Gson gson = new Gson();
                 dialog.dismiss();
                 javaBean = gson.fromJson(response, JavaBean.class);
+                if (javaBean.getResult().equals("1")){
+                    ToastUtils.showMessageLong(getActivity(),javaBean.getResultNote());
+                }
                 JavaBean.Serve serve = gson.fromJson(response, JavaBean.Serve.class);
                 List<JavaBean.Serve.rotateAdvertisement> rotateAdvertisementList = serve.rotateAdvertisement;//轮播图集合
                 rotateAdvertisement.addAll(rotateAdvertisementList);

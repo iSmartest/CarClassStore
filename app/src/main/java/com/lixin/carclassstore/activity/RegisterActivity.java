@@ -132,8 +132,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         }
         String userphone = edi_phone_number.getText().toString().trim();
         logpwd = password;
+        String inviteCode = edi_verification_code.getText().toString().trim();
         try {
-            userRegister(userphone, Md5Util.md5Encode(password), addressId);
+            userRegister(userphone, Md5Util.md5Encode(password), inviteCode);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -143,9 +144,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
      *
      * @param userPhone
      * @param password
-     * @param addressId
+     * @param inviteCode
      */
-    private void userRegister(final String userPhone, final String password, String addressId) {
+    private void userRegister(final String userPhone, final String password, String inviteCode) {
        /* cmd:”userRegister”
         userPhone:”18023344”  //用户手机号
         password:”  ”    //用户密码
@@ -156,7 +157,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         params.put("password", password);
         params.put("addressId", "100100");*/
         String json="{\"cmd\":\"userRegister\",\"userPhone\":\"" + userPhone + "\"," +
-                "\"password\":\"" + password +"\",\"addressId\":\"" + 100100 + "\"}";
+                "\"password\":\"" + password +"\",\"inviteCode\":\"" + inviteCode + "\"}";
         params.put("json", json);
         dialog.show();
         //车品商城服务端
@@ -174,7 +175,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                         UserRegisterBean bean = gson.fromJson(response, UserRegisterBean.class);
                         if ("0".equals(bean.result)) {
                             ToastUtils.showMessageShort(mContext, "注册成功");
-                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"openId",bean.userInfo.openId);
+//                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"openId",bean.userInfo.openId);
                             Bundle bundle = new Bundle();
                             bundle.putString("phone", userPhone);
                             bundle.putString("password", logpwd);

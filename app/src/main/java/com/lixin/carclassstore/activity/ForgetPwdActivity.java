@@ -59,7 +59,7 @@ public class ForgetPwdActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_forgrt_password);
         mContext = this;
         TelephonyManager mTelephonyManager = (TelephonyManager)mContext.getSystemService(TELEPHONY_SERVICE);
-        token=mTelephonyManager.getDeviceId();
+        token = mTelephonyManager.getDeviceId();
         initView();
     }
 
@@ -208,13 +208,13 @@ public class ForgetPwdActivity extends Activity implements View.OnClickListener{
      * @param phone
      * @param password
      */
-    private void findPassword(final String phone, String password) {
+    private void findPassword(final String phone, final String password) {
         Map<String, String> params = new HashMap<>();
        /* params.put("cmd", "findPassword");
         params.put("phone", phone);
         params.put("password", password);*/
-        String json="{\"cmd\":\"findPassword\",\"phone\":\"" + phone + "\"," +
-                "\"password\":\"" + password +"\",\"token\":\"" + token + "\"}";
+        String json="{\"cmd\":\"forgetPassword\",\"phoneNum\":\"" + phone + "\"," +
+                "\"password\":\"" + password +"\",\"inviteCode\":\"" + token + "\"}";
         params.put("json", json);
         dialog.show();
         OkHttpUtils.post().url(getString(R.string.url)).params(params).build()
@@ -234,6 +234,7 @@ public class ForgetPwdActivity extends Activity implements View.OnClickListener{
                             if ("0".equals(result)){
                                 ToastUtils.showMessageShort(mContext,"找回密码成功");
                                 SharedPreferencesUtil.putSharePre(mContext,"phoneNum",phone);
+                                SharedPreferencesUtil.putSharePre(mContext,"password",password);
                                 finish();
                                 dialog.dismiss();
                             }else {

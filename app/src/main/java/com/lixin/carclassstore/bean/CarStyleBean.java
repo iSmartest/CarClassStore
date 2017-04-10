@@ -9,8 +9,8 @@ import java.util.List;
  */
 
 public class CarStyleBean {
-    private String result;
-    private String resultNote;
+    public String result;
+    public String resultNote;
 
     public List<hotCarsList> hotCarsList;
     public List<carsSelectList> carsSelectList;
@@ -47,16 +47,16 @@ public class CarStyleBean {
     }
 
     public class hotCarsList{
-        private String carBrandId;
-        private String carleader;
-        private String carName;
+        public String carbrandId;
+        public String carleader;
+        public String carname;
 
         public String getCarBrandId() {
-            return carBrandId;
+            return carbrandId;
         }
 
         public void setCarBrandId(String carBrandId) {
-            this.carBrandId = carBrandId;
+            this.carbrandId = carBrandId;
         }
 
         public String getCarleader() {
@@ -68,31 +68,23 @@ public class CarStyleBean {
         }
 
         public String getCarName() {
-            return carName;
+            return carname;
         }
 
         public void setCarName(String carName) {
-            this.carName = carName;
+            this.carname = carName;
         }
     }
     public class carsSelectList {
-        private String carBrandId;
-        private String carleader;
-        private String carName;
-        private String sortLetters;
-        public String getSortLetters() {
-            return sortLetters;
-        }
-
-        public void setSortLetters(String sortLetters) {
-            this.sortLetters = sortLetters;
-        }
+        public String carbrandId;
+        public String carleader;
+        public String carname;
         public String getCarBrandId() {
-            return carBrandId;
+            return carbrandId;
         }
 
         public void setCarBrandId(String carBrandId) {
-            this.carBrandId = carBrandId;
+            this.carbrandId = carBrandId;
         }
 
         public String getCarleader() {
@@ -104,11 +96,11 @@ public class CarStyleBean {
         }
 
         public String getCarName() {
-            return carName;
+            return carname;
         }
 
         public void setCarName(String carName) {
-            this.carName = carName;
+            this.carname = carName;
         }
     }
 }

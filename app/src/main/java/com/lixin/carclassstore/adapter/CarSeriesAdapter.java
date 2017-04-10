@@ -60,15 +60,15 @@ public class CarSeriesAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
             final CarSeries carSeries = (CarSeries) carSeriesList.get(position);
-            String image = carSeries.getImage();
+//            String image = carSeries.getImage();
             //获取类别默认图片
 //            if (TextUtils.isEmpty(image)) {
 //                image = KnowledgeTypeDBManager.getInstance().getTypeDefaultImg(carSeries.getCateId());
 //
 //            }
 //            ImageManager.imageLoader.displayImage(image, viewHolder.iv_car_picture, ImageManager.options3);
-            viewHolder.text_new_car_name.setText(carSeries.getName());
-            viewHolder.text_new_car_price.setText(carSeries.getPrice());
+//            viewHolder.text_new_car_name.setText(carSeries.getName());
+//            viewHolder.text_new_car_price.setText(carSeries.getPrice());
         }
         return convertView;
     }

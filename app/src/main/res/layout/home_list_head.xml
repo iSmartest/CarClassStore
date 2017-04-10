@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/text_home_head01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="活动推荐"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginLeft="8dp"/>
+    <ImageView
+        android:id="@+id/im_home_head"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/image_car_defult"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/text_home_head02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="活动推荐"
+            android:textColor="@color/btn_login_color"
+            android:textSize="18sp"
+            android:layout_marginLeft="8dp"/>
+        <TextView
+            android:id="@+id/text_home_head03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="活动推荐"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginLeft="4dp"/>
+    </LinearLayout>
+
+</LinearLayout>

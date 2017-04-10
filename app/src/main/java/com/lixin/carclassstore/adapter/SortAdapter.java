@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.lixin.carclassstore.R;
 
 import com.lixin.carclassstore.bean.SortModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	}
 
 	public Object getItem(int position) {
-		return list.get(position);
+		return list.get(position-1);
 	}
 
 	public long getItemId(int position) {
@@ -53,6 +55,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 			view = LayoutInflater.from(mContext).inflate(R.layout.sort_item, null);
 			viewHolder.tvTitle = (TextView) view.findViewById(R.id.text_sort_content);
 			viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
+			viewHolder.imPicture = (ImageView) view.findViewById(R.id.iv_sort_car_picture);
 			view.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
@@ -70,7 +73,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 		}
 	
 		viewHolder.tvTitle.setText(this.list.get(position).getName());
-
+		Picasso.with(mContext).load(list.get(position).getLeader()).into(viewHolder.imPicture);
 		return view;
 
 	}
@@ -80,6 +83,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	final static class ViewHolder {
 		TextView tvLetter;
 		TextView tvTitle;
+		ImageView imPicture;
 	}
 
 

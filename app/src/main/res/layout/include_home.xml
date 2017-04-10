@@ -342,30 +342,14 @@
         android:textSize="14sp"
         android:text="更多"/>
 </LinearLayout>
-
-
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
-    <ImageView
+    <ListView
+        android:id="@+id/list_activity"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@mipmap/image_new_vip"
-        android:scaleType="fitXY"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@mipmap/image_new_vip"
-        android:scaleType="fitXY"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@mipmap/image_new_vip"
-        android:scaleType="fitXY"/>
-<ListView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-</ListView>
+        android:layout_height="wrap_content">
+    </ListView>
 </LinearLayout>

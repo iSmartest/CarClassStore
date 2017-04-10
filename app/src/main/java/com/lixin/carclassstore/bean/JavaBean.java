@@ -9,9 +9,9 @@ import java.util.List;
  */
 
 public class JavaBean {
-    private String result;
-    private String resultNote;
-    private Serve serve;
+    public String result;
+    public String resultNote;
+    public Serve serve;
     public class Serve{
         public List<serveTop> serveTop;
         public List<rotateAdvertisement> rotateAdvertisement;
@@ -27,9 +27,9 @@ public class JavaBean {
         }
 
         public class CheckAdvertisement{
-            private String serveType;//跳转到商城列表时用
-            private String serveIcon; //服务的头标
-            private String serveTypeId;//商品类别id
+            public String serveType;//跳转到商城列表时用
+            public String serveIcon; //服务的头标
+            public String serveTypeId;//商品类别id
             public List<checkServes> checkServes;
 
             public String getServeType() {
@@ -96,9 +96,9 @@ public class JavaBean {
             }
         }
         public class serveBottom{
-            private String serveIcon; //服务的头标
-            private String serveType; //服务的标题，跳转到商城列表时用
-            private String serveTypeId;//商品类别id
+            public String serveIcon; //服务的头标
+            public String serveType; //服务的标题，跳转到商城列表时用
+            public String serveTypeId;//商品类别id
 
             public String getServeIcon() {
                 return serveIcon;
@@ -125,9 +125,9 @@ public class JavaBean {
             }
         }
         public class rotateAdvertisement{
-            private String serveType;
-            private String serveIcon;
-            private String serveTypeId;
+            public String serveType;
+            public String serveIcon;
+            public String serveTypeId;
 
             public String getServeType() {
                 return serveType;

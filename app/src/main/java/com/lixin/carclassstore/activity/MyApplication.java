@@ -1,10 +1,13 @@
 package com.lixin.carclassstore.activity;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.lixin.carclassstore.BuildConfig;
+import com.lixin.carclassstore.tools.ImageManager;
 import com.umeng.socialize.PlatformConfig;
 
 public class MyApplication extends Application {
@@ -90,5 +93,12 @@ public class MyApplication extends Application {
         }
         context.startActivity(intent);
     }
-
+    public void exit() {
+        //使用状态统计-结束
+        ImageManager.imageLoader.destroy();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        ActivityManager activityMgr = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
+        activityMgr.killBackgroundProcesses(getPackageName());
+        System.exit(0);
+    }
 }
