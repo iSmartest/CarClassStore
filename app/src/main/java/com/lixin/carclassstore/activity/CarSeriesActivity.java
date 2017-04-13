@@ -52,7 +52,7 @@ public class CarSeriesActivity extends BaseActivity {
     private String carBrandId;
     private String carleader;
     private String nowPage = "1";
-    private String uid ;
+    private String uid  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +64,7 @@ public class CarSeriesActivity extends BaseActivity {
         carBrandId = intent.getStringExtra("carbrandId");
         carleader = intent.getStringExtra("carleader");
         uid =  SharedPreferencesUtil.getSharePreStr(context,"uid");
+
         initView();
         initData();
 //        mCarSeriesAdapter = new CarSeriesAdapter(CarSeriesActivity.this, mList);
@@ -74,7 +75,7 @@ public class CarSeriesActivity extends BaseActivity {
 
     private void initData() {
         Map<String, String> params = new HashMap<>();
-        String json = "{\"cmd\":\"getCarVersioninfo\",\"carBrandId\":\""+ carBrandId + "\"" + ",\"nowPage\":\""+ nowPage + "\"}";
+        String json = "{\"cmd\":\"getCarVersioninfo\",\"carBrandId\":\""+ carBrandId + "\"" + ",\"nowPage\":\""+ nowPage + "\"" + ",\"uId\":\""+ uid + "\"}";
         params.put("json", json);
         dialog1.show();
         OkHttpUtils.post().url(context.getString(R.string.url)).params(params)
@@ -94,7 +95,7 @@ public class CarSeriesActivity extends BaseActivity {
                     ToastUtils.showMessageLong(CarSeriesActivity.this,carServes.getResultNote());
                 }
 
-//                carVersionsList = carServes.carVersionsList;//轮播图集合
+//                carVersionsList = carServes.carVersionsList;//
 //                Log.i("qqqq", "carVersionsList: " + carVersionsList.get(0).getCarVersionName());
 
             }

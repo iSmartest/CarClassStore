@@ -9,6 +9,7 @@ import com.lixin.carclassstore.R;
  * Created by 小火
  * Create time on  2017/3/31
  * My mailbox is 1403241630@qq.com
+ * 金融保险
  */
 
 public class MoneySafeActivity extends BaseActivity{

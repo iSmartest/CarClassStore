@@ -3,6 +3,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.lixin.carclassstore.R;
@@ -68,6 +69,8 @@ public class MainActivity extends BaseActivity {
             lay_bg.setVisibility(View.GONE);
         }else {
             hideBack(false);
+            ImageView Iv_base_back = (ImageView) findViewById(R.id.Iv_base_back);
+            Iv_base_back.setVisibility(View.GONE);
             setTitleText(titles[position]);
         }
         current = position;

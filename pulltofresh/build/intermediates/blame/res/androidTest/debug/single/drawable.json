@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ptr_indicator_bg_top.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\ptr_indicator_bg_top.xml"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ptr_indicator_bg_bottom.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\ptr_indicator_bg_bottom.xml"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\bv_loading_rotate_pull_re.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\bv_loading_rotate_pull_re.xml"
+    }
+]

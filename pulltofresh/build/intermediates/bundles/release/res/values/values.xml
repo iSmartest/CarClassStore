@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="bv_actionbar_shadow">#DDDDDD</color>
+    <color name="bv_actionbar_shadow_night">#3C3C3C</color>
+    <color name="bv_list_text_already_read">#8D8D8D</color>
+    <color name="bv_ptr_top_bg">#EFEFEF</color>
+    <color name="bv_ptr_top_bg_night">#202020</color>
+    <color name="bv_ptr_top_sub_text">#616161</color>
+    <color name="bv_ptr_top_sub_text_night">#FF646464</color>
+    <color name="bv_ptr_top_text">#616161</color>
+    <color name="bv_ptr_top_text_night">#FF6D6D6D</color>
+    <color name="common_blue">#4b8bbd</color>
+    <color name="common_dark">#3d5562</color>
+    <color name="common_dark_disabled">#9aa7af</color>
+    <color name="common_dark_shadow">#dedede</color>
+    <color name="common_green">#60990c</color>
+    <color name="common_grey">#8496a0</color>
+    <color name="common_grey_disabled">#aabbc4</color>
+    <color name="common_red">#e62f2f</color>
+    <color name="common_white">#ffffff</color>
+    <color name="common_white_disabled">#e7e7e7</color>
+    <color name="common_white_shadow">#414141</color>
+    <color name="common_yellow">#f1930d</color>
+    <color name="dimgrey">#696969</color>
+    <color name="gray">#808080</color>
+    <color name="green">#008000</color>
+    <color name="page_viewer_margin_color">#007800</color>
+    <color name="tab_indicator_text_selected">#ffffff</color>
+    <color name="tab_indicator_text_unselected">#aac5d7</color>
+    <declare-styleable name="PullToRefresh"><attr format="reference|color" name="ptrRefreshableViewBackground"/><attr format="reference|color" name="ptrHeaderBackground"/><attr format="reference|color" name="ptrHeaderTextColor"/><attr format="reference|color" name="ptrHeaderSubTextColor"/><attr name="ptrMode">
+            <flag name="disabled" value="0x0"/>
+            <flag name="pullFromStart" value="0x1"/>
+            <flag name="pullFromEnd" value="0x2"/>
+            <flag name="both" value="0x3"/>
+            <flag name="manualOnly" value="0x4"/>
+
+            
+            <flag name="pullDownFromTop" value="0x1"/>
+            <flag name="pullUpFromBottom" value="0x2"/>
+        </attr><attr format="reference|boolean" name="ptrShowIndicator"/><attr format="reference" name="ptrDrawable"/><attr format="reference" name="ptrDrawableStart"/><attr format="reference" name="ptrDrawableEnd"/><attr format="reference|boolean" name="ptrOverScroll"/><attr format="reference" name="ptrHeaderTextAppearance"/><attr format="reference" name="ptrSubHeaderTextAppearance"/><attr name="ptrAnimationStyle">
+            <flag name="rotate" value="0x0"/>
+            <flag name="flip" value="0x1"/>
+        </attr><attr format="reference|boolean" name="ptrScrollingWhileRefreshingEnabled"/><attr format="reference|boolean" name="ptrListViewExtrasEnabled"/><attr format="reference|boolean" name="ptrRotateDrawableWhilePulling"/><attr format="reference|color" name="ptrAdapterViewBackground"/><attr format="reference" name="ptrDrawableTop"/><attr format="reference" name="ptrDrawableBottom"/></declare-styleable>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <drawable name="transparent">#00000000</drawable>
+    <item name="gridview" type="id"/>
+    <item name="scrollview" type="id"/>
+    <item name="selected_view" type="id"/>
+    <item name="viewpager" type="id"/>
+    <item name="webview" type="id"/>
+    <string name="app_name">pulltofresh</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="not_updated_yet">暂未更新过</string>
+    <string name="pull_to_refresh_from_bottom_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">正在加载...</string>
+    <string name="pull_to_refresh_from_bottom_release_label">松开加载更多</string>
+    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新...</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="time_error">时间有问题</string>
+    <string name="updated_at">上次更新于%1$s前</string>
+    <string name="updated_just_now">刚刚更新</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

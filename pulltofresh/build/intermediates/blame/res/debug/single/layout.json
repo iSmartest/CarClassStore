@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_footer.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\layout\\pull_to_refresh_footer.xml"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\debug\\layout\\slideviewlayout.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\layout\\slideviewlayout.xml"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\debug\\layout\\header.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\layout\\header.xml"
+    }
+]

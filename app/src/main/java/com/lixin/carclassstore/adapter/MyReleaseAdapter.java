@@ -25,12 +25,12 @@ public class MyReleaseAdapter extends BaseAdapter {
     private Context context;
     private ShoppingCartAdapter.CheckInterface checkInterface;
     private ShoppingCartAdapter.ModifyCountInterface modifyCountInterface;
-    private List<MyReleaseBean> myReleaseBeanList;
+    private List<MyReleaseBean.qusetions> myReleaseBeanList;
     public MyReleaseAdapter(Context context) {
         this.context = context;
     }
 
-    public void setMyReleaseBean(List<MyReleaseBean> myReleaseBeanList) {
+    public void setMyReleaseBean(List<MyReleaseBean.qusetions> myReleaseBeanList) {
         this.myReleaseBeanList = myReleaseBeanList;
         notifyDataSetChanged();
     }
@@ -77,10 +77,10 @@ public class MyReleaseAdapter extends BaseAdapter {
         } else {
             holder = (MyReleaseAdapter.ViewHolder) convertView.getTag();
         }
-        final MyReleaseBean myReleaseBean = myReleaseBeanList.get(position);
-        holder.text_comment_content.setText(myReleaseBean.getContent());
-        holder.text_comment_num.setText(myReleaseBean.getNum());
-        holder.text_comment_time.setText( myReleaseBean.getTime());
+        final MyReleaseBean.qusetions qusetionsBean = myReleaseBeanList.get(position);
+        holder.text_comment_content.setText(qusetionsBean.getUserTalk());
+        holder.text_comment_num.setText("100");
+        holder.text_comment_time.setText( qusetionsBean.getUserTalkTime());
         //删除弹窗
         holder.text_delete_comment.setOnClickListener(new View.OnClickListener() {
             @Override

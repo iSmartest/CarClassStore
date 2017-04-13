@@ -1,18 +1,29 @@
 package com.lixin.carclassstore.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
+import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.adapter.MyReleaseAdapter;
 import com.lixin.carclassstore.adapter.ShoppingCartAdapter;
 import com.lixin.carclassstore.bean.MyReleaseBean;
+import com.lixin.carclassstore.http.StringCallback;
+import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.ToastUtils;
+import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
+import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * Created by 小火
@@ -22,27 +33,40 @@ import java.util.List;
 
 public class MyReleaseActivity extends BaseActivity implements View.OnClickListener
         ,ShoppingCartAdapter.CheckInterface, ShoppingCartAdapter.ModifyCountInterface{
-    private ListView list_my_release;
-    public TextView tv_title;
+    private PullToRefreshListView list_my_release;
     private MyReleaseAdapter myReleaseAdapter;
-    private List<MyReleaseBean> myReleaseBeanList = new ArrayList<>();
-
+    private List<MyReleaseBean.qusetions> myReleaseBeanList = new ArrayList<>();
+    private String uid = "123";
+    private int nowPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_cart);
-        setTitleText("我的发布");
+        setContentView(R.layout.activity_my_release);
         hideBack(false);
-        initData();
+        setTitleText("我的发布");
         initView();
     }
 
     private void initView() {
-        list_my_release = (ListView) findViewById(R.id.list_my_release);
+        list_my_release = (PullToRefreshListView) findViewById(R.id.list_my_release);
+        list_my_release.setMode(PullToRefreshBase.Mode.BOTH);
         myReleaseAdapter = new MyReleaseAdapter(this);
         myReleaseAdapter.setModifyCountInterface(this);
         list_my_release.setAdapter(myReleaseAdapter);
-        myReleaseAdapter.setMyReleaseBean(myReleaseBeanList);
+        list_my_release.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                nowPage = 1;
+                myReleaseBeanList.clear();
+                getdata();
+            }
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                nowPage++;
+                getdata();
+            }
+        });
+
     }
 
     @Override
@@ -50,18 +74,48 @@ public class MyReleaseActivity extends BaseActivity implements View.OnClickListe
 
     }
 
+    private void getdata() {
+        Map<String, String> params = new HashMap<>();
+        final String json="{\"cmd\":\"queryPubilckQuestion\",\"uid\":\"" + uid +"\",\"nowPage\":\"" + nowPage + "\"}";
+        params.put("json", json);
+        dialog1.show();
+        OkHttpUtils//
+                .post()//
+                .url(context.getString(R.string.url))//
+                .params(params)//
+                .build()//
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtils.showMessageShort(context, e.getMessage());
+                        dialog1.dismiss();
+                        list_my_release.onRefreshComplete();
+                    }
 
-
-
-    protected void initData() {
-        for (int i = 0; i < 6; i++) {
-            MyReleaseBean MyReleaseBean = new MyReleaseBean();
-            MyReleaseBean.setContent("百度翻译是百度发布的在线翻译服务，依托海量的互联网数据资源和领先的自然语言处理技术优势，致力于帮助用户跨越语言鸿沟，更加方便快捷地获取信息和服务。百度翻译支持全球28种热门语言互译，包括中文、英语、日语、韩语、西班牙语、泰语");
-            MyReleaseBean.setNum("100");
-            MyReleaseBean.setTime("2017-3-31 12：08");
-            myReleaseBeanList.add(MyReleaseBean);
-        }
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Gson gson = new Gson();
+                        dialog1.dismiss();
+                        list_my_release.onRefreshComplete();
+                        Log.i("response", "response: " + response.toString());
+                        MyReleaseBean myReleaseBean = gson.fromJson(response, MyReleaseBean.class);
+                        if (myReleaseBean.getResult().equals("1")) {
+                            ToastUtils.showMessageShort(context, myReleaseBean.getResultNote());
+                            return;
+                        }
+                        if (Integer.parseInt(myReleaseBean.getTotalPage()) < nowPage) {
+                            ToastUtils.showMessageShort(context, "没有更多了");
+                            return;
+                        }
+                        List<MyReleaseBean.qusetions> qusetionslist = myReleaseBean.qusetions;
+                        myReleaseBeanList.addAll(qusetionslist);
+                        myReleaseAdapter.setMyReleaseBean(myReleaseBeanList);
+                        list_my_release.setAdapter(myReleaseAdapter);
+                        list_my_release.onRefreshComplete();
+                    }
+                });
     }
+
 
     @Override
     public void checkGroup(int position, boolean isChecked) {
@@ -75,13 +129,13 @@ public class MyReleaseActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void doDecrease(int position, View showCountView, boolean isChecked) {
-        MyReleaseBean myReleaseBean = myReleaseBeanList.get(position);
-        int currentCount = myReleaseBean.getCount();
+        MyReleaseBean.qusetions qusetions = myReleaseBeanList.get(position);
+        int currentCount = qusetions.getCount();
         if (currentCount == 1) {
             return;
         }
         currentCount--;
-        myReleaseBean.setCount(currentCount);
+        qusetions.setCount(currentCount);
         ((TextView) showCountView).setText(currentCount + "");
         myReleaseAdapter.notifyDataSetChanged();
 

@@ -51,6 +51,7 @@ public class NewCarActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_car);
+        hideBack(false);
         setTitleText("请选择品牌");
         initViews();
     }

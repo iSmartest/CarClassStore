@@ -45,10 +45,10 @@ public class NewCarDetailsActivity extends Activity implements View.OnClickListe
     private ListView lv_car_message;
     private LinearLayout linear_website_image,asking_for_the_lowest_price;
     private int[] bigBGs = new int[]{
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2
+            R.drawable.app_home,
+            R.drawable.app_home,
+            R.drawable.app_home,
+            R.drawable.app_home
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {

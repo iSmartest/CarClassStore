@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/activity_base"/>
+    <EditText
+        android:id="@+id/a_release_edt_question"
+        style="@style/DefaultTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edi_color"
+        android:gravity="left|top"
+        android:hint="请输入问题描述...."
+        android:maxLines="12"
+        android:minLines="12"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:textColorHint="@color/hint_text_color_default" />
+    <Button
+    android:id="@+id/btn_feedback_btn"
+    android:background="@color/btn_login_color"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="48dp"
+    android:layout_marginRight="48dp"
+    android:layout_marginTop="48dp"
+    android:textSize="16sp"
+    android:textColor="@color/white_smoke"
+    android:text="提交" />
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.lixin.carclassstore.bean;
 
+import java.util.List;
+
 /**
  * Created by 小火
  * Create time on  2017/3/31
@@ -7,60 +9,80 @@ package com.lixin.carclassstore.bean;
  */
 
 public class MyReleaseBean {
-    private String content;
-    private String time;
-    private String comment;
-    private String num;
-    private int count;
 
-    public MyReleaseBean(){
+    public String result;//"0" //0成功1失败
+    public String resultNote;//"失败原因"
+    public List<qusetions> qusetions;
+    private String totalPage;
 
-    }
-    public void MyReleaseBean(String content, String time, String comment, String num, int count){
-        this.comment = comment;
-        this.content = content;
-        this.time = time;
-        this.num = num;
-        this.count = count;
+    public String getTotalPage() {
+        return totalPage;
     }
 
-    public int getCount() {
-        return count;
+    public void setTotalPage(String totalPage) {
+        this.totalPage = totalPage;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public String getResult() {
+        return result;
     }
 
-    public String getNum() {
-        return num;
+    public void setResult(String result) {
+        this.result = result;
     }
 
-    public void setNum(String num) {
-        this.num = num;
+    public String getResultNote() {
+        return resultNote;
     }
 
-    public String getContent() {
-        return content;
+    public void setResultNote(String resultNote) {
+        this.resultNote = resultNote;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public List<MyReleaseBean.qusetions> getQusetions() {
+        return qusetions;
     }
 
-    public String getTime() {
-        return time;
+    public void setQusetions(List<MyReleaseBean.qusetions> qusetions) {
+        this.qusetions = qusetions;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+    public class qusetions{
+        public String qusetionid;//""//发问题的id
+        public String userTalk;//"附近撒娇的撒旦就？"//用户提交的文问题
+        public String userTalkTime;//""///用户提交的文问题的时间
+        public int count;
 
-    public String getComment() {
-        return comment;
-    }
+        public int getCount() {
+            return count;
+        }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public String getQusetionid() {
+            return qusetionid;
+        }
+
+        public void setQusetionid(String qusetionid) {
+            this.qusetionid = qusetionid;
+        }
+
+        public String getUserTalk() {
+            return userTalk;
+        }
+
+        public void setUserTalk(String userTalk) {
+            this.userTalk = userTalk;
+        }
+
+        public String getUserTalkTime() {
+            return userTalkTime;
+        }
+
+        public void setUserTalkTime(String userTalkTime) {
+            this.userTalkTime = userTalkTime;
+        }
     }
 }

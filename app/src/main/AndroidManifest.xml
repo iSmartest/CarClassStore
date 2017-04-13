@@ -40,49 +40,49 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <meta-data
         android:name="UMENG_APPKEY"
-        android:value="58e4607f677baa43b8000ef8" >
+        android:value="58ee1a237f2c7441be0007e3" >
     </meta-data>
-    <activity
-        android:name=".wxapi.WXEntryActivity"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:exported="true"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-    <activity
-        android:name="com.tencent.tauth.AuthActivity"
-        android:launchMode="singleTask"
-        android:noHistory="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
+    <!--<activity-->
+        <!--android:name=".wxapi.WXEntryActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+        <!--android:exported="true"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+    <!--<activity-->
+        <!--android:name="com.tencent.tauth.AuthActivity"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:noHistory="true" >-->
+        <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.VIEW" />-->
 
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--<category android:name="android.intent.category.BROWSABLE" />-->
 
-            <data android:scheme="tencent1106082546" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name="com.tencent.connect.common.AssistActivity"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar"
-        android:configChanges="orientation|keyboardHidden|screenSize"/>
-    <activity
-        android:name=".WBShareActivity"
-        android:configChanges="keyboardHidden|orientation"
-        android:screenOrientation="portrait" >
-        <intent-filter>
-            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-        android:configChanges="keyboardHidden|orientation"
-        android:windowSoftInputMode="adjustResize"
-        android:exported="false" >
-    </activity>
-    <service android:name="com.sina.weibo.sdk.net.DownloadService"
-        android:exported="false"></service>
+            <!--<data android:scheme="tencent1106082546" />-->
+        <!--</intent-filter>-->
+    <!--</activity>-->
+    <!--<activity-->
+        <!--android:name="com.tencent.connect.common.AssistActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
+        <!--android:configChanges="orientation|keyboardHidden|screenSize"/>-->
+    <!--<activity-->
+        <!--android:name=".WBShareActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation"-->
+        <!--android:screenOrientation="portrait" >-->
+        <!--<intent-filter>-->
+            <!--<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />-->
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+        <!--</intent-filter>-->
+    <!--</activity>-->
+    <!--<activity-->
+        <!--android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"-->
+        <!--android:configChanges="keyboardHidden|orientation"-->
+        <!--android:windowSoftInputMode="adjustResize"-->
+        <!--android:exported="false" >-->
+    <!--</activity>-->
+    <!--<service android:name="com.sina.weibo.sdk.net.DownloadService"-->
+        <!--android:exported="false"></service>-->
 
     <application
         android:name=".activity.MyApplication"
@@ -98,10 +98,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        //注册
         <activity android:name=".activity.RegisterActivity"/>
+        //忘记密码
         <activity android:name=".activity.ForgetPwdActivity"/>
+        //登录
         <activity android:name=".activity.LoginActivity"/>
+        //设置
         <activity android:name=".activity.SetUpActivity"/>
+        //买保险
         <activity android:name=".activity.BuyInsuranceActivity"/>
         <activity android:name=".activity.CarStoreActivity"/>
         <activity android:name=".activity.CheckViolationWebActivity"/>
@@ -114,6 +119,10 @@
         <activity android:name=".activity.CarSeriesActivity"/>
         <activity android:name=".activity.NewCarDetailsActivity"/>
         <activity android:name=".activity.NewCarModelsActivity"/>
+        <activity android:name=".activity.NewsWebActivity"/>
+        <activity android:name=".activity.ReplyQuestionActivity"/>
+        <activity android:name=".activity.ReleaseQuestionActivity"/>
+        <activity android:name=".activity.SectionArticleListActivity"/>
         <!--<activity android:name=".activity.UsedCarSeriesActivity"/>-->
         <!--<activity android:name=".activity.UsedCarBrandActivity"/>-->
         <!--<activity android:name=".activity.UsedCarDetailsActivity"/>-->
@@ -124,13 +133,17 @@
         <activity android:name=".activity.OrderPaymentActivity"/>
         <activity android:name=".activity.ShoppingCartActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <!--<activity android:name=".activity.MyCollectionActivity"-->
-            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>-->
-        <!--<activity android:name=".activity.MyReleaseActivity"-->
-            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>-->
+        //收藏、足迹
+        <activity android:name=".activity.MyCollectionFootActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        //我的发布
+        <activity android:name=".activity.MyReleaseActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        //我的全部订单
+        <activity android:name=".activity.MyAllOrderActivity"/>
         <activity android:name=".activity.SetPasswordQuestionActivity"/>
         <activity android:name=".activity.SetPasswordActivity"/>
-        <!--<activity android:name=".activity.MoneySafeActivity"/>-->
+        <activity android:name=".activity.MoneySafeActivity"/>
         <!--<activity android:name=".activity.RoadRescueActivity"/>-->
         <!--<activity android:name=".activity.ReleaseRescueInformationActivity"/>-->
         <!--<activity android:name=".activity.FaultCategoryActivity"/>-->

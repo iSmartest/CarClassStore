@@ -11,9 +11,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.lixin.carclassstore.R;
-import com.lixin.carclassstore.bean.ShoppingCartBean;
+import com.lixin.carclassstore.bean.ShoppingCollectionFootBean;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ import java.util.List;
 public class ShoppingCartAdapter extends BaseAdapter {
 
     private boolean isShow = true;//是否显示编辑/完成
-    private List<ShoppingCartBean> shoppingCartBeanList;
+    private List<ShoppingCollectionFootBean.commoditys> mList;
     private CheckInterface checkInterface;
     private ModifyCountInterface modifyCountInterface;
     private Context context;
@@ -35,8 +34,8 @@ public class ShoppingCartAdapter extends BaseAdapter {
         this.context = context;
     }
 
-    public void setShoppingCartBeanList(List<ShoppingCartBean> shoppingCartBeanList) {
-        this.shoppingCartBeanList = shoppingCartBeanList;
+    public void setShoppingCartBeanList(List<ShoppingCollectionFootBean.commoditys> mList) {
+        this.mList = mList;
         notifyDataSetChanged();
     }
 
@@ -60,12 +59,12 @@ public class ShoppingCartAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return shoppingCartBeanList == null ? 0 : shoppingCartBeanList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return shoppingCartBeanList.get(position);
+        return mList.get(position);
     }
 
     @Override
@@ -83,21 +82,21 @@ public class ShoppingCartAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        final ShoppingCartBean shoppingCartBean = shoppingCartBeanList.get(position);
-        holder.tv_commodity_name.setText(shoppingCartBean.getShoppingName());
-        holder.tv_fabric.setText("" + shoppingCartBean.getFabric());
-        holder.tv_pants.setText("销量" + shoppingCartBean.getPantsSize());
-        holder.tv_price.setText("￥" + shoppingCartBean.getPrice());
-        holder.ck_chose.setChecked(shoppingCartBean.isChoosed());
-        holder.tv_show_num.setText(shoppingCartBean.getCount() + "");
-        holder.tv_num.setText("X" + shoppingCartBean.getCount());
+        final ShoppingCollectionFootBean.commoditys commoditysList = mList.get(position);
+        holder.tv_commodity_name.setText(commoditysList.getCommodityTitle());
+//        holder.tv_fabric.setText("" + commoditysList.getFabric());
+        holder.tv_pants.setText("销量" + commoditysList.getCommoditysellerNum());
+        holder.tv_price.setText("￥" + commoditysList.getCommodityNewPrice());
+        holder.ck_chose.setChecked(commoditysList.isChoosed());
+        holder.tv_show_num.setText(commoditysList.getCount() + "");
+        holder.tv_num.setText("X" + commoditysList.getCount());
 
         //单选框按钮
         holder.ck_chose.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        shoppingCartBean.setChoosed(((CheckBox) v).isChecked());
+                        commoditysList.setChoosed(((CheckBox) v).isChecked());
                         checkInterface.checkGroup(position, ((CheckBox) v).isChecked());//向外暴露接口
                     }
                 }

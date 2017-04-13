@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\indicator_arrow.png",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\drawable-hdpi\\indicator_arrow.png"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\holder_bg.xml",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\drawable-hdpi\\holder_bg.xml"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\del_icon_normal.png",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\drawable-hdpi\\del_icon_normal.png"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\bv_ic_ptr_arrow.png",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\drawable-hdpi\\bv_ic_ptr_arrow.png"
+    },
+    {
+        "merged": "D:\\Documents\\CarClassStore\\pulltofresh\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\default_ptr_rotate.png",
+        "source": "D:\\Documents\\CarClassStore\\pulltofresh\\src\\main\\res\\drawable-hdpi\\default_ptr_rotate.png"
+    }
+]

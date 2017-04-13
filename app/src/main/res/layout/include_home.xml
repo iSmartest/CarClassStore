@@ -5,97 +5,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_smoke">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="3dp">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="1">
-        <include
-            android:id="@+id/text_change_tire"
-            layout="@layout/include_imagetext"
+        android:orientation="horizontal"
+        android:layout_marginTop="3dp">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <include
+                android:id="@+id/text_change_tire"
+                layout="@layout/include_imagetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/edi_phone_number"
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:background="@drawable/shape_btn_bg"
-            android:text="￥599.00起"
-            android:textColor="@color/black"
-            android:textSize="8sp"
-            android:gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="1">
-        <include
-            android:id="@+id/text_do_maintenance"
-            layout="@layout/include_imagetext"
+            <TextView
+                android:id="@+id/edi_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:background="@drawable/shape_btn_bg"
+                android:text="￥599.00起"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:text="精准匹配"
-            android:textColor="@color/gray"
-            android:textSize="10sp"
-            android:gravity="center|left"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="1">
-        <include
-            android:id="@+id/text_wash_car"
-            layout="@layout/include_imagetext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:text="优质服务"
-            android:textColor="@color/gray"
-            android:textSize="10sp"
-            android:gravity="center|left"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="1">
-        <include
-            android:id="@+id/text_customer_service"
-            layout="@layout/include_imagetext"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <include
+                android:id="@+id/text_do_maintenance"
+                layout="@layout/include_imagetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:text="精准匹配"
+                android:textColor="@color/gray"
+                android:textSize="10sp"
+                android:gravity="center|left"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
-        <TextView
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <include
+                android:id="@+id/text_wash_car"
+                layout="@layout/include_imagetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:text="优质服务"
+                android:textColor="@color/gray"
+                android:textSize="10sp"
+                android:gravity="center|left"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:textColor="@color/gray"
-            android:textSize="10sp"
-            android:gravity="center|left"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <include
+                android:id="@+id/text_customer_service"
+                layout="@layout/include_imagetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:textColor="@color/gray"
+                android:textSize="10sp"
+                android:gravity="center|left"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -239,13 +239,13 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:gravity="center">
-                <ImageView
-                    android:id="@+id/iv_car"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:duplicateParentState="true"
-                    android:scaleType="fitXY"
-                    tools:ignore="ContentDescription"/>
+            <ImageView
+                android:id="@+id/iv_car"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                tools:ignore="ContentDescription"/>
         </LinearLayout>
 
         <View
@@ -311,37 +311,37 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/gray"/>
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:background="@android:color/transparent"
-    android:clickable="true"
-    android:gravity="center"
-    android:orientation="vertical">
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/include_imagetext_view_image"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="5dp"
-            android:duplicateParentState="true"
-            android:scaleType="fitCenter"
-            tools:ignore="ContentDescription"
-            android:src="@mipmap/gengduo"/>
-    </FrameLayout>
-    <TextView
-        android:id="@+id/include_imagetext_textview_text"
-        style="@style/DefaultTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/s_text_click"
-        android:textSize="14sp"
-        android:text="更多"/>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/include_imagetext_view_image"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="5dp"
+                    android:duplicateParentState="true"
+                    android:scaleType="fitCenter"
+                    tools:ignore="ContentDescription"
+                    android:src="@mipmap/gengduo"/>
+            </FrameLayout>
+            <TextView
+                android:id="@+id/include_imagetext_textview_text"
+                style="@style/DefaultTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/s_text_click"
+                android:textSize="14sp"
+                android:text="更多"/>
+        </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

@@ -4,7 +4,7 @@ package com.lixin.carclassstore.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +12,36 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.activity.CustomerComplaintActivity;
 import com.lixin.carclassstore.activity.CustomerServiceActivity;
 import com.lixin.carclassstore.activity.LoginActivity;
 import com.lixin.carclassstore.activity.MoneySafeActivity;
-import com.lixin.carclassstore.activity.MyCollectionActivity;
+import com.lixin.carclassstore.activity.MyAllOrderActivity;
+import com.lixin.carclassstore.activity.MyCollectionFootActivity;
 import com.lixin.carclassstore.activity.MyReleaseActivity;
 import com.lixin.carclassstore.activity.RoadRescueActivity;
 import com.lixin.carclassstore.activity.SetUpActivity;
 import com.lixin.carclassstore.activity.ShoppingCartActivity;
-import com.lixin.carclassstore.bean.UserLoginBean;
-import com.lixin.carclassstore.bean.UserRegisterBean;
-import com.lixin.carclassstore.tools.ImageManager;
+import com.lixin.carclassstore.bean.MineMenuBean;
+import com.lixin.carclassstore.http.StringCallback;
+import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.ToastUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * Created by 小火
  * Create time on  2017/4/1
  * My mailbox is 1403241630@qq.com
  */
-public class MineFragment extends Fragment implements View.OnClickListener{
+public class MineFragment extends BaseFragment implements View.OnClickListener{
     private ImageView iv_set_up;
     private ImageView head_image;
     private TextView head_text;
@@ -39,34 +49,39 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private View[] funcViews = new View[21];
     private String[] funcTxts;
     private View view;
+    private List<MineMenuBean.messageMenu> messageMenuList = new ArrayList<>();
+    private List<MineMenuBean.hpleMenu> hpleMenuList = new ArrayList<>();
+    private List<MineMenuBean.aboutMenu> aboutMenuList = new ArrayList<>();
+    private String remmondCode;
     private int[] bigBGs = new int[]{
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2,
-            R.drawable.s_home2
+            R.drawable.m_shopping_cat,
+            R.drawable.m_collection,
+            R.drawable.m_footprint,
+            R.drawable.m_my_release,
+            R.drawable.m_customer_service,
+            R.drawable.m_wait_payment,
+            R.drawable.m_wait_goods,
+            R.drawable.m_wait_evaluate,
+            R.drawable.m_is_completed,
+            R.drawable.m_money_safe,
+            R.drawable.m_road_rescue,
+            R.drawable.m_customer_complaint,
+            R.drawable.m_service_reminder,
+            R.drawable.m_car_files,
+            R.drawable.m_integral_center,
+            R.drawable.m_exchang_zone,
+            R.drawable.m_recomend_courtesy,
+            R.drawable.m_feedback,
+            R.drawable.m_mail,
+            R.drawable.m_help_center,
+            R.drawable.m_about_us
     };
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine,container,false);
         initView();
+        getdata();
         return view;
     }
 
@@ -116,15 +131,19 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        UserLoginBean userLoginBean = new UserLoginBean();
+
         switch (v.getId()){
             case R.id.head_image:
                 startActivity(new Intent(getActivity(), LoginActivity.class));
-                ImageManager.imageLoader.displayImage(userLoginBean.getUserInfo().nickName,head_image);
+//                ImageManager.imageLoader.displayImage(userLoginBean.nickName,head_image);
                 break;
             //跳转到设置
             case R.id.iv_set_up:
                 startActivity(new Intent(getActivity(),SetUpActivity.class));
+                break;
+            //跳转到我的订单
+            case R.id.linear_all_order:
+                startActivity(new Intent(getActivity(),MyAllOrderActivity.class));
                 break;
 //            跳转到购物车
             case 0:
@@ -132,11 +151,15 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 break;
             case 1:
                 //跳转到收藏
-                startActivity(new Intent(getActivity(),MyCollectionActivity.class));
+                Intent intent1 = new Intent(getActivity(),MyCollectionFootActivity.class);
+                intent1.putExtra("handleType","1");
+                startActivity(intent1);
                 break;
             case 2:
                 //跳转到足迹
-                startActivity(new Intent(getActivity(),MyCollectionActivity.class));
+                Intent intent2 = new Intent(getActivity(),MyCollectionFootActivity.class);
+                intent2.putExtra("handleType","2");
+                startActivity(intent2);
                 break;
             case 3:
                 //跳转到我的发布
@@ -145,6 +168,18 @@ public class MineFragment extends Fragment implements View.OnClickListener{
             case 4:
                 //跳转到客服平台
                 startActivity(new Intent(getActivity(),CustomerServiceActivity.class));
+                break;
+            //跳转到待收款
+            case 5:
+                break;
+            //跳转到待收货
+            case 6:
+                break;
+            //跳转到待评价
+            case 7:
+                break;
+            //跳转到已完成
+            case 8:
                 break;
             case 9:
                 //跳转到金融保险
@@ -163,6 +198,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 break;
             case 13:
                 //爱车档案
+                Log.i("TAG", "messageMenuList: " + messageMenuList.get(0).getMeunType());
+                Log.i("TAG", "hpleMenuList: " + hpleMenuList.get(0).getMeunType());
+                Log.i("TAG", "aboutMenuList: " + aboutMenuList.get(0).getMeunType());
                 break;
             case 14:
                 //积分中心
@@ -186,5 +224,39 @@ public class MineFragment extends Fragment implements View.OnClickListener{
                 //关于我们
                 break;
         }
+    }
+    //请求参数
+    private void getdata() {
+        Map<String, String> params = new HashMap<>();
+        final String json="{\"cmd\":\"getMineMenuInfo\"}";
+        params.put("json", json);
+        dialog.show();
+        OkHttpUtils.post().url(context.getString(R.string.url)).params(params)
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtils.showMessageLong(context, "网络异常");
+                dialog.dismiss();
+            }
+            @Override
+            public void onResponse(String response, int id) {
+                Gson gson = new Gson();
+                dialog.dismiss();
+                MineMenuBean mineMenuBean = gson.fromJson(response, MineMenuBean.class);
+                if (mineMenuBean.getResult().equals("1")){
+                    ToastUtils.showMessageLong(getActivity(),mineMenuBean.getResultNote());
+                }
+
+                List<MineMenuBean.messageMenu> messageMenu = mineMenuBean.messageMenu;//轮播图集合
+                messageMenuList.addAll(messageMenu);
+
+                List<MineMenuBean.hpleMenu> hpleMenu = mineMenuBean.hpleMenu;//轮播图集合
+                hpleMenuList.addAll(hpleMenu);
+
+                List<MineMenuBean.aboutMenu> aboutMenu = mineMenuBean.aboutMenu;//轮播图集合
+                aboutMenuList.addAll(aboutMenu);
+                remmondCode = mineMenuBean.getRemmondCode();
+            }
+        });
     }
 }

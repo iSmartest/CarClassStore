@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="21.0.3$Generated" generated="true"><source path="D:\Documents\CarClassStore\pulltofresh\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\res"/></dataSet><dataSet config="main$Generated" generated="true"><source path="D:\Documents\CarClassStore\pulltofresh\src\main\res"/><source path="D:\Documents\CarClassStore\pulltofresh\build\generated\res\rs\release"/><source path="D:\Documents\CarClassStore\pulltofresh\build\generated\res\resValues\release"/></dataSet><dataSet config="release$Generated" generated="true"><source path="D:\Documents\CarClassStore\pulltofresh\src\release\res"/></dataSet><dataSet config="21.0.3" from-dependency="true" generated-set="21.0.3$Generated"><source path="D:\Documents\CarClassStore\pulltofresh\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\res"/></dataSet><dataSet config="main" generated-set="main$Generated"><source path="D:\Documents\CarClassStore\pulltofresh\src\main\res"><file name="ptr_slide_in_from_bottom" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\ptr_slide_in_from_bottom.xml" qualifiers="" type="anim"/><file name="ptr_slide_in_from_top" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\ptr_slide_in_from_top.xml" qualifiers="" type="anim"/><file name="ptr_slide_out_to_bottom" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\ptr_slide_out_to_bottom.xml" qualifiers="" type="anim"/><file name="ptr_slide_out_to_top" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\ptr_slide_out_to_top.xml" qualifiers="" type="anim"/><file name="push_bottom_in" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\push_bottom_in.xml" qualifiers="" type="anim"/><file name="push_bottom_out" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\push_bottom_out.xml" qualifiers="" type="anim"/><file name="push_top_in" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\push_top_in.xml" qualifiers="" type="anim"/><file name="push_top_in2" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\push_top_in2.xml" qualifiers="" type="anim"/><file name="push_top_out" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\push_top_out.xml" qualifiers="" type="anim"/><file name="push_top_out2" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\anim\push_top_out2.xml" qualifiers="" type="anim"/><file name="bv_loading_rotate_pull_re" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable\bv_loading_rotate_pull_re.xml" qualifiers="" type="drawable"/><file name="ptr_indicator_bg_bottom" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable\ptr_indicator_bg_bottom.xml" qualifiers="" type="drawable"/><file name="ptr_indicator_bg_top" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable\ptr_indicator_bg_top.xml" qualifiers="" type="drawable"/><file name="bv_ic_ptr_arrow" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-hdpi\bv_ic_ptr_arrow.png" qualifiers="hdpi-v4" type="drawable"/><file name="default_ptr_rotate" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-hdpi\default_ptr_rotate.png" qualifiers="hdpi-v4" type="drawable"/><file name="del_icon_normal" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-hdpi\del_icon_normal.png" qualifiers="hdpi-v4" type="drawable"/><file name="holder_bg" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-hdpi\holder_bg.xml" qualifiers="hdpi-v4" type="drawable"/><file name="ic_launcher" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-hdpi\ic_launcher.png" qualifiers="hdpi-v4" type="drawable"/><file name="indicator_arrow" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-hdpi\indicator_arrow.png" qualifiers="hdpi-v4" type="drawable"/><file name="ic_launcher" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-mdpi\ic_launcher.png" qualifiers="mdpi-v4" type="drawable"/><file name="ic_launcher" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-xhdpi\ic_launcher.png" qualifiers="xhdpi-v4" type="drawable"/><file name="ic_launcher" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\drawable-xxhdpi\ic_launcher.png" qualifiers="xxhdpi-v4" type="drawable"/><file name="header" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\layout\header.xml" qualifiers="" type="layout"/><file name="pull_to_refresh_footer" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\layout\pull_to_refresh_footer.xml" qualifiers="" type="layout"/><file name="pull_to_refresh_header_horizontal" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\layout\pull_to_refresh_header_horizontal.xml" qualifiers="" type="layout"/><file name="pull_to_refresh_header_vertical" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\layout\pull_to_refresh_header_vertical.xml" qualifiers="" type="layout"/><file name="slideviewlayout" path="D:\Documents\CarClassStore\pulltofresh\src\main\res\layout\slideviewlayout.xml" qualifiers="" type="layout"/><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\color.xml" qualifiers=""><color name="common_white_disabled">#e7e7e7</color><color name="common_dark_shadow">#dedede</color><color name="common_grey">#8496a0</color><color name="common_grey_disabled">#aabbc4</color><color name="common_dark_disabled">#9aa7af</color><color name="common_red">#e62f2f</color><color name="black">#000000</color><color name="common_yellow">#f1930d</color><color name="tab_indicator_text_selected">#ffffff</color><color name="green">#008000</color><drawable name="transparent">#00000000</drawable><color name="tab_indicator_text_unselected">#aac5d7</color><color name="page_viewer_margin_color">#007800</color><color name="common_green">#60990c</color><color name="dimgrey">#696969</color><color name="gray">#808080</color><color name="common_white_shadow">#414141</color><color name="common_blue">#4b8bbd</color><color name="common_white">#ffffff</color><color name="common_dark">#3d5562</color></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\pulltorefresh_dimen.xml" qualifiers=""><dimen name="indicator_corner_radius">12dp</dimen><dimen name="indicator_right_padding">10dp</dimen><dimen name="indicator_internal_padding">4dp</dimen><dimen name="header_footer_top_bottom_padding">12dp</dimen><dimen name="header_footer_left_right_padding">24dp</dimen></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\pull_attrs.xml" qualifiers=""><declare-styleable name="PullToRefresh">
+
+        
+        <attr format="reference|color" name="ptrRefreshableViewBackground"/>
+
+        
+        <attr format="reference|color" name="ptrHeaderBackground"/>
+
+        
+        <attr format="reference|color" name="ptrHeaderTextColor"/>
+
+        
+        <attr format="reference|color" name="ptrHeaderSubTextColor"/>
+
+        
+        <attr name="ptrMode">
+            <flag name="disabled" value="0x0"/>
+            <flag name="pullFromStart" value="0x1"/>
+            <flag name="pullFromEnd" value="0x2"/>
+            <flag name="both" value="0x3"/>
+            <flag name="manualOnly" value="0x4"/>
+
+            
+            <flag name="pullDownFromTop" value="0x1"/>
+            <flag name="pullUpFromBottom" value="0x2"/>
+        </attr>
+
+        
+        <attr format="reference|boolean" name="ptrShowIndicator"/>
+
+        
+        <attr format="reference" name="ptrDrawable"/>
+
+        
+        <attr format="reference" name="ptrDrawableStart"/>
+
+        
+        <attr format="reference" name="ptrDrawableEnd"/>
+
+        
+        <attr format="reference|boolean" name="ptrOverScroll"/>
+
+        
+        <attr format="reference" name="ptrHeaderTextAppearance"/>
+
+        
+        <attr format="reference" name="ptrSubHeaderTextAppearance"/>
+
+        
+        <attr name="ptrAnimationStyle">
+            <flag name="rotate" value="0x0"/>
+            <flag name="flip" value="0x1"/>
+        </attr>
+
+        
+        <attr format="reference|boolean" name="ptrScrollingWhileRefreshingEnabled"/>
+
+        
+        <attr format="reference|boolean" name="ptrListViewExtrasEnabled"/>
+
+        
+        <attr format="reference|boolean" name="ptrRotateDrawableWhilePulling"/>
+
+        
+        <attr format="reference|color" name="ptrAdapterViewBackground"/>
+        <attr format="reference" name="ptrDrawableTop"/>
+        <attr format="reference" name="ptrDrawableBottom"/>
+    </declare-styleable></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\pull_colors.xml" qualifiers=""><color name="bv_ptr_top_bg_night">#202020</color><color name="bv_actionbar_shadow">#DDDDDD</color><color name="bv_ptr_top_sub_text">#616161</color><color name="bv_ptr_top_sub_text_night">#FF646464</color><color name="bv_ptr_top_text_night">#FF6D6D6D</color><color name="bv_list_text_already_read">#8D8D8D</color><color name="bv_ptr_top_text">#616161</color><color name="bv_ptr_top_bg">#EFEFEF</color><color name="bv_actionbar_shadow_night">#3C3C3C</color></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\pull_ids.xml" qualifiers=""><item name="scrollview" type="id"/><item name="selected_view" type="id"/><item name="webview" type="id"/><item name="viewpager" type="id"/><item name="gridview" type="id"/></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\pull_refresh_strings.xml" qualifiers=""><string name="pull_to_refresh_from_bottom_pull_label">上拉加载更多</string><string name="pull_to_refresh_from_bottom_release_label">松开加载更多</string><string name="time_error">时间有问题</string><string name="pull_to_refresh_from_bottom_refreshing_label">正在加载...</string><string name="pull_to_refresh_refreshing_label">正在刷新...</string><string name="pull_to_refresh_pull_label">下拉可以刷新</string><string name="not_updated_yet">暂未更新过</string><string name="updated_just_now">刚刚更新</string><string name="pull_to_refresh_release_label">松开可以刷新</string><string name="updated_at">上次更新于%1$s前</string></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\strings.xml" qualifiers=""><string name="hello_world">Hello world!</string><string name="app_name">pulltofresh</string></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values\styles.xml" qualifiers=""><style name="AppTheme" parent="AppBaseTheme">
+        
+    </style><style name="AppBaseTheme" parent="android:Theme.Light">
+        
+    </style></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values-v11\styles.xml" qualifiers="v11"><style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        
+    </style></file><file path="D:\Documents\CarClassStore\pulltofresh\src\main\res\values-v14\styles.xml" qualifiers="v14"><style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        
+    </style></file></source><source path="D:\Documents\CarClassStore\pulltofresh\build\generated\res\rs\release"/><source path="D:\Documents\CarClassStore\pulltofresh\build\generated\res\resValues\release"/></dataSet><dataSet config="release" generated-set="release$Generated"><source path="D:\Documents\CarClassStore\pulltofresh\src\release\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="PullToRefresh"><attr format="reference|color" name="ptrRefreshableViewBackground"/><attr format="reference|color" name="ptrHeaderBackground"/><attr format="reference|color" name="ptrHeaderTextColor"/><attr format="reference|color" name="ptrHeaderSubTextColor"/><attr name="ptrMode">
+            <flag name="disabled" value="0x0"/>
+            <flag name="pullFromStart" value="0x1"/>
+            <flag name="pullFromEnd" value="0x2"/>
+            <flag name="both" value="0x3"/>
+            <flag name="manualOnly" value="0x4"/>
+
+            
+            <flag name="pullDownFromTop" value="0x1"/>
+            <flag name="pullUpFromBottom" value="0x2"/>
+        </attr><attr format="reference|boolean" name="ptrShowIndicator"/><attr format="reference" name="ptrDrawable"/><attr format="reference" name="ptrDrawableStart"/><attr format="reference" name="ptrDrawableEnd"/><attr format="reference|boolean" name="ptrOverScroll"/><attr format="reference" name="ptrHeaderTextAppearance"/><attr format="reference" name="ptrSubHeaderTextAppearance"/><attr name="ptrAnimationStyle">
+            <flag name="rotate" value="0x0"/>
+            <flag name="flip" value="0x1"/>
+        </attr><attr format="reference|boolean" name="ptrScrollingWhileRefreshingEnabled"/><attr format="reference|boolean" name="ptrListViewExtrasEnabled"/><attr format="reference|boolean" name="ptrRotateDrawableWhilePulling"/><attr format="reference|color" name="ptrAdapterViewBackground"/><attr format="reference" name="ptrDrawableTop"/><attr format="reference" name="ptrDrawableBottom"/></declare-styleable></configuration></mergedItems></merger>

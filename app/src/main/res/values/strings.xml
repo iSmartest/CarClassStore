@@ -22,7 +22,7 @@
     <string name="error_input_verification_fail_info">验证码错误:验证码由4位数字组成</string>
     <string name="sure_to_do_sth">您确定要%s吗？</string>
     <string name="url">http://116.255.239.201:8080/carmallService/service.action</string>
-    <string name="juhe_url">聚合验证码地址</string>
+    <string name="juhe_url">http://v.juhe.cn/sms/send?</string>
     <string name="ok_to_exit_it">确定退出吗?</string>
     <string name="only_can_chose_nine">你最多可以选择9张图片</string>
     <string name="error_download_success_format">下载成功，文件保存于:%s</string>

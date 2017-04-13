@@ -1,14 +1,18 @@
 package com.lixin.carclassstore.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.lixin.carclassstore.R;
-import com.lixin.carclassstore.bean.CollectionBean;
+import com.lixin.carclassstore.bean.ForumReplyBean;
+import com.lixin.carclassstore.bean.ShoppingCollectionFootBean;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +21,33 @@ import java.util.List;
 /**
  *
  */
-public class CollectionAdapter extends MyBaseAdapter<CollectionBean> {
+public class CollectionAdapter extends BaseAdapter {
+    private Context context;
+    private List<ShoppingCollectionFootBean.commoditys> list;
+    public void setCollection(List<ShoppingCollectionFootBean.commoditys> list) {
+        this.list = list;
+    }
 
-    public CollectionAdapter(Context context, List<CollectionBean> list) {
-        super(context, list);
+    @Override
+    public int getCount() {
+        return list == null ? 0 : list.size();
+    }
+
+    @Override
+    public ShoppingCollectionFootBean.commoditys getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder vh;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_store_detail, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_store_detail, null);
             vh = new ViewHolder();
             vh.iv_show_pic1 = (ImageView) convertView.findViewById(R.id.iv_show_pic1);
             vh.tv_commodity_name1 = (TextView) convertView.findViewById(R.id.tv_commodity_name1);
@@ -39,14 +59,12 @@ public class CollectionAdapter extends MyBaseAdapter<CollectionBean> {
         } else
             vh = (ViewHolder) convertView.getTag();
 
-        CollectionBean collectionBean = mList.get(position);
-//        String img = collectionBean.getImage();
-//
-//        ImageManager.imageLoader.displayImage(img, vh.iv_show_pic1, ImageManager.options3);
-        vh.tv_commodity_name1.setText(collectionBean.getTitle());
-        vh.tv_fabric1.setText(collectionBean.getAuthor());
-        vh.tv_pants1.setText(collectionBean.getCateName());
-        vh.tv_price1.setText(collectionBean.getDocUrl());
+        ShoppingCollectionFootBean.commoditys commoditysList = list.get(position);
+        Picasso.with(context).load(commoditysList.getCommodityIcon());
+        vh.tv_commodity_name1.setText(commoditysList.getCommodityTitle());
+//        vh.tv_fabric1.setText(commoditysList.getAuthor());
+        vh.tv_pants1.setText(commoditysList.getCommoditysellerNum());
+        vh.tv_price1.setText(commoditysList.getCommodityCommendNum());
         return convertView;
     }
 
@@ -56,11 +74,11 @@ public class CollectionAdapter extends MyBaseAdapter<CollectionBean> {
     }
 
 
-    public void updateList(List<CollectionBean> list) {
-        if (mList == null) {
-            mList = new ArrayList<>();
+    public void updateList(List<ShoppingCollectionFootBean.commoditys> mList) {
+        if (list == null) {
+            list = new ArrayList<>();
         }
-        mList = list;
+        list = mList;
         notifyDataSetChanged();
     }
 }

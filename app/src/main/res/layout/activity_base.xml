@@ -18,7 +18,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="8dp"
-            android:src="@drawable/s_fabu"
+            android:src="@drawable/app_home_add"
             android:visibility="visible"/>
         <ImageView
             android:id="@+id/Iv_base_back"
@@ -53,14 +53,14 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="8dp"
-            android:src="@drawable/s_fabu"
+            android:src="@drawable/app_home_search"
             android:visibility="visible"/>
         <ImageView
             android:id="@+id/iv_conversation"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="8dp"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/app_home_message"
             android:visibility="visible"/>
     </LinearLayout>
 </RelativeLayout>

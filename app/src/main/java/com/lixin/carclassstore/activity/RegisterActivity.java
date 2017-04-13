@@ -175,7 +175,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                         UserRegisterBean bean = gson.fromJson(response, UserRegisterBean.class);
                         if ("0".equals(bean.result)) {
                             ToastUtils.showMessageShort(mContext, "注册成功");
-//                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"openId",bean.userInfo.openId);
+                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"uid",bean.uid);
+                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"userPhone",userPhone);
+                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"password",password);
                             Bundle bundle = new Bundle();
                             bundle.putString("phone", userPhone);
                             bundle.putString("password", logpwd);

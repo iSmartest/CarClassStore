@@ -3,13 +3,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include
-        android:id="@+id/shopping_title"
-        layout="@layout/activity_base" />
-    <ListView
+    <include layout="@layout/activity_base"/>
+    <com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView
         android:id="@+id/list_my_release"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:scrollbars="none" />
+        android:layout_height="match_parent"
+        />
 </LinearLayout>
