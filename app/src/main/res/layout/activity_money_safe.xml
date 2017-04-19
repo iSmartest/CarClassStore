@@ -104,10 +104,10 @@
                 android:layout_centerVertical="true"
                 android:text="车牌号码" />
 
-            <TextView
-                android:id="@+id/text_input_car_licence_num"
+            <EditText
+                android:id="@+id/edi_input_car_licence_num"
                 android:textSize="16dp"
-                android:textColor="@color/gray"
+                android:textColorHint="@color/gray"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -115,7 +115,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="请输入车牌"/>
+                android:hint="请输入车牌"
+                android:background="@null"/>
 
         </LinearLayout>
 
@@ -172,10 +173,10 @@
                 android:layout_centerVertical="true"
                 android:text="车价" />
 
-            <TextView
-                android:id="@+id/text_car_price"
+            <EditText
+                android:id="@+id/edi_car_price"
                 android:textSize="16dp"
-                android:textColor="@color/gray"
+                android:textColorHint="@color/gray"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -183,7 +184,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="请输入车价"/>
+                android:hint="请输入车价"
+                android:background="@null"/>
 
         </LinearLayout>
 

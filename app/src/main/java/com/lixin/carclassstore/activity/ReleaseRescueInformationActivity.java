@@ -29,6 +29,7 @@ public class ReleaseRescueInformationActivity extends BaseActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release_rescue_information);
+        hideBack(false);
         setTitleText("发布救援信息");
         initView();
     }
@@ -52,7 +53,7 @@ public class ReleaseRescueInformationActivity extends BaseActivity implements Vi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.linear_fault_category:
-                startActivity(new Intent(ReleaseRescueInformationActivity.this,FaultCategoryActivity.class));
+                startActivityForResult(new Intent(ReleaseRescueInformationActivity.this,FaultCategoryActivity.class),1000);
                 break;
             case R.id.linear_current_location:
                 startActivity(new Intent(ReleaseRescueInformationActivity.this,CurrentLocationActivity.class));
@@ -86,5 +87,19 @@ public class ReleaseRescueInformationActivity extends BaseActivity implements Vi
         }
         mDialog.setTextView("请输入要反馈的内容");
         mDialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000 && resultCode == 1001)
+        {
+            String result_value = data.getStringExtra("result");
+            if (TextUtils.isEmpty(result_value)){
+                setTips();
+            }
+            text_fault_category.setText(result_value);
+        }
     }
 }

@@ -16,12 +16,14 @@ import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.activity.CustomerComplaintActivity;
 import com.lixin.carclassstore.activity.CustomerServiceActivity;
+import com.lixin.carclassstore.activity.FeedbackActivity;
 import com.lixin.carclassstore.activity.LoginActivity;
 import com.lixin.carclassstore.activity.MoneySafeActivity;
 import com.lixin.carclassstore.activity.MyAllOrderActivity;
 import com.lixin.carclassstore.activity.MyCollectionFootActivity;
 import com.lixin.carclassstore.activity.MyReleaseActivity;
 import com.lixin.carclassstore.activity.RoadRescueActivity;
+import com.lixin.carclassstore.activity.ServiceReminderActivity;
 import com.lixin.carclassstore.activity.SetUpActivity;
 import com.lixin.carclassstore.activity.ShoppingCartActivity;
 import com.lixin.carclassstore.bean.MineMenuBean;
@@ -99,7 +101,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         funcViews[1] = view.findViewById(R.id.text_collection);
         funcViews[2] = view.findViewById(R.id.text_footprint);
         funcViews[3] = view.findViewById(R.id.text_my_release);
-        funcViews[4] = view.findViewById(R.id.text_customer_service);
+        funcViews[4] = view.findViewById(R.id.text_customer_service01);
         funcViews[5] = view.findViewById(R.id.text_wait_pay_money);
         funcViews[6] = view.findViewById(R.id.text_wait_goods_receipt);
         funcViews[7] = view.findViewById(R.id.text_wait_evaluate);
@@ -143,7 +145,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             //跳转到我的订单
             case R.id.linear_all_order:
-                startActivity(new Intent(getActivity(),MyAllOrderActivity.class));
+                Intent intent3 = new Intent(getActivity(),MyAllOrderActivity.class);
+                intent3.putExtra("temp","0");
+                startActivity(intent3);
                 break;
 //            跳转到购物车
             case 0:
@@ -171,15 +175,27 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             //跳转到待收款
             case 5:
+                Intent intent4 = new Intent(getActivity(),MyAllOrderActivity.class);
+                intent4.putExtra("temp","1");
+                startActivity(intent4);
                 break;
             //跳转到待收货
             case 6:
+                Intent intent5 = new Intent(getActivity(),MyAllOrderActivity.class);
+                intent5.putExtra("temp","2");
+                startActivity(intent5);
                 break;
             //跳转到待评价
             case 7:
+                Intent intent6= new Intent(getActivity(),MyAllOrderActivity.class);
+                intent6.putExtra("temp","3");
+                startActivity(intent6);
                 break;
             //跳转到已完成
             case 8:
+                Intent intent7 = new Intent(getActivity(),MyAllOrderActivity.class);
+                intent7.putExtra("temp","4");
+                startActivity(intent7);
                 break;
             case 9:
                 //跳转到金融保险
@@ -195,6 +211,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case 12:
                 //跳转到服务提醒
+                startActivity(new Intent(getActivity(),ServiceReminderActivity.class));
                 break;
             case 13:
                 //爱车档案
@@ -213,15 +230,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case 17:
                 //意见反馈
+                startActivity(new Intent(getActivity(),FeedbackActivity.class));
                 break;
             case 18:
                 //站内信
+
                 break;
             case 19:
                 //帮助中心
                 break;
             case 20:
                 //关于我们
+
                 break;
         }
     }

@@ -84,7 +84,7 @@
             android:layout_weight="1" />
 
         <include
-            android:id="@+id/text_customer_service"
+            android:id="@+id/text_customer_service01"
             layout="@layout/include_imagetext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

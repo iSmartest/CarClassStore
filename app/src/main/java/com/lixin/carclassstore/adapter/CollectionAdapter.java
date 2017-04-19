@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 import com.lixin.carclassstore.R;
+import com.lixin.carclassstore.activity.MyCollectionFootActivity;
 import com.lixin.carclassstore.bean.ForumReplyBean;
 import com.lixin.carclassstore.bean.ShoppingCollectionFootBean;
 import com.squareup.picasso.Picasso;
@@ -24,6 +25,11 @@ import java.util.List;
 public class CollectionAdapter extends BaseAdapter {
     private Context context;
     private List<ShoppingCollectionFootBean.commoditys> list;
+
+    public CollectionAdapter(Context context) {
+        this.context = context;
+    }
+
     public void setCollection(List<ShoppingCollectionFootBean.commoditys> list) {
         this.list = list;
     }

@@ -1,5 +1,6 @@
 package com.lixin.carclassstore.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,9 @@ public class FaultCategoryActivity extends BaseActivity implements View.OnClickL
     private CheckBox ck_chose1,ck_chose2,ck_chose3;
     private Button a_sure_chose;
     String context;
+    String context1;
+    String context2;
+    String context3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +50,25 @@ public class FaultCategoryActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ck_chose1:
-               context = text_car_no_oil.getText().toString().trim();
+               if (ck_chose1.isChecked()){
+                   context1 = text_car_no_oil.getText().toString().trim();
+               }else {
+                   context1 = "";
+               }
                 break;
             case R.id.ck_chose2:
-                context = text_car_tire_bad.getText().toString().trim();
+                if (ck_chose1.isChecked()){
+                    context2 = text_car_tire_bad.getText().toString().trim();
+                }else {
+                    context2 = "";
+                }
                 break;
             case R.id.ck_chose3:
-                context = text_other_car_question.getText().toString().trim();
+                if (ck_chose1.isChecked()){
+                    context3 = text_other_car_question.getText().toString().trim();
+                }else {
+                    context3 = "";
+                }
                 break;
             case R.id.a_sure_chose:
                 sumit();
@@ -62,5 +78,10 @@ public class FaultCategoryActivity extends BaseActivity implements View.OnClickL
 
     private void sumit() {
 
+        context = context1 + context2 + context3;
+        Intent intent = new Intent();
+        intent.putExtra("result", context);
+        setResult(1001, intent);
+        finish();
     }
 }

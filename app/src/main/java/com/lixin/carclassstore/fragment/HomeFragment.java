@@ -2,21 +2,25 @@ package com.lixin.carclassstore.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.activity.BuyInsuranceActivity;
-import com.lixin.carclassstore.activity.CarStoreActivity;
 import com.lixin.carclassstore.activity.CheckViolationWebActivity;
 import com.lixin.carclassstore.activity.CustomerServiceActivity;
 import com.lixin.carclassstore.activity.NewCarActivity;
-import com.lixin.carclassstore.activity.StoreActivity;
+import com.lixin.carclassstore.activity.ShopActivity;
+import com.lixin.carclassstore.adapter.GridAdapter;
+import com.lixin.carclassstore.bean.ContentBean;
 import com.lixin.carclassstore.bean.JavaBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
@@ -44,19 +48,25 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private String result;
     private String resultNote;
     private String serve;
-    private List<JavaBean.Serve.rotateAdvertisement> rotateAdvertisement = new ArrayList<>();
-    private List<JavaBean.Serve.serveTop> topList = new ArrayList<>();
-    private List<JavaBean.Serve.serveBottom> bottomList = new ArrayList<>();
-    private List<JavaBean.Serve.CheckAdvertisement.checkServes> checkServesList = new ArrayList<>();
-    private JavaBean.Serve.CheckAdvertisement checkAdvertisements ;
+    private List<JavaBean.rotateAdvertisement> rotateAdvertisement = new ArrayList<>();
+    private List<JavaBean.filtrate> filtrateList = new ArrayList<>();
+    private List<JavaBean.serveTop> topList = new ArrayList<>();
+    private List<JavaBean.serveBottom> bottomList = new ArrayList<>();
+    private List<JavaBean.CheckAdvertisement.checkServes> checkServesList = new ArrayList<>();
+    private List<ContentBean.commoditysList> mList = new ArrayList<>();
+    private JavaBean.CheckAdvertisement checkAdvertisements ;
     private ImageView iv_car;
     private ListView list_activity;
     private View head;
-    private View foot;
+    private int nowPage = 1;
     private ImageSlideshow imageSlideshow;
     private List<String> imageUrlList;
     private List<String> titleList ;
-    TextView text_home_head01,text_home_head02,text_home_head03;
+    TextView recommended,recommendedPrice,recommendedContent,boutique,boutiquePrice,boutiqueContent,dayKill;
+    ImageView ivRecommended,ivBoutique;
+    GridView gridKill;
+    GridAdapter gridAdapter;
+    LinearLayout linear01,linear02,linear03;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,10 +75,68 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         titleList = new ArrayList<>();
         initView();
         getdata();
+        getCommoditysData();
         return view;
     }
+
+    private void getCommoditysData() {
+        Map<String, String> params = new HashMap<>();
+        final String json="{\"cmd\":\"getHomeContentInfo\",\"nowPage\":\"" + nowPage + "\"}";
+        params.put("json", json);
+        dialog.show();
+        OkHttpUtils.post().url(context.getString(R.string.url)).params(params)
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtils.showMessageLong(context, "网络异常");
+                dialog.dismiss();
+            }
+            @Override
+            public void onResponse(String response, int id) {
+                Log.i("commoditysList", "onResponse:111 " + response.toString());
+                Gson gson = new Gson();
+                dialog.dismiss();
+                ContentBean contentBean = gson.fromJson(response, ContentBean.class);
+                if (contentBean.result.equals("1")){
+                    ToastUtils.showMessageLong(getActivity(),contentBean.resultNote);
+                }
+                List<ContentBean.commoditysList> commoditysList = contentBean.commoditysList;
+
+                Log.i("commoditysList", "onResponse2222: " + commoditysList.toString());
+                if (commoditysList.get(0).sectionName.equals("天天秒杀")){
+                    linear03.setVisibility(View.VISIBLE);
+                    dayKill.setText(commoditysList.get(0).sectionName);
+                    gridKill.setAdapter(gridAdapter);
+                    List<ContentBean.commoditysList.commoditys> commoditys = contentBean.commoditysList.get(0).commoditys;
+                    Log.i("commoditysList", "onResponse5555: " + commoditys.get(0).commodityid);
+                    gridAdapter.setGrid(commoditys);
+                }else {
+                    linear03.setVisibility(View.GONE);
+                }
+                if (commoditysList.get(1).sectionName.equals("活动推荐")){
+                    linear02.setVisibility(View.VISIBLE);
+                    recommended.setText(commoditysList.get(1).sectionName);
+                    recommendedPrice.setText(commoditysList.get(1).commoditys.get(0).commodityOriginalPrice);
+                    recommendedContent.setText(commoditysList.get(1).commoditys.get(0).commodityDescription);
+                    Picasso.with(context).load(commoditysList.get(1).commoditys.get(0).commodityIcon).into(ivRecommended);
+                }else {
+                    linear02.setVisibility(View.GONE);
+                }
+                if (commoditysList.get(1).sectionName.equals("精品推荐")){
+                    linear01.setVisibility(View.VISIBLE);
+                    boutique.setText(commoditysList.get(1).sectionName);
+                    boutiquePrice.setText(commoditysList.get(1).commoditys.get(0).commodityOriginalPrice);
+                    boutiqueContent.setText(commoditysList.get(1).commoditys.get(0).commodityDescription);
+                    Picasso.with(context).load(commoditysList.get(1).commoditys.get(0).commodityIcon).into(ivBoutique);
+                }else {
+                    linear01.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
     //轮播
-    private void initViewData(List<JavaBean.Serve.rotateAdvertisement> rotateAdvertisement) {
+    private void initViewData(List<JavaBean.rotateAdvertisement> rotateAdvertisement) {
         for (int i = 0; i < rotateAdvertisement.size(); i++) {
             imageSlideshow.addImageTitle(rotateAdvertisement.get(i).getServeIcon());
         }
@@ -108,19 +176,25 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         funcViews[16] = view.findViewById(R.id.text_special_offer);
         funcViews[17] = view.findViewById(R.id.text_automative_lighting);
         funcViews[18] = view.findViewById(R.id.text_refrigerator);
-        list_activity = (ListView) view.findViewById(R.id.list_activity);
-        head = LayoutInflater.from(getActivity()).inflate(R.layout.home_list_head,null);
-        text_home_head01 = (TextView) head.findViewById(R.id.text_home_head01);
-        text_home_head02 = (TextView) head.findViewById(R.id.text_home_head02);
-        text_home_head03 = (TextView) head.findViewById(R.id.text_home_head03);
-        foot = LayoutInflater.from(getActivity()).inflate(R.layout.home_list_head,null);
-        text_home_head01 = (TextView) foot.findViewById(R.id.text_home_head01);
-        text_home_head02 = (TextView) foot.findViewById(R.id.text_home_head02);
-        text_home_head03 = (TextView) foot.findViewById(R.id.text_home_head03);
-        if (head != null){
-            list_activity.addHeaderView(head);
-            list_activity.addFooterView(foot);
-        }
+        //活动推荐
+        recommended = (TextView) view.findViewById(R.id.text_activity_recommended);
+        recommendedPrice = (TextView) view.findViewById(R.id.text_activity_recommended_price);
+        recommendedContent = (TextView) view.findViewById(R.id.text_activity_recommended_content);
+        ivRecommended = (ImageView) view.findViewById(R.id.imv_activity_recommended);
+        linear02 = (LinearLayout) view.findViewById(R.id.linear02);
+        //精品推荐
+        boutique  = (TextView) view.findViewById(R.id.text_boutique_recommend);
+        boutiquePrice = (TextView) view.findViewById(R.id.text_boutique_price);
+        boutiqueContent = (TextView) view.findViewById(R.id.text_boutique_dec);
+        ivBoutique = (ImageView) view.findViewById(R.id.iv_boutique_picture);
+        linear01 = (LinearLayout) view.findViewById(R.id.linear01);
+        //天天秒杀
+        dayKill = (TextView) view.findViewById(R.id.text_everyday_kill);
+        gridKill = (GridView) view.findViewById(R.id.grid_everyday_kill);
+        linear03 = (LinearLayout) view.findViewById(R.id.linear03);
+        gridAdapter = new GridAdapter(getActivity());
+        gridKill.setAdapter(gridAdapter);
+        iv_car.setOnClickListener(this);
     }
     //主页面数据加载
     private void initData() {
@@ -130,7 +204,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 topList.get(1).getServeIcon(),
                 topList.get(2).getServeIcon(),
                 topList.get(3).getServeIcon(),
-                //顶部服务展示6个
+                //中部服务展示6个
                 bottomList.get(0).getServeIcon(),
                 bottomList.get(1).getServeIcon(),
                 bottomList.get(2).getServeIcon(),
@@ -164,21 +238,107 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            //跳转到车品商店
             case 0:
+                Intent intent00 = new Intent(getActivity(),ShopActivity.class);
+                intent00.putExtra("serveTypeId",topList.get(0).getServeTypeId() );
+                ToastUtils.showMessageShort(getActivity(),topList.get(0).getServeType());
+                startActivity(intent00);
+                break;
             case 1:
+                Intent intent01 = new Intent(getActivity(),ShopActivity.class);
+                intent01.putExtra("serveTypeId",topList.get(1).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),topList.get(1).getServeType());
+                startActivity(intent01);
+                break;
             case 2:
+                Intent intent02 = new Intent(getActivity(),ShopActivity.class);
+                intent02.putExtra("serveTypeId",topList.get(2).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),topList.get(2).getServeType());
+                startActivity(intent02);
+                break;
             case 3:
-            case 19:
-            case 18:
-            case 14:
-            case 13:
-            case 12:
-            case 11:
+                Intent intent03 = new Intent(getActivity(),CustomerServiceActivity.class);
+                startActivity(intent03);
+                break;
             case 10:
+                Intent intent10 = new Intent(getActivity(),ShopActivity.class);
+                intent10.putExtra("serveTypeId",checkServesList.get(0).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(0).getServeType());
+                startActivity(intent10);
+                break;
+            case 11:
+                Intent intent11 = new Intent(getActivity(),ShopActivity.class);
+                intent11.putExtra("serveTypeId",checkServesList.get(1).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(1).getServeType());
+                startActivity(intent11);
+                break;
+            case 12:
+                Intent intent12 = new Intent(getActivity(),ShopActivity.class);
+                intent12.putExtra("serveTypeId",checkServesList.get(2).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(2).getServeType());
+                startActivity(intent12);
+                break;
+            case 13:
+                Intent intent13 = new Intent(getActivity(),ShopActivity.class);
+                intent13.putExtra("serveTypeId",checkServesList.get(3).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(3).getServeType());
+                startActivity(intent13);
+                break;
+            case 14:
+                Intent intent14 = new Intent(getActivity(),ShopActivity.class);
+                intent14.putExtra("serveTypeId",checkServesList.get(4).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(4).getServeType());
+                startActivity(intent14);
+                break;
+            case R.id.iv_car:
+                Intent intent04 = new Intent(getActivity(),ShopActivity.class);
+                intent04.putExtra("serveTypeId",checkServesList.get(5).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(5).getServeType());
+                startActivity(intent04);
+                break;
+            case 15:
+                Intent intent15 = new Intent(getActivity(),ShopActivity.class);
+                intent15.putExtra("serveTypeId",checkServesList.get(6).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(6).getServeType());
+                startActivity(intent15);
+                break;
+            case 16:
+                Intent intent16 = new Intent(getActivity(),ShopActivity.class);
+                intent16.putExtra("serveTypeId",checkServesList.get(7).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(7).getServeType());
+                startActivity(intent16);
+                break;
+            case 17:
+                Intent intent17 = new Intent(getActivity(),ShopActivity.class);
+                intent17.putExtra("serveTypeId",checkServesList.get(8).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(8).getServeType());
+                startActivity(intent17);
+                break;
+            case 18:
+                Intent intent18 = new Intent(getActivity(),ShopActivity.class);
+                intent18.putExtra("serveTypeId",checkServesList.get(9).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(9).getServeType());
+                startActivity(intent18);
+                break;
+            case 19:
+                Intent intent19 = new Intent(getActivity(),ShopActivity.class);
+                intent19.putExtra("serveTypeId",checkServesList.get(10).getServeTypeId());
+                ToastUtils.showMessageShort(getActivity(),checkServesList.get(10).getServeType());
+                startActivity(intent19);
+                break;
             case 6:
+                StoreFragment storeFragment1 = StoreFragment.newInstance("serveType");
+                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
+                transaction1.add(R.id.activity_new_main_layout_content, storeFragment1);
+                transaction1.addToBackStack(null);
+                transaction1.commit();
             case 7:
-                startActivity(new Intent(getActivity(),StoreActivity.class));
-                Log.i("qqqq", "bottomList: " + bottomList.get(0).getServeIcon());
+                StoreFragment storeFragment2 = StoreFragment.newInstance("serveType");
+                FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
+                transaction2.add(R.id.activity_new_main_layout_content, storeFragment2);
+                transaction2.addToBackStack(null);
+                transaction2.commit();
                 break;
             //跳转到客服
             case R.id.text_customer_service:
@@ -202,10 +362,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
             case 9:
                 startActivity(new Intent(getActivity(),BuyInsuranceActivity.class));
                 break;
-            //跳转到车品商店
-            case 16:
-                startActivity(new Intent(getActivity(),CarStoreActivity.class));
-                break;
         }
     }
     //请求参数
@@ -223,23 +379,27 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
             }
             @Override
             public void onResponse(String response, int id) {
+                Log.i("qqqq", "topList: " + response.toString());
                 Gson gson = new Gson();
                 dialog.dismiss();
                 javaBean = gson.fromJson(response, JavaBean.class);
                 if (javaBean.getResult().equals("1")){
                     ToastUtils.showMessageLong(getActivity(),javaBean.getResultNote());
                 }
-                JavaBean.Serve serve = gson.fromJson(response, JavaBean.Serve.class);
-                List<JavaBean.Serve.rotateAdvertisement> rotateAdvertisementList = serve.rotateAdvertisement;//轮播图集合
+                List<JavaBean.rotateAdvertisement> rotateAdvertisementList = javaBean.rotateAdvertisement;//轮播图集合
+                List<JavaBean.filtrate> filtrate = javaBean.filtrate;
+                filtrateList.addAll(filtrate);
                 rotateAdvertisement.addAll(rotateAdvertisementList);
-                topList = serve.serveTop;
+                List<JavaBean.serveTop> serveTopList = javaBean.serveTop;
+                topList.addAll(serveTopList);
                 Log.i("qqqq", "topList: " + topList.get(0).getServeIcon());
-                bottomList = serve.serveBottom;
-                checkAdvertisements = gson.fromJson(response, JavaBean.Serve.CheckAdvertisement.class);
+                bottomList = javaBean.serveBottom;
+                checkAdvertisements = gson.fromJson(response, JavaBean.CheckAdvertisement.class);
                 checkServesList = checkAdvertisements.checkServes;
                 initData();
                 initViewData(rotateAdvertisement);
             }
         });
     }
+
 }

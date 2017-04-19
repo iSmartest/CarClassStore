@@ -11,9 +11,43 @@ import java.util.List;
 public class StoreBean {
     public String result; //0成功1失败"0"
     public String resultNote;//"失败原因"
-    public String totalPage;//总页数 5
-    public List<shopList> shop;
-    public class shopList{
+    public int totalPage;//总页数 5
+    public List<shop> shop;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getResultNote() {
+        return resultNote;
+    }
+
+    public void setResultNote(String resultNote) {
+        this.resultNote = resultNote;
+    }
+
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public List<StoreBean.shop> getShop() {
+        return shop;
+    }
+
+    public void setShop(List<StoreBean.shop> shop) {
+        this.shop = shop;
+    }
+
+    public class shop{
         public String shopid;
         public String shopIcon;
         public String shopName;

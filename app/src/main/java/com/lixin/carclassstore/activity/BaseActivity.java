@@ -120,7 +120,7 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
                         public void sure() {
                             dialog.dismiss();
                             finish();
-//                            MyApplication.getApplication().exit();
+                            MyApplication.getApplication().exit();
                         }
                     });
                 }

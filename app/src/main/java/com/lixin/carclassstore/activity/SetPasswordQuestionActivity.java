@@ -15,7 +15,6 @@ public class SetPasswordQuestionActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_set_password_question);
         setTitleText("设置密保问题");
         hideBack(false);

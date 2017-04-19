@@ -1,19 +1,16 @@
 package com.lixin.carclassstore.activity;
 
-
-
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-
 import com.lixin.carclassstore.R;
-import com.lixin.carclassstore.adapter.StoreDetailAdapter;
 import com.lixin.carclassstore.bean.StoreDetailBean;
+import com.lixin.carclassstore.fragment.DecFragment;
+import com.lixin.carclassstore.fragment.OpinionFragment;
+import com.lixin.carclassstore.fragment.ShopFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,69 +24,70 @@ import java.util.List;
  */
 
 public class StoreDetailsActivity extends BaseActivity implements View.OnClickListener{
-    private TextView text_immediately_pay,text_tyre,text_maintenance;
-    private LinearLayout linear_shopping_cart;
-    private ListView list_something;
-    private StoreDetailAdapter storeDetailAdapter;
+    private TextView[] mTextView;
+    private Fragment[] mFragments;
+    private FragmentTransaction transaction;
+    private int current = 0;
     private List<StoreDetailBean> mList = new ArrayList<>();
+    private ImageView imBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_store_details);
-        hideBack(false);
         initView();
-        initData();
-
-    }
-    protected void initData() {
-        for (int i = 0; i < 6; i++) {
-            StoreDetailBean storeDetailBean = new StoreDetailBean();
-            storeDetailBean.setShoppingName("米其林轮胎");
-            storeDetailBean.setSize("15寸");
-            storeDetailBean.setSalesvolume(200);
-            storeDetailBean.setPrice(750);
-            mList.add(storeDetailBean);
-        }
+        initFragment();
+        refreshView();
     }
     protected void initView() {
-        text_immediately_pay = (TextView) findViewById(R.id.text_immediately_pay);
-        text_immediately_pay.setOnClickListener(this);
-        text_tyre = (TextView) findViewById(R.id.text_tyre);
-        text_tyre.setOnClickListener(this);
-        text_maintenance = (TextView) findViewById(R.id.text_maintenance);
-        text_maintenance.setOnClickListener(this);
-        linear_shopping_cart = (LinearLayout) findViewById(R.id.linear_shopping_cart);
-        linear_shopping_cart.setOnClickListener(this);
-        list_something = (ListView) findViewById(R.id.list_something);
-
-        storeDetailAdapter = new StoreDetailAdapter(StoreDetailsActivity.this,mList);
-        list_something.setAdapter(storeDetailAdapter);
-        storeDetailAdapter.setStoreDetailBean(mList);
-        storeDetailAdapter.setModifyCountInterface((StoreDetailAdapter.ModifyCountInterface) this);
-
-
-        list_something.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
+        mTextView = new TextView[3];
+        mTextView[0] = (TextView) findViewById(R.id.text_shop);
+        mTextView[1] = (TextView) findViewById(R.id.text_dec);
+        mTextView[2] = (TextView) findViewById(R.id.text_opinion);
+        imBack = (ImageView) findViewById(R.id.img_back);
+        imBack.setOnClickListener(this);
     }
-
+    private void initFragment() {
+        mFragments = new Fragment[3];
+        mFragments[0] = new ShopFragment();
+        mFragments[1] = new DecFragment();
+        mFragments[2] = new OpinionFragment();
+        setCurrent(0);
+    }
+    private void setCurrent(int position) {
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activity_shop_layout_content, mFragments[position]);
+        transaction.commitAllowingStateLoss();
+        mTextView[position].setSelected(true);
+        for (int i = 0; i < mTextView.length; i++) {
+            if (i != position) {
+                mTextView[i].setSelected(false);
+            }
+        }
+        current = position;
+    }
+    private void refreshView() {
+        for (int i = 0; i < mTextView.length; i++) {
+            mTextView[i].setId(i);
+            mTextView[i].setOnClickListener(this);
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.text_immediately_pay:
-                startActivity(new Intent(StoreDetailsActivity.this,OrderPaymentActivity.class));//订单支付
+            case 0:
+                setCurrent(0);
                 break;
-            case R.id.text_tyre:
+            case 1:
+                setCurrent(1);
                 break;
-            case R.id.text_maintenance:
+            case 2:
+                setCurrent(2);
                 break;
-            case R.id.linear_shopping_cart:
-                startActivity(new Intent(StoreDetailsActivity.this,ShoppingCartActivity.class));//购物车
+            case R.id.img_back:
+                finish();
+                break;
+            default:
                 break;
         }
-
     }
 }

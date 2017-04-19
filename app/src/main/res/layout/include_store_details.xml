@@ -118,25 +118,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="3">
-            <TextView
-                android:id="@+id/text_tyre"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="轮胎"
-                android:textSize="16sp"
-                android:textColor="@drawable/selector_text_color"
-                android:background="@drawable/selector_text_background_color"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/text_maintenance"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="维修保养"
-                android:textSize="16sp"
-                android:layout_marginTop="10dp"
-                android:textColor="@drawable/selector_text_color"
-                android:background="@drawable/selector_text_background_color"
-                android:gravity="center"/>
+           <ListView
+               android:id="@+id/list"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent">
+           </ListView>
         </LinearLayout>
         <ListView
             android:id="@+id/list_something"

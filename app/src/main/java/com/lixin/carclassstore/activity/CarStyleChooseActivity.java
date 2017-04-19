@@ -111,8 +111,6 @@ public class CarStyleChooseActivity extends BaseActivity {
         sortListView = (ListView) findViewById(R.id.country_lvcountry);
         if (head != null)
             sortListView.addHeaderView(head);
-
-
         mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
 
         //根据输入框输入值的改变来过滤搜索

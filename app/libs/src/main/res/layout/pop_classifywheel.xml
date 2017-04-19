@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_cancle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:gravity="left|center_vertical"
+            android:text="取消"
+            android:textColor="@color/dark_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btn_enter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:gravity="right|center_vertical"
+            android:text="确定"
+            android:textColor="@color/dark_black"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <com.lixin.qiaoqixinyuan.wheel.wheelview.WheelView
+        android:id="@+id/wheel_classify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         />
+</LinearLayout>

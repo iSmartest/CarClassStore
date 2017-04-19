@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_day_kill_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_fail_empty"/>
+    <TextView
+        android:id="@+id/text_new_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#f1b696"
+        android:text="￥998"
+        android:layout_gravity="center"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/text_old_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9f9f9f"
+        android:text="￥1998"
+        android:textSize="14sp"
+        android:layout_gravity="center"/>
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.lixin.carclassstore.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -59,6 +60,7 @@ public class MyCollectionFootActivity extends BaseActivity
     private void initView() {
         list_collection = (PullToRefreshListView)findViewById(R.id.list_collection);
         list_collection.setMode(PullToRefreshBase.Mode.BOTH);
+        mAdapter = new CollectionAdapter(this);
         list_collection.setAdapter(mAdapter);
         list_collection.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
@@ -106,6 +108,7 @@ public class MyCollectionFootActivity extends BaseActivity
                         Gson gson = new Gson();
                         dialog1.dismiss();
                         list_collection.onRefreshComplete();
+                        Log.i("MyCollectionFootActivity", "onResponse: " + response.toString());
                         ShoppingCollectionFootBean shoppingCollectionFootBean = gson.fromJson(response, ShoppingCollectionFootBean.class);
                         if (shoppingCollectionFootBean.result.equals("1")) {
                             ToastUtils.showMessageShort(context, shoppingCollectionFootBean.resultNote);

@@ -5,8 +5,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.lixin.carclassstore.BuildConfig;
+import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.tools.ImageManager;
 import com.umeng.socialize.PlatformConfig;
 
@@ -27,7 +30,8 @@ public class MyApplication extends Application {
         //初始化sharesdk
 //        ShareSDK.initSDK(this);
 //        initJPush();
-    }
+
+}
     public static MyApplication getApplication() {
         return myApplication;
     }

@@ -24,24 +24,23 @@ import java.util.List;
 
 public class StoreAdapter extends BaseAdapter{
 
-    private List<StoreBean.shopList> storeBeanList;
+    private List<StoreBean.shop> storeBeanList;
     private Context context;
 
-    public StoreAdapter(Context context, List<StoreBean.shopList> list) {
+    public StoreAdapter(Context context) {
         this.context = context;
-        this.storeBeanList = list;
     }
-    public void setStoreBeanList(List<StoreBean.shopList> storeBean){
+    public void setStoreBeanList(List<StoreBean.shop> storeBean){
         this.storeBeanList = storeBean;
     }
 
     @Override
     public int getCount() {
-        return storeBeanList.size();
+        return storeBeanList == null ? 0 : storeBeanList.size();
     }
 
     @Override
-    public StoreBean.shopList getItem(int position) {
+    public StoreBean.shop getItem(int position) {
         return storeBeanList.get(position);
     }
 
@@ -64,7 +63,7 @@ public class StoreAdapter extends BaseAdapter{
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            final StoreBean.shopList mShopList = storeBeanList.get(position);
+            final StoreBean.shop mShopList = storeBeanList.get(position);
             String imag = mShopList.getShopIcon();
             Picasso.with(context).load(imag).into(viewHolder.iv_car_picture);
             viewHolder.text_sales_num.setText("销量" + mShopList.getSellerNum());
@@ -78,7 +77,7 @@ public class StoreAdapter extends BaseAdapter{
         ImageView iv_car_picture;
         TextView text_store_name,text_store_score,text_sales_num,text_store_address;
     }
-    public void updateList(List<StoreBean.shopList> newList) {
+    public void updateList(List<StoreBean.shop> newList) {
         if (newList == null)
             storeBeanList = new ArrayList<>();
         else

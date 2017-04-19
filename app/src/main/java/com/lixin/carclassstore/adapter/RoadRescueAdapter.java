@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.bean.RoadRescue;
+import com.lixin.carclassstore.bean.RoadRescueBean;
 
 import java.util.List;
 
@@ -22,21 +23,23 @@ import java.util.List;
 
 public class RoadRescueAdapter extends BaseAdapter {
     private Context context;
-    private List<RoadRescue> mList;
+    private List<RoadRescueBean.rescueList> mList;
 
-
-    public RoadRescueAdapter(Context context, List<RoadRescue> mList) {
-        this.context = context;
+    public void setRoadRescue(List<RoadRescueBean.rescueList> mList) {
         this.mList = mList;
+    }
+    public RoadRescueAdapter(Context context) {
+        this.context = context;
+
     }
 
     @Override
     public int getCount() {
-        return mList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     @Override
-    public RoadRescue getItem(int position) {
+    public RoadRescueBean.rescueList getItem(int position) {
         return mList.get(position);
     }
 
@@ -59,12 +62,21 @@ public class RoadRescueAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        RoadRescue roadRescue = mList.get(position);
-        viewHolder.text_time.setText(roadRescue.getDate());
-        viewHolder.text_state.setText(roadRescue.getState());
-        viewHolder.text_car_question.setText(roadRescue.getQuestion());
+        RoadRescueBean.rescueList rescueList = mList.get(position);
+        viewHolder.text_time.setText(rescueList.getAccidentTime());
+        viewHolder.text_car_question.setText(rescueList.getAccidentType());
+        switch (rescueList.getAccidentHandleType()){
+            case "0":
+                viewHolder.text_state.setText("已处理");
+                break;
+            case "1":
+                viewHolder.text_state.setText("未处理");
+        }
         return convertView;
     }
+
+
+
     class ViewHolder{
         ImageView iv_car_image;
         TextView text_car_question,text_state,text_time;

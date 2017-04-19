@@ -1,5 +1,6 @@
 package com.lixin.carclassstore.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
@@ -39,13 +40,16 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
     private int selectedColor, unSelectedColor;//是否选择显示的颜色
     private int type;//选择的订单状态
     private static final int pageSize = 5;//页卡总数
+    private int temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_all_order);
         hideBack(false);
         setTitleText("我的订单");
-        int temp = 2;
+        Intent intent = getIntent();
+        String result  = intent.getStringExtra("temp");
+        temp = Integer.valueOf(result);
         initView();
         InitViewPager(temp);
         InitImageView(temp);

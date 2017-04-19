@@ -14,7 +14,20 @@
             android:id="@+id/text_service_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="不限种类"
+            android:text="服务类别"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:background="@color/gray"/>
+        <TextView
+            android:id="@+id/text_sort_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="排列方式"
             android:textSize="16sp"
             android:layout_weight="1"
             android:gravity="center"
@@ -27,7 +40,7 @@
             android:id="@+id/text_screening_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="排列方式"
+            android:text="筛选方式"
             android:textSize="16sp"
             android:layout_weight="1"
             android:gravity="center"
@@ -39,7 +52,7 @@
         android:background="@color/gray"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="2dp">
         <com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView
             android:id="@+id/pull_to_refresh_list"

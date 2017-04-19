@@ -11,22 +11,37 @@ import java.util.List;
 public class JavaBean {
     public String result;
     public String resultNote;
-    public Serve serve;
-    public class Serve{
-        public List<serveTop> serveTop;
-        public List<rotateAdvertisement> rotateAdvertisement;
-        public List<serveBottom> serveBottom;
-        public CheckAdvertisement checkAdvertisement;
-
-        public CheckAdvertisement getCheckAdvertisement() {
+    public List<serveTop> serveTop;
+    public List<rotateAdvertisement> rotateAdvertisement;
+    public List<serveBottom> serveBottom;
+    public List<filtrate> filtrate;
+    public CheckAdvertisement checkAdvertisement;
+    public CheckAdvertisement getCheckAdvertisement() {
             return checkAdvertisement;
         }
-
-        public void setCheckAdvertisement(CheckAdvertisement checkAdvertisement) {
+    public void setCheckAdvertisement(CheckAdvertisement checkAdvertisement) {
             this.checkAdvertisement = checkAdvertisement;
         }
+    public class filtrate {
+            public String filtrateTitle;
+            public String filtrateid;
+            public String getFiltrateTitle() {
+                return filtrateTitle;
+            }
 
-        public class CheckAdvertisement{
+            public void setFiltrateTitle(String filtrateTitle) {
+                this.filtrateTitle = filtrateTitle;
+            }
+
+            public String getFiltrateid() {
+                return filtrateid;
+            }
+
+            public void setFiltrateid(String filtrateid) {
+                this.filtrateid = filtrateid;
+            }
+        }
+    public class CheckAdvertisement{
             public String serveType;//跳转到商城列表时用
             public String serveIcon; //服务的头标
             public String serveTypeId;//商品类别id
@@ -95,10 +110,10 @@ public class JavaBean {
                 }
             }
         }
-        public class serveBottom{
-            public String serveIcon; //服务的头标
-            public String serveType; //服务的标题，跳转到商城列表时用
-            public String serveTypeId;//商品类别id
+    public class serveBottom{
+        public String serveIcon; //服务的头标
+        public String serveType; //服务的标题，跳转到商城列表时用
+        public String serveTypeId;//商品类别id
 
             public String getServeIcon() {
                 return serveIcon;
@@ -124,10 +139,10 @@ public class JavaBean {
                 this.serveTypeId = serveTypeId;
             }
         }
-        public class rotateAdvertisement{
-            public String serveType;
-            public String serveIcon;
-            public String serveTypeId;
+    public class rotateAdvertisement{
+        public String serveType;
+        public String serveIcon;
+        public String serveTypeId;
 
             public String getServeType() {
                 return serveType;
@@ -153,11 +168,11 @@ public class JavaBean {
                 this.serveTypeId = serveTypeId;
             }
         }
-        public class serveTop{
-            private String serveIcon;
-            private String serveType;
-            private String serveTypeId;
-            private String serveDetailTitle;
+    public class serveTop{
+        private String serveIcon;
+        private String serveType;
+        private String serveTypeId;
+        private String serveDetailTitle;
 
             public String getServeIcon() {
                 return serveIcon;
@@ -191,37 +206,19 @@ public class JavaBean {
                 this.serveDetailTitle = serveDetailTitle;
             }
         }
-
-    }
-
     public String getResult() {
         return result;
     }
-
     public void setResult(String result) {
         this.result = result;
     }
-
     public String getResultNote() {
         return resultNote;
     }
-
     public void setResultNote(String resultNote) {
         this.resultNote = resultNote;
     }
 
-    public Serve getServe() {
-        return serve;
-    }
-
-    public void setServe(Serve serve) {
-        this.serve = serve;
-    }
-    @Override
-    public String toString() {
-        return "JavaBean [result=" + result + ", resultNote=" + resultNote + ", serve=" + serve
-                      + "]";
-    }
 }
 
 

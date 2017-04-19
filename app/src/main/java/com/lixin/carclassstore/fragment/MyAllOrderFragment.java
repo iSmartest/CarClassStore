@@ -7,69 +7,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.adapter.MyAllOrderAdapter;
 import com.lixin.carclassstore.bean.MyOrderBean;
-import com.lixin.carclassstore.bean.ReplyBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import okhttp3.Call;
 
 /**
  * Created by 小火
  * Create time on  2017/4/13
  * My mailbox is 1403241630@qq.com
+ * 全部订单
  */
 
 public class MyAllOrderFragment extends BaseFragment{
-    private PullToRefreshListView list_order_content;
     private View view;
     private MyAllOrderAdapter mAdapter;
     private int nowPage = 1;
     private String uid ="123";
     private String orderState = "0";
-    private List<MyOrderBean.orders> ordersList = new ArrayList<>();
+    private ListView order_lv;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_order_content,null);
-        initView();
+        order_lv = (ListView)view.findViewById(R.id.order_lv);
+        getdata();
         return view;
-
     }
-
-    private void initView() {
-        list_order_content = (PullToRefreshListView) view.findViewById(R.id.list_order_content);
-        list_order_content.setMode(PullToRefreshBase.Mode.BOTH);
-        mAdapter = new MyAllOrderAdapter();
-        list_order_content.setAdapter(mAdapter);
-        list_order_content.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                nowPage = 1;
-                ordersList.clear();
-                getdata();
-            }
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                nowPage++;
-                getdata();
-            }
-        });
-    }
-
     private void getdata() {
         Map<String, String> params = new HashMap<>();
         String json = "{\"cmd\":\"getOrderInfo\",\"orderState\":\"" + orderState + "\"" + ",\"uid\":\"" + uid + "\"" + ",\"nowPage\":\"" + nowPage + "\"}";
@@ -88,21 +68,21 @@ public class MyAllOrderFragment extends BaseFragment{
                     }
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i("111", "onResponse: " + response.toString());
-                        Gson gson = new Gson();
-                        dialog.dismiss();
-                        ReplyBean rplyBean = gson.fromJson(response, ReplyBean.class);
-                        if (rplyBean.getResult().equals("1")) {
-                            ToastUtils.showMessageShort(context, rplyBean.getResultNote());
-                            return;
-                        }else {
-                            ToastUtils.showMessageShort(context, "回复成功！");
 
-//                            mList.clear();
-//                            commentsList();
-                            mAdapter.notifyDataSetChanged();
+                        List<JSONObject> datalist = new ArrayList<>();
+                        dialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray ordersArray = jsonObject.getJSONArray("orders");
+                            Log.i("ordersArray", "onResponse: " + ordersArray.toString());
+                            mAdapter = new MyAllOrderAdapter(context);
+                            mAdapter.setCollection(ordersArray);
+                            order_lv.setAdapter(mAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
     }
+
 }

@@ -1,47 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/search_background">
-    <include layout="@layout/activity_base"/>
-    <include layout="@layout/include_store_details"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <LinearLayout
-            android:id="@+id/linear_shopping_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_weight="1"
-            android:gravity="center"
             android:background="@color/white_smoke">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/shopping_cat1"
-                android:layout_gravity="center"/>
-            <TextView
+                android:id="@+id/img_back"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|left"
+                android:src="@drawable/back"
+                android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/text_shop"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="商品"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white_smoke" />
+                <TextView
+                    android:id="@+id/text_dec"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="详情"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white_smoke" />
+                <TextView
+                    android:id="@+id/text_opinion"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="评价"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_smoke" />
+        <FrameLayout
+            android:id="@+id/activity_shop_layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.85">
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_smoke" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:gravity="center">
+            <LinearLayout
+                android:id="@+id/linear_shopping_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:text="￥200"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/white_smoke">
+                <ImageView
+                    android:id="@+id/im_telephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:src="@drawable/telephone"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+                <ImageView
+                    android:id="@+id/im_shopping_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:src="@drawable/shopping_cat1"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/text_immediately_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="加入购物车"
                 android:textSize="20sp"
-                android:textColor="@color/btn_login_color"
+                android:textColor="@color/white_smoke"
+                android:background="@color/pay_background"
+                android:layout_weight="2"
                 android:gravity="center"/>
         </LinearLayout>
-        <TextView
-            android:id="@+id/text_immediately_pay"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="立即支付"
-            android:textSize="20sp"
-            android:textColor="@color/white_smoke"
-            android:background="@color/pay_background"
-            android:layout_weight="1"
-            android:gravity="center"/>
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>
