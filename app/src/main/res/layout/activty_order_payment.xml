@@ -124,19 +124,17 @@
             android:background="@color/white_smoke"
             android:gravity="center">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:text="微信支付"
                 android:textSize="16sp"
                 android:layout_weight="1"
                 android:layout_gravity="center"/>
-            <ImageView
-                android:layout_width="match_parent"
+            <CheckBox
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:src="@drawable/selected_check_pay_style"
-                android:gravity="center|right"
                 android:layout_marginRight="16dp"/>
         </LinearLayout>
         <View
@@ -150,18 +148,16 @@
             android:background="@color/white_smoke"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:text="支付宝支付"
                 android:textSize="16sp"
                 android:layout_weight="1"
                 android:layout_gravity="center"/>
-            <ImageView
-                android:layout_width="match_parent"
+            <CheckBox
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/selected_check_pay_style"
                 android:layout_gravity="center|right"
                 android:layout_marginRight="16dp"/>
         </LinearLayout>

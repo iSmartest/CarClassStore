@@ -20,13 +20,14 @@ import java.util.List;
  */
 
 public class CustomerServiceAdapter extends BaseAdapter{
-    private List<CustomerServiceBean.Service> mList;
+    private List<CustomerServiceBean.service> mList;
     private Context context;
 
     public CustomerServiceAdapter(Context context) {
         this.context = context;
     }
-    public void setCustomerService(List<CustomerServiceBean.Service> servicesList) {
+    public void setCustomerService(Context context,List<CustomerServiceBean.service> servicesList) {
+        this.context = context;
         this.mList = servicesList;
         notifyDataSetChanged();
     }
@@ -36,7 +37,7 @@ public class CustomerServiceAdapter extends BaseAdapter{
     }
 
     @Override
-    public CustomerServiceBean.Service getItem(int position) {
+    public CustomerServiceBean.service getItem(int position) {
         return mList.get(position);
     }
 
@@ -59,7 +60,7 @@ public class CustomerServiceAdapter extends BaseAdapter{
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        CustomerServiceBean.Service serviceList = mList.get(position);
+        CustomerServiceBean.service serviceList = mList.get(position);
         viewHolder.serviceName.setText(serviceList.getServiceName());
         viewHolder.serviceQQ.setText(serviceList.getServiceQQ());
         viewHolder.serviceWX.setText(serviceList.getServiceWX());

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_smoke"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="8dp">
+    <TextView
+        android:id="@+id/text_parameter_types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="配置名："
+        android:textSize="18dp"/>
+    <TextView
+        android:id="@+id/text_parameters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="参数"
+        android:textSize="16dp"/>
+</LinearLayout>

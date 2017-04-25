@@ -1,5 +1,6 @@
 package com.lixin.carclassstore.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
@@ -27,10 +28,16 @@ public class CheckViolationWebActivity extends BaseActivity{
     private ProgressBar progressBar;
     public static final String URL="url";
     private static final String TAG = "CheckViolationWebActivity";
+    private String isStoreDetailsOrCheckviolation;
+    private int num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_violation_web_view);
+        Intent intent = getIntent();
+        isStoreDetailsOrCheckviolation = intent.getStringExtra("isStoreDetailsOrCheckviolation");
+        num = Integer.parseInt(isStoreDetailsOrCheckviolation);
+        hideBack(false);
         init();
     }
     void init() {
@@ -124,7 +131,11 @@ public class CheckViolationWebActivity extends BaseActivity{
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
 //            setTitleText(title);
-            setTitleText("查违章");
+            if (num == 1){
+                setTitleText("门店详情");
+            }else {
+                setTitleText("查违章");
+            }
         }
 
         //=========HTML5定位==========================================================

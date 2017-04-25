@@ -1,6 +1,7 @@
 package com.lixin.carclassstore.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,12 @@ public class ForumReplyAdapter extends BaseAdapter{
         }
         viewHolder.line_reply.setVisibility(View.GONE);
         ForumReplyBean.replys replysList = list.get(position);
-//        Picasso.with(context).load(replysList.getUserIcon()).into(viewHolder.iv_user_icon);
+        if (TextUtils.isEmpty(replysList.getUserIcon())){
+            viewHolder.iv_user_icon.setImageResource(R.drawable.head_img_default);
+        }else {
+            Picasso.with(context).load(replysList.getUserIcon()).into(viewHolder.iv_user_icon);
+        }
+
         viewHolder.text_user_name.setText(replysList.getUserName());
         viewHolder.text_talk_time.setText(replysList.getTalkTime());
         viewHolder.text_user_talk.setText(replysList.getUserTalk());

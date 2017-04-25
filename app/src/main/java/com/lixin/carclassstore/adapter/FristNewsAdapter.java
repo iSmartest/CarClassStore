@@ -1,6 +1,7 @@
 package com.lixin.carclassstore.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,12 @@ public class FristNewsAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         NewsAndFocusBean.newsList newsList = list.get(position);
+        if (TextUtils.isEmpty(newsList.getForumIcon())){
+            viewHolder.newsPicture.setImageResource(R.drawable.image_fail_empty);
+        }else {
+            Picasso.with(context).load(newsList.getForumIcon()).into(viewHolder.newsPicture);
+        }
 
-//        Picasso.with(context).load(newsList.getForumIcon()).into(viewHolder.newsPicture);
         viewHolder.newsTitle.setText(newsList.getForumTitle());
         viewHolder.newsContent.setText(newsList.getForumDetail());
         viewHolder.newsTime.setText(newsList.getForumTime());

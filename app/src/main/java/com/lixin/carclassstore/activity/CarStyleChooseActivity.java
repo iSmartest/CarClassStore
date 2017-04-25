@@ -263,32 +263,3 @@ public class CarStyleChooseActivity extends BaseActivity {
         });
     }
 }
-
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        lv_test = (ListView)findViewById(R.id.lv_test);
-////      头布局
-//        vHead= View.inflate(this, R.layout.item_main, null);
-//        ImageView iv_img= (ImageView) vHead.findViewById(R.id.iv_img);
-////      头布局放入listView中
-//        lv_test.addHeaderView(vHead);
-////      绑定适配器
-//        String [] arrarStr={"刘备","关羽","张飞","马超","黄忠"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrarStr);
-//        lv_test.setAdapter(adapter);
-//        myOnClick();
-//
-//    }
-//    private void myOnClick() {
-//        lv_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(MainActivity.this, "position:"+position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
-//}

@@ -1,10 +1,15 @@
 package com.lixin.carclassstore.activity;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +25,7 @@ import com.lixin.carclassstore.bean.StoreBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
+import com.lixin.carclassstore.view.ProgressDialog;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
 
@@ -37,7 +43,7 @@ import okhttp3.Call;
  * My mailbox is 1403241630@qq.com
  */
 
-public class ShopActivity extends BaseActivity implements View.OnClickListener{
+public class ShopActivity extends Activity implements View.OnClickListener{
     private TextView textComprehensive,textSalesVolume,textPrice;
     private PullToRefreshListView list_store;
     private List<ShopBean.commoditys> mList = new ArrayList<>();
@@ -46,20 +52,30 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener{
     private String meunid;
     private int meunType;
     private int meunSort;
+    private ImageView mBack,mSearch;
+    private EditText ediShopSerchKey;
+    protected Context context;
+    protected Dialog dialog1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
-        setTitleText("门店");
-        hideBack(false);
+        context = this;
+        dialog1 = ProgressDialog.createLoadingDialog(context, "加载中.....");
         Intent intent = getIntent();
         meunid = intent.getStringExtra("serveTypeId");
         Log.i("meunid", "onCreate: " + meunid);
         meunType = 0;
         meunSort = 0;
         initView();
+        getdata();
     }
     private void initView() {
+        mBack = (ImageView) findViewById(R.id.iv_back);
+        mBack.setOnClickListener(this);
+        mSearch = (ImageView) findViewById(R.id.im_search);
+        mSearch.setOnClickListener(this);
+        ediShopSerchKey = (EditText) findViewById(R.id.a_shop_edt_search);
         textComprehensive = (TextView) findViewById(R.id.text_comprehensive);
         textComprehensive.setOnClickListener(this);
         textSalesVolume = (TextView) findViewById(R.id.text_sales_volume);
@@ -74,7 +90,6 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 nowPage = 1;
-                mList.clear();
                 getdata();
             }
             @Override
@@ -86,7 +101,13 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener{
         list_store.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(ShopActivity.this,StoreDetailsActivity.class));
+                Intent intent = new Intent(ShopActivity.this,ShopDetailsActivity.class);
+                intent.putExtra("commodityid",mList.get(position-1).commodityid);
+                intent.putExtra("meunid",mList.get(position-1).getCommodityTitle());
+                intent.putExtra("commodityShopid",mList.get(position-1).getCommodityShopid());
+                intent.putExtra("commodityBrandid",mList.get(position-1).commodityBrandid);
+                intent.putExtra("commodityType",mList.get(position-1).commodityType);
+                startActivity(intent);
             }
         });
     }
@@ -94,7 +115,8 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.text_comprehensive:
-
+                meunid = "";
+                getdata();
                 break;
             case R.id.text_sales_volume:
 
@@ -102,9 +124,58 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener{
             case R.id.text_price:
 
                 break;
-
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.im_search:
+                String searchKeys = ediShopSerchKey.getText().toString().trim();
+                getSearchResult(searchKeys);
+                break;
+            default:
+                break;
         }
     }
+
+    private void getSearchResult(String searchKeys) {
+        Map<String, String> params = new HashMap<>();
+        final String json="{\"cmd\":\"getSerachCommodityListInfo\",\"nowPage\":\"" + nowPage +"\",\"searchKey\":\""
+                + searchKeys + "\"}";
+        params.put("json", json);
+        Log.i("MyCollectionFootActivity", "onResponse: " + json.toString());
+        dialog1.show();
+        OkHttpUtils.post().url(context.getString(R.string.url)).params(params)
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtils.showMessageShort(context, e.getMessage());
+                dialog1.dismiss();
+                list_store.onRefreshComplete();
+            }
+            @Override
+            public void onResponse(String response, int id) {
+                Log.i("MyCollectionFootActivity", "onResponse: " + response.toString());
+                Gson gson = new Gson();
+                dialog1.dismiss();
+                list_store.onRefreshComplete();
+                ShopBean shopBean = gson.fromJson(response, ShopBean.class);
+                if (shopBean.result.equals("1")) {
+                    ToastUtils.showMessageShort(context, shopBean.resultNote);
+                    return;
+                }
+                if (Integer.parseInt(shopBean.totalPage) < nowPage) {
+                    ToastUtils.showMessageShort(context, "没有更多了");
+                    return;
+                }
+                List<ShopBean.commoditys> commodityslist = shopBean.commoditys;
+                Log.i("commodityslist", "commodityslist: " + commodityslist.get(0).getCommodityTitle());
+                mList.addAll(commodityslist);
+                storeAdapter.setShopBeanList(ShopActivity.this,mList);
+                list_store.setAdapter(storeAdapter);
+                list_store.onRefreshComplete();
+            }
+        });
+    }
+
     //请求参数
     private void getdata() {
         Map<String, String> params = new HashMap<>();

@@ -18,11 +18,15 @@ import com.lixin.carclassstore.bean.VerificationCodeBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.Md5Util;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.SharedPreferencesUtil;
 import com.lixin.carclassstore.utils.StringUtils;
 import com.lixin.carclassstore.utils.TimerUtil;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.sina.weibo.sdk.utils.LogUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -31,6 +35,7 @@ import java.util.Map;
 import okhttp3.Call;
 
 import static com.umeng.socialize.Config.dialog;
+import static com.umeng.socialize.utils.DeviceConfig.context;
 
 
 /**
@@ -94,7 +99,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 }
                 code = TimerUtil.getNum();
                 LogUtil.i("code","---------" + code);
-                getPin(user_phone_number);
+                sendSMS(user_phone_number,code);
                 TimerUtil mTimerUtil = new TimerUtil(btn_verification_code);
                 mTimerUtil.timers();
             break;
@@ -106,7 +111,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     }
 
     private void submit() {
-
         //验证密码不能为空
         String password = edi_password.getText().toString().trim();
         if (TextUtils.isEmpty(password)) {
@@ -125,19 +129,17 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
             return;
         }
         //验证密码格式是否正确
-
+        String inviteCode = edi_verification_code.getText().toString().trim();
+        if (TextUtils.isEmpty(inviteCode)){
+            ToastUtils.showMessageShort(mContext, "验证码不能为空");
+        }
         if (!StringUtils.isPwd(password)) {
             ToastUtils.showMessageShort(mContext, "密码格式不正确，请核对后重新输入");
             return;
         }
         String userphone = edi_phone_number.getText().toString().trim();
         logpwd = password;
-        String inviteCode = edi_verification_code.getText().toString().trim();
-        try {
-            userRegister(userphone, Md5Util.md5Encode(password), inviteCode);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        userRegister(userphone, logpwd, inviteCode);
     }
     /**
      * 用户注册
@@ -147,44 +149,35 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
      * @param inviteCode
      */
     private void userRegister(final String userPhone, final String password, String inviteCode) {
-       /* cmd:”userRegister”
-        userPhone:”18023344”  //用户手机号
-        password:”  ”    //用户密码
-        addressId:@“410100” //用户活动县ID */
         Map<String, String> params = new HashMap<>();
-       /* params.put("cmd", "userRegister");
-        params.put("userPhone", userPhone);
-        params.put("password", password);
-        params.put("addressId", "100100");*/
-        String json="{\"cmd\":\"userRegister\",\"userPhone\":\"" + userPhone + "\"," +
+        final String json="{\"cmd\":\"userRegister\",\"userPhone\":\"" + userPhone + "\"," +
                 "\"password\":\"" + password +"\",\"inviteCode\":\"" + inviteCode + "\"}";
         params.put("json", json);
-        dialog.show();
+        Log.i("6666", "userRegister: " + json);
         //车品商城服务端
-        OkHttpUtils.post().url(getString(R.string.url)).params(params).build()
+        OkHttpUtils.post().url(mContext.getString(R.string.url)).params(params).build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         ToastUtils.showMessageShort(mContext, e.getMessage());
-                        dialog.dismiss();
                     }
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.i("6666", "onResponse: " + response);
                         Gson gson = new Gson();
-                        dialog.dismiss();
                         UserRegisterBean bean = gson.fromJson(response, UserRegisterBean.class);
                         if ("0".equals(bean.result)) {
                             ToastUtils.showMessageShort(mContext, "注册成功");
-                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"uid",bean.uid);
-                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"userPhone",userPhone);
-                            SharedPreferencesUtil.putSharePre(RegisterActivity.this,"password",password);
+                            SPUtils.put(RegisterActivity.this,"uid",bean.getUid());
+                            SPUtils.put(RegisterActivity.this,"userPhone",userPhone);
+                            SPUtils.put(RegisterActivity.this,"password",password);
                             Bundle bundle = new Bundle();
                             bundle.putString("phone", userPhone);
                             bundle.putString("password", logpwd);
                             MyApplication.openActivity(mContext, LoginActivity.class, bundle);
                             finish();
                         } else {
-                            ToastUtils.showMessageShort(mContext, bean.resultNote);
+                            ToastUtils.showMessageShort(mContext,"该号码已存在");
                         }
                     }
                 });
@@ -193,42 +186,26 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
      * 获取短信验证码
      * @param phone
      */
-    private void getPin(String phone) {
-        Map<String, String> params = new HashMap<>();
-        try {
-            params.put("tpl_value", URLEncoder.encode("#code#=" + code, "utf-8"));
-            params.put("dtype", "json");
-            params.put("tpl_id", "28078");
-            params.put("key", "c6bc033aec60a1073b6950471592618f");
-            params.put("mobile", phone);
-            Log.e("tiramisu",params.toString());
-            dialog.show();
-            //聚合验证码
-            OkHttpUtils.post().url(getString(R.string.juhe_url)).params(params).build()
-                    .execute(new StringCallback() {
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            ToastUtils.showMessageShort(mContext, e.getMessage());
-                            dialog.dismiss();
-                        }
+    public void sendSMS(String phone, String CODE) {
+        OkHttpUtils.post().url("https://v.juhe.cn/sms/send?").addParams("mobile", phone).addParams("tpl_id", "32726").addParams("tpl_value", "%23code%23%3d" + CODE).addParams("key", "3b5b27d9ca33e3873994ecab8d1ddc77").build().execute(new StringCallback() {
+            @Override
+            public void onResponse(String response, int id) {
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    if (obj.getString("error_code").equals("0")) {
+                        ToastUtils.showMessageShort(RegisterActivity.this,"短信已发送，请注意查收");
+                    } else {
+                        ToastUtils.showMessageShort(RegisterActivity.this,obj.getString("reason"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onError(Call call, Exception e, int id) {
 
-                        @Override
-                        public void onResponse(String response, int id) {
-                            Gson gson = new Gson();
-                            VerificationCodeBean Vbean = gson.fromJson(response, VerificationCodeBean.class);
-                            if ("操作成功".equals(Vbean.reason)) {
-                                ToastUtils.showMessageShort(mContext, "验证码已发送");
-                                TimerUtil timerUtil = new TimerUtil(btn_verification_code);
-                                timerUtil.timers();
-                                dialog.dismiss();
-                            } else {
-                                ToastUtils.showMessageShort(mContext, "验证码发送失败");
-                                dialog.dismiss();
-                            }
-                        }
-                    });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            }
+        });
+
     }
 }

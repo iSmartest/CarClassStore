@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.lixin.carclassstore.dialog.TipsDialog;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.Md5Util;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.SharedPreferencesUtil;
 import com.lixin.carclassstore.utils.StringUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
@@ -54,20 +56,20 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private Button btn_login;
     private Dialog progressDlg;
     protected Context context;
+    protected Dialog dialog1;
     private UMShareAPI mShareAPI;
-    private String token;
     private boolean isSkip = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         context = this;
-        TelephonyManager mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-        token=mTelephonyManager.getDeviceId();
+        dialog1 = com.lixin.carclassstore.view.ProgressDialog.createLoadingDialog(context, "加载中.....");
         initView();
         initData();
         initListener();
         isSkip = false;
+        Log.i(TAG, "onCreate: " + SPUtils.get(context,"uid",""));
     }
 
     private void initView() {
@@ -156,11 +158,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             ToastUtils.showMessageShort(context, "密码格式不正确，请核对后重新输入");
             return;
         }
-        try {
-            userLogin(userphone, Md5Util.md5Encode(password));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        userLogin(userphone, password);
     }
 
     @Override
@@ -224,34 +222,28 @@ public class LoginActivity extends Activity implements View.OnClickListener{
      */
     private void userLogin(String phone, String password) {
         Map<String, String> params = new HashMap<>();
-        /*params.put("cmd", "userLogin");
-        params.put("phone", phone);
-        params.put("password", password);*/
-        //params.put("token", "123123");
         String json="{\"cmd\":\"userLogin\",\"phone\":\"" + phone + "\",\"password\":\""
                 + password + "\"}";
         params.put("json", json);
-        dialog.show();
-        OkHttpUtils.post().url(getString(R.string.url)).params(params).build()
+        dialog1.show();
+        OkHttpUtils.post().url(context.getString(R.string.url)).params(params).build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         ToastUtils.showMessageShort(context, e.getMessage());
-                        dialog.dismiss();
                     }
                     @Override
                     public void onResponse(String response, int id) {
                         Gson gson = new Gson();
                         UserLoginBean bean = gson.fromJson(response, UserLoginBean.class);
                         if ("0".equals(bean.result)) {
-                            SharedPreferencesUtil.putSharePre(context, "uid", bean.uid);
                             ToastUtils.showMessageShort(context, "登录成功");
                             MyApplication.openActivity(context, MainActivity.class);
                             finish();
-                            dialog.dismiss();
+                            dialog1.dismiss();
                         } else {
                             ToastUtils.showMessageShort(context, bean.resultNote);
-                            dialog.dismiss();
+                            dialog1.dismiss();
                             if (isSkip) {
                                 skip();
                             } else {
@@ -278,13 +270,13 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         String json="{\"cmd\":\"thirdLogin\",\"thirdUid\":\"" + thirdUid + "\",\"nickName\":\""
                 + nickName + "\",\"userIcon\":\"" + userIcon + "\",\"phoneNum\":\"" + phoneNum + "\"}";
         params.put("json", json);
-        dialog.show();
+
         OkHttpUtils.post().url(getString(R.string.url)).params(params).build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         ToastUtils.showMessageShort(context, e.getMessage());
-                        dialog.dismiss();
+
                     }
                     @Override
                     public void onResponse(String response, int id) {
@@ -296,10 +288,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                             ToastUtils.showMessageShort(context, "登录成功");
                             MyApplication.openActivity(context, MainActivity.class);
                             finish();
-                            dialog.dismiss();
                         } else {
                             ToastUtils.showMessageShort(context, bean.resultNote);
-                            dialog.dismiss();
+
                         }
                     }
                 });

@@ -1,6 +1,7 @@
 package com.lixin.carclassstore.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,12 @@ public class ShopAdapter extends BaseAdapter{
         }
         ShopBean.commoditys commoditysList = mList.get(position);
         Log.i("getView", "getView: " + commoditysList.getCommodityDescription());
-//        Picasso.with(context).load(commoditysList.getCommodityIcon()).into(viewHolder.shopPicture);
+        if (TextUtils.isEmpty(commoditysList.getCommodityIcon())){
+            viewHolder.shopPicture.setImageResource(R.drawable.image_fail_empty);
+        }else {
+            Picasso.with(context).load(commoditysList.getCommodityIcon()).into(viewHolder.shopPicture);
+        }
+
         viewHolder.shopName.setText(commoditysList.getCommodityTitle());
         viewHolder.shopDec.setText(commoditysList.getCommodityDescription());
         viewHolder.shopPrice.setText(commoditysList.getCommodityNewPrice());

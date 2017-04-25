@@ -19,6 +19,7 @@ import com.lixin.carclassstore.bean.CarSeries;
 import com.lixin.carclassstore.bean.JavaBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.SharedPreferencesUtil;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.squareup.picasso.Picasso;
@@ -39,15 +40,11 @@ import okhttp3.Call;
  */
 
 public class CarSeriesActivity extends BaseActivity {
-    private static final String TAG = "CarSeriesActivity";
-    private TextView text_car_name,text_car_style_name;
-    private LinearLayout line_brand_introduction;
+    private TextView text_car_name;
     private ListView lv_car_style;
     private ImageView imCarLeader;
     private CarSeriesAdapter mCarSeriesAdapter;
-    private CarSeries carServes;
-    private List<CarSeries.carVersionsList> carVersionsList = new ArrayList<>();
-    private List<CarSeries.carVersionsList.carVersions> carVersions = new ArrayList<>();
+    private List<CarSeries.carVersionsList> mList1 = new ArrayList<>();
     private String carName;
     private String carBrandId;
     private String carleader;
@@ -63,20 +60,16 @@ public class CarSeriesActivity extends BaseActivity {
         carName = intent.getStringExtra("carname");
         carBrandId = intent.getStringExtra("carbrandId");
         carleader = intent.getStringExtra("carleader");
-        uid =  SharedPreferencesUtil.getSharePreStr(context,"uid");
-
+        uid = (String) SPUtils.get(context,"uid","");
         initView();
         initData();
-//        mCarSeriesAdapter = new CarSeriesAdapter(CarSeriesActivity.this, mList);
-//        lv_car_style.setAdapter(mCarSeriesAdapter);
-//        mCarSeriesAdapter.setCarSeriesList(mList);
-
     }
 
     private void initData() {
         Map<String, String> params = new HashMap<>();
-        String json = "{\"cmd\":\"getCarVersioninfo\",\"carBrandId\":\""+ carBrandId + "\"" + ",\"nowPage\":\""+ nowPage + "\"" + ",\"uId\":\""+ uid + "\"}";
+        String json = "{\"cmd\":\"getCarVersionInfo\",\"carBrandId\":\""+ carBrandId + "\"" + ",\"nowPage\":\""+ nowPage + "\"" + ",\"uid\":\""+ uid + "\"}";
         params.put("json", json);
+        Log.i("CarSeriesActivity", "CarSeriesActivity: " + json.toString());
         dialog1.show();
         OkHttpUtils.post().url(context.getString(R.string.url)).params(params)
                 .build().execute(new StringCallback() {
@@ -87,17 +80,18 @@ public class CarSeriesActivity extends BaseActivity {
             }
             @Override
             public void onResponse(String response, int id) {
+                Log.i("CarSeriesActivity", "CarSeriesActivity: " + response.toString());
                 Gson gson = new Gson();
                 dialog1.dismiss();
-                Log.i(TAG, "onResponse: " + response.toString());
-                carServes = gson.fromJson(response, CarSeries.class);
+                 CarSeries carServes = gson.fromJson(response, CarSeries.class);
                 if (carServes.getResult().equals("1")){
                     ToastUtils.showMessageLong(CarSeriesActivity.this,carServes.getResultNote());
                 }
-
-//                carVersionsList = carServes.carVersionsList;//
-//                Log.i("qqqq", "carVersionsList: " + carVersionsList.get(0).getCarVersionName());
-
+                List<CarSeries.carVersionsList> carVersionsList = carServes.carVersionsList;
+                mList1.addAll(carVersionsList);
+                mCarSeriesAdapter.setCarSeriesList(context,mList1);
+                lv_car_style.setAdapter(mCarSeriesAdapter);
+                Log.i("qqqq", "carVersionsList: " + carVersionsList.get(0).getCarVersionName());
             }
         });
     }
@@ -105,23 +99,14 @@ public class CarSeriesActivity extends BaseActivity {
     private void initView() {
         text_car_name = (TextView) findViewById(R.id.text_car_name);
         text_car_name.setText(carName);
-        text_car_style_name = (TextView) findViewById(R.id.text_car_style_name);
-        text_car_style_name.setText(carName);
         imCarLeader = (ImageView) findViewById(R.id.im_car_leader);
         Picasso.with(context).load(carleader).into(imCarLeader);
-        line_brand_introduction = (LinearLayout) findViewById(R.id.line_brand_introduction);
-        line_brand_introduction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.showMessageLong(context,"你点击了品牌介绍");
-                startActivity(new Intent(CarSeriesActivity.this,NewCarModelsActivity.class));
-            }
-        });
         lv_car_style = (ListView) findViewById(R.id.lv_car_style);
+        mCarSeriesAdapter = new CarSeriesAdapter(this);
+        lv_car_style.setAdapter(mCarSeriesAdapter);
         lv_car_style.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CarSeries carSeries = new CarSeries();
 
 //                startActivityForResult(new Intent(CarSeriesActivity.this,NewCarDetailsActivity.class).putExtra(NewCarDetailsActivity.ARG, carSeries.getName())
 //                        , 3);

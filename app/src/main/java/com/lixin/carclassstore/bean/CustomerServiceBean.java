@@ -11,7 +11,7 @@ import java.util.List;
 public class CustomerServiceBean {
     public String result;//"0" //0成功1失败
     public String resultNote;//"失败原因"
-    public List<Service> Service;
+    public List<service> service;
 
     public String getResult() {
         return result;
@@ -29,15 +29,15 @@ public class CustomerServiceBean {
         this.resultNote = resultNote;
     }
 
-    public List<CustomerServiceBean.Service> getService() {
-        return Service;
+    public List<CustomerServiceBean.service> getService() {
+        return service;
     }
 
-    public void setService(List<CustomerServiceBean.Service> service) {
-        Service = service;
+    public void setService(List<CustomerServiceBean.service> service) {
+        service = service;
     }
 
-    public class Service{
+    public class service{
         public String serviceName;//"客服小赵"//
         public String serviceQQ;//"65663251"
         public String serviceWX;//"31232113"

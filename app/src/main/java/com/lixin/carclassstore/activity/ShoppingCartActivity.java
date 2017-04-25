@@ -91,7 +91,6 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
                 Log.i("commoditys", "commoditys: " + commoditys.toString());
                 mList.addAll(commoditys);
 
-
             }
         });
     }

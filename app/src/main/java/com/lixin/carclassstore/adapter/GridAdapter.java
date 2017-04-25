@@ -2,6 +2,7 @@ package com.lixin.carclassstore.adapter;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,12 @@ public class GridAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
         ContentBean.commoditysList.commoditys commoditysList = commoditys.get(position);
-        Picasso.with(context).load(commoditysList.commodityIcon);
+        if (TextUtils.isEmpty(commoditysList.commodityIcon)){
+            viewHolder.iv_day_kill_picture.setImageResource(R.drawable.image_fail_empty);
+        }else {
+            Picasso.with(context).load(commoditysList.commodityIcon).into(viewHolder.iv_day_kill_picture);
+        }
+
         viewHolder.text_new_price.setText(commoditysList.commodityNewPrice);
         viewHolder.text_old_price.setText(commoditysList.commodityOriginalPrice);
         return convertView;

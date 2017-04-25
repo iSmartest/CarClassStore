@@ -17,6 +17,7 @@ public class SetPasswordActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_password);
-
+        hideBack(false);
+        setTitleText("设置密保");
     }
 }

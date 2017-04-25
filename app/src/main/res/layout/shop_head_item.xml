@@ -20,18 +20,21 @@
         android:orientation="vertical"
         android:background="@color/white_smoke">
         <TextView
+            android:id="@+id/text_head_shop_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="商品名字"
             android:gravity="center|left"
             android:layout_marginLeft="8dp"/>
         <TextView
+            android:id="@+id/text_head_shop_dec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="商品描述"
             android:gravity="center|left"
             android:layout_marginLeft="8dp"/>
         <TextView
+            android:id="@+id/text_shop_kill_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="秒杀时间"
@@ -51,10 +54,12 @@
                 android:gravity="center|left"
                 android:layout_marginLeft="8dp">
                 <TextView
+                    android:id="@+id/text_head_shop_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="价格"/>
                 <TextView
+                    android:id="@+id/text_head_shop_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="购买总量"
@@ -68,9 +73,10 @@
                 android:gravity="center|right"
                 android:layout_marginRight="8dp">
                 <ImageView
+                    android:id="@+id/iv_head_collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/shop_collection"/>
+                    android:src="@drawable/shop_collection_normal"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,53 +86,64 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:layout_marginTop="6dp"
         android:background="@color/white_smoke">
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="用户评价"
-            android:layout_gravity="center|left"
-            android:layout_marginLeft="8dp"
-            android:layout_weight="1"
-            android:textSize="18dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center">
+            <TextView
+                android:id="@+id/text_head_user_opinion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户评价"
+                android:textSize="18dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginLeft="4dp">
             <RatingBar
+                android:id="@+id/rab_head_star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 style="@style/fiveRatingBar"
                 android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/text_head_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.6分"
+                android:layout_gravity="center|left"/>
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4.6分"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
+
         <LinearLayout
-            android:id="@+id/linear_all_order"
-            android:layout_width="wrap_content"
+            android:id="@+id/linear_all_opinion"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_marginRight="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/text_head_total_opinion"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2345人评价"
-                android:layout_gravity="center|right"/>
+                android:gravity="center|right"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="2345人评价" />
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/jiantou_right"
-                android:layout_gravity="center|right"/>
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center|right"
+                android:layout_weight="4"
+                android:src="@drawable/jiantou_right" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

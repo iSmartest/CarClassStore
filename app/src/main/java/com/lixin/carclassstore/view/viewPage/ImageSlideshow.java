@@ -172,7 +172,7 @@ public class ImageSlideshow extends FrameLayout {
      */
     private void starPlay() {
         // 如果少于2张就不用自动播放了
-        if (count < 2) {
+        if (count < 1) {
             isAutoPlay = false;
         } else {
             isAutoPlay = true;

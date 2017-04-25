@@ -9,6 +9,11 @@ import java.util.List;
  */
 
 public class CarSeries {
+    public String result;
+    public String resultNote;
+    public String totalPage;
+    public List<carVersionsList> carVersionsList;
+
     public String getResult() {
         return result;
     }
@@ -33,14 +38,6 @@ public class CarSeries {
         this.totalPage = totalPage;
     }
 
-    public String getCarInfo() {
-        return carInfo;
-    }
-
-    public void setCarInfo(String carInfo) {
-        this.carInfo = carInfo;
-    }
-
     public List<CarSeries.carVersionsList> getCarVersionsList() {
         return carVersionsList;
     }
@@ -49,12 +46,11 @@ public class CarSeries {
         this.carVersionsList = carVersionsList;
     }
 
-    public String result;
-    public String resultNote;
-    public String totalPage;
-    public String carInfo;
-    public List<carVersionsList> carVersionsList;
     public class carVersionsList{
+        public String carVersionName;
+        public String id;
+        public List<getCarVersionInfo>getCarVersionInfo;
+
         public String getCarVersionName() {
             return carVersionName;
         }
@@ -63,29 +59,27 @@ public class CarSeries {
             this.carVersionName = carVersionName;
         }
 
-        public List<CarSeries.carVersionsList.carVersions> getCarVersions() {
-            return carVersions;
+        public String getId() {
+            return id;
         }
 
-        public void setCarVersions(List<CarSeries.carVersionsList.carVersions> carVersions) {
-            this.carVersions = carVersions;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public String carVersionName;
-        public List<carVersions> carVersions;
-        public class carVersions{
-            public String carVersionId;//:"A2"//车系id，用于查看车型时用
-            public String carIcon;//:"http://dsadsad.png" //车系图
-            public String carVersionName;//:"奔驰A4L" //汽车系名字
-            public String carPriceZone;//:"29.98 - 43.00万"
+        public List<CarSeries.carVersionsList.getCarVersionInfo> getGetCarVersionInfo() {
+            return getCarVersionInfo;
+        }
 
-            public String getCarVersionId() {
-                return carVersionId;
-            }
+        public void setGetCarVersionInfo(List<CarSeries.carVersionsList.getCarVersionInfo> getCarVersionInfo) {
+            this.getCarVersionInfo = getCarVersionInfo;
+        }
 
-            public void setCarVersionId(String carVersionId) {
-                this.carVersionId = carVersionId;
-            }
+        public class getCarVersionInfo{
+            public String carIcon;
+            public String carPriceZone;
+            public String carVersionId;
+            public String carVersionName;
 
             public String getCarIcon() {
                 return carIcon;
@@ -95,14 +89,6 @@ public class CarSeries {
                 this.carIcon = carIcon;
             }
 
-            public String getCarVersionName() {
-                return carVersionName;
-            }
-
-            public void setCarVersionName(String carVersionName) {
-                this.carVersionName = carVersionName;
-            }
-
             public String getCarPriceZone() {
                 return carPriceZone;
             }
@@ -110,7 +96,22 @@ public class CarSeries {
             public void setCarPriceZone(String carPriceZone) {
                 this.carPriceZone = carPriceZone;
             }
+
+            public String getCarVersionId() {
+                return carVersionId;
+            }
+
+            public void setCarVersionId(String carVersionId) {
+                this.carVersionId = carVersionId;
+            }
+
+            public String getCarVersionName() {
+                return carVersionName;
+            }
+
+            public void setCarVersionName(String carVersionName) {
+                this.carVersionName = carVersionName;
+            }
         }
     }
-
 }

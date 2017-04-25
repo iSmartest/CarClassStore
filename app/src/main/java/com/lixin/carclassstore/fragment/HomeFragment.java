@@ -355,6 +355,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
             //跳转到查违章
             case 8:
                 Intent intent = new Intent(getActivity(), CheckViolationWebActivity.class);
+                intent.putExtra("isStoreDetailsOrCheckviolation","2");
                 intent.putExtra(CheckViolationWebActivity.URL, "http://www.baidu.com");
                 startActivity(intent);
                 break;

@@ -13,7 +13,7 @@ import com.lixin.carclassstore.fragment.MineFragment;
 import com.lixin.carclassstore.fragment.StoreFragment;
 
 public class MainActivity extends BaseActivity {
-    private TextView[] mTextView;
+    private ImageView[] mTextView;
     private Fragment[] mFragments;
     private FragmentTransaction transaction;
     private int current = 0;
@@ -34,11 +34,11 @@ public class MainActivity extends BaseActivity {
         refreshView();
     }
     private void initView() {
-        mTextView = new TextView[4];
-        mTextView[0] = (TextView) findViewById(R.id.text_main_home);
-        mTextView[1] = (TextView) findViewById(R.id.text_main_store);
-        mTextView[2] = (TextView) findViewById(R.id.text_main_forum);
-        mTextView[3] = (TextView) findViewById(R.id.text_main_mine);
+        mTextView = new ImageView[4];
+        mTextView[0] = (ImageView) findViewById(R.id.iv_main_home);
+        mTextView[1] = (ImageView) findViewById(R.id.iv_main_store);
+        mTextView[2] = (ImageView) findViewById(R.id.iv_main_forum);
+        mTextView[3] = (ImageView) findViewById(R.id.iv_main_mine);
 
     }
     private void initFragment() {

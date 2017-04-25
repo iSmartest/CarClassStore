@@ -11,4 +11,27 @@ public class UserRegisterBean {
     public String resultNote;//失败原因
     public String uid;//用户ID
 
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getResultNote() {
+        return resultNote;
+    }
+
+    public void setResultNote(String resultNote) {
+        this.resultNote = resultNote;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }

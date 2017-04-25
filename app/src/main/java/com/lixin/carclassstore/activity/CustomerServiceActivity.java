@@ -33,7 +33,7 @@ import okhttp3.Call;
 public class CustomerServiceActivity extends BaseActivity{
     private ListView list_customer_service;
     private CustomerServiceAdapter mAdapter;
-    private List<CustomerServiceBean.Service> servicesList = new ArrayList<>();
+    private List<CustomerServiceBean.service> servicesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,6 @@ public class CustomerServiceActivity extends BaseActivity{
         list_customer_service = (ListView) findViewById(R.id.list_customer_service);
         mAdapter = new CustomerServiceAdapter(this);
         list_customer_service.setAdapter(mAdapter);
-        mAdapter.setCustomerService(servicesList);
         list_customer_service.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,16 +71,19 @@ public class CustomerServiceActivity extends BaseActivity{
             }
             @Override
             public void onResponse(String response, int id) {
+                Log.i("CustomerServiceActivity", "CustomerServiceActivity: " + response.toString());
                 Gson gson = new Gson();
                 dialog1.dismiss();
                 CustomerServiceBean customerServiceBean = gson.fromJson(response, CustomerServiceBean.class);
-                Log.i("commoditys", "commoditys: " + response.toString());
+                Log.i("CustomerServiceActivity", "CustomerServiceActivity: " + response.toString());
                 if (customerServiceBean.getResult().equals("1")){
                     ToastUtils.showMessageLong(context,customerServiceBean.getResultNote());
                 }
-                List<CustomerServiceBean.Service> service = customerServiceBean.Service;
-                Log.i("commoditys", "commoditys: " + service.toString());
+                List<CustomerServiceBean.service> service = customerServiceBean.service;
+//                Log.i("CustomerServiceActivity", "CustomerServiceActivity: " + service.toString());
                 servicesList.addAll(service);
+                mAdapter.setCustomerService(context,servicesList);
+                list_customer_service.setAdapter(mAdapter);
             }
         });
     }

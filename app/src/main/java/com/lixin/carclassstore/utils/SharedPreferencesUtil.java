@@ -14,8 +14,6 @@ import android.content.SharedPreferences;
  * 10、用户会员类型（普通、VIP）memberOrder String类型，0 普通会员、1 VIP
  * 11、用户积分 userScore String类型
  *
- *
- *
  * 3、定位城市 cityName String类型
  * 4、城市码 cityCode String类型
  * 5、详细地址 Address String类型
@@ -28,7 +26,7 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesUtil {
 
-	private static String NAME="ZhongShiTong";
+	private static String NAME="CarClassStore";
 
 	/**
 	 * @param mContext
