@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="4dp"
+    android:background="@color/gray_white">
+    <TextView
+        android:id="@+id/text_default_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="默认排序"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/source_good"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="评分最高"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/selas_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="销量最高"
+        android:textSize="20sp" />
+</LinearLayout>

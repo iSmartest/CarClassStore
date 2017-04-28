@@ -8,7 +8,7 @@
         android:layout_height="50dp"
         android:background="@color/btn_login_color">
         <LinearLayout
-            android:id="@+id/ly_base_back"
+            android:id="@+id/ly_base_back1"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
@@ -16,7 +16,7 @@
             android:gravity="center"
             android:orientation="horizontal">
             <ImageView
-                android:id="@+id/Iv_base_back"
+                android:id="@+id/Iv_base_back1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="8dp"

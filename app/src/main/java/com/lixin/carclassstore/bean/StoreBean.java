@@ -9,9 +9,9 @@ import java.util.List;
  */
 
 public class StoreBean {
-    public String result; //0成功1失败"0"
-    public String resultNote;//"失败原因"
-    public int totalPage;//总页数 5
+    public String result;
+    public String resultNote;
+    public int totalPage;
     public List<shop> shop;
 
     public String getResult() {
@@ -30,7 +30,6 @@ public class StoreBean {
         this.resultNote = resultNote;
     }
 
-
     public int getTotalPage() {
         return totalPage;
     }
@@ -48,44 +47,12 @@ public class StoreBean {
     }
 
     public class shop{
-        public String shopid;
-        public String shopIcon;
-        public String shopName;
-        public String shopLocaltion;
         public String sellerNum;
         public String shopCommentNum;
-
-        public String getShopid() {
-            return shopid;
-        }
-
-        public void setShopid(String shopid) {
-            this.shopid = shopid;
-        }
-
-        public String getShopIcon() {
-            return shopIcon;
-        }
-
-        public void setShopIcon(String shopIcon) {
-            this.shopIcon = shopIcon;
-        }
-
-        public String getShopName() {
-            return shopName;
-        }
-
-        public void setShopName(String shopName) {
-            this.shopName = shopName;
-        }
-
-        public String getShopLocaltion() {
-            return shopLocaltion;
-        }
-
-        public void setShopLocaltion(String shopLocaltion) {
-            this.shopLocaltion = shopLocaltion;
-        }
+        public String shopIcon;
+        public String shopLocaltion;
+        public String shopName;
+        public String shopid;
 
         public String getSellerNum() {
             return sellerNum;
@@ -102,6 +69,37 @@ public class StoreBean {
         public void setShopCommentNum(String shopCommentNum) {
             this.shopCommentNum = shopCommentNum;
         }
-    }
 
+        public String getShopIcon() {
+            return shopIcon;
+        }
+
+        public void setShopIcon(String shopIcon) {
+            this.shopIcon = shopIcon;
+        }
+
+        public String getShopLocaltion() {
+            return shopLocaltion;
+        }
+
+        public void setShopLocaltion(String shopLocaltion) {
+            this.shopLocaltion = shopLocaltion;
+        }
+
+        public String getShopName() {
+            return shopName;
+        }
+
+        public void setShopName(String shopName) {
+            this.shopName = shopName;
+        }
+
+        public String getShopid() {
+            return shopid;
+        }
+
+        public void setShopid(String shopid) {
+            this.shopid = shopid;
+        }
+    }
 }

@@ -29,54 +29,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <meta-data
-        android:name="UMENG_APPKEY"
-        android:value="58ee1a237f2c7441be0007e3" >
-    </meta-data>
-    <meta-data
-        android:name="com.baidu.lbsapi.API_KEY"
-        android:value="jpauKHjGaccWpWdyzvxMcyQg6Sdg3wN6" />
-    <!--<activity-->
-        <!--android:name=".wxapi.WXEntryActivity"-->
-        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-        <!--android:exported="true"-->
-        <!--android:screenOrientation="portrait"-->
-        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-    <!--<activity-->
-        <!--android:name="com.tencent.tauth.AuthActivity"-->
-        <!--android:launchMode="singleTask"-->
-        <!--android:noHistory="true" >-->
-        <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.VIEW" />-->
-
-            <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--<category android:name="android.intent.category.BROWSABLE" />-->
-
-            <!--<data android:scheme="tencent1106082546" />-->
-        <!--</intent-filter>-->
-    <!--</activity>-->
-    <!--<activity-->
-        <!--android:name="com.tencent.connect.common.AssistActivity"-->
-        <!--android:screenOrientation="portrait"-->
-        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
-        <!--android:configChanges="orientation|keyboardHidden|screenSize"/>-->
-    <!--<activity-->
-        <!--android:name=".WBShareActivity"-->
-        <!--android:configChanges="keyboardHidden|orientation"-->
-        <!--android:screenOrientation="portrait" >-->
-        <!--<intent-filter>-->
-            <!--<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />-->
-            <!--<category android:name="android.intent.category.DEFAULT" />-->
-        <!--</intent-filter>-->
-    <!--</activity>-->
-    <!--<activity-->
-        <!--android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"-->
-        <!--android:configChanges="keyboardHidden|orientation"-->
-        <!--android:windowSoftInputMode="adjustResize"-->
-        <!--android:exported="false" >-->
-    <!--</activity>-->
-    <!--<service android:name="com.sina.weibo.sdk.net.DownloadService"-->
-        <!--android:exported="false"></service>-->
 
     <application
         android:name=".activity.MyApplication"
@@ -103,22 +55,23 @@
         <activity android:name=".activity.BuyInsuranceActivity"/>
         <activity android:name=".activity.CheckViolationWebActivity"/>
         <activity android:name=".activity.CustomerServiceActivity"/>
-        <activity android:name=".activity.NewCarActivity"/>
-        <activity android:name=".activity.CarStyleChooseActivity"/>
+        <activity android:name=".activity.CarStyleChooseActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <!--<activity android:name=".activity.UsedCarActivity"/>-->
         <activity android:name=".activity.BaseActivity"/>
-        <activity android:name=".activity.ShopActivity"/>
+        <activity android:name=".activity.ShopActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.CarSeriesActivity"/>
         <activity android:name=".activity.NewCarDetailsActivity"/>
         <activity android:name=".activity.NewCarModelsActivity"/>
         <activity android:name=".activity.NewsWebActivity"/>
-        <activity android:name=".activity.ReplyQuestionActivity"/>
+        <activity android:name=".activity.ReplyQuestionActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.ReleaseQuestionActivity"/>
         <activity android:name=".activity.SectionArticleListActivity"/>
-        <!--<activity android:name=".activity.UsedCarSeriesActivity"/>-->
-        <!--<activity android:name=".activity.UsedCarBrandActivity"/>-->
-        <!--<activity android:name=".activity.UsedCarDetailsActivity"/>-->
-        <!--<activity android:name=".activity.UsedCarListActivity"/>-->
+
+        <activity android:name=".activity.UsedCarDetailsActivity"/>
+        <activity android:name=".activity.UsedCarListActivity"/>
         //门店详情
         <activity android:name=".activity.StoreDetailsActivity"/>
         //商品详情页
@@ -149,14 +102,53 @@
         <activity android:name=".activity.RescueInformationActivity"/>
         //故障类别
         <activity android:name=".activity.FaultCategoryActivity"/>
-        //故障当前位置
-        <activity android:name=".activity.CurrentLocationActivity"/>
         //客户投诉
         <activity android:name=".activity.CustomerComplaintActivity"/>
         //服务提醒
         <activity android:name=".activity.ServiceReminderActivity"/>
         //意见反馈
         <activity android:name=".activity.FeedbackActivity"/>
+        //故障当前位置
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="jpauKHjGaccWpWdyzvxMcyQg6Sdg3wN6" />
+        <activity android:name=".activity.MapApiDemoActivity"/>
+        //选择自己车型
+        <activity android:name=".activity.CarModelActivity"/>
+        //推荐有礼
+        <activity android:name=".activity.RecommendCourtesyActivity"/>
+        //爱车档案
+        <activity android:name=".activity.CarFilesActivity"/>
+        //兑换专区
+        <activity android:name=".activity.ExchangeZoneActivity"/>
+        //积分中心
+        <activity android:name=".activity.IntegralCenter"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="	58ee1a237f2c7441be0007e3" >
+        </meta-data>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.View" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent1106082546" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
     </application>
 
 </manifest>

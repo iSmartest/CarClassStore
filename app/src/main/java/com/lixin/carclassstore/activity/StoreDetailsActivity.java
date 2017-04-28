@@ -1,10 +1,13 @@
 package com.lixin.carclassstore.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -13,7 +16,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.adapter.FirstAdapter;
-import com.lixin.carclassstore.bean.ShopDetailsBean;
+import com.lixin.carclassstore.adapter.SecondAdapter;
 import com.lixin.carclassstore.bean.StoreDetailsBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
@@ -34,17 +37,18 @@ import okhttp3.Call;
  * 门店详情
  */
 
-public class StoreDetailsActivity extends BaseActivity{
+public class StoreDetailsActivity extends BaseActivity {
     private String shopid;
     private ImageSlideshow mSlidShow;
     private ImageView mBack,mStorePhone;
-    private TextView mStoreName,mStoreTotalOrder,mStoreAddress,mStoreOpenTime,mFirstPay;
+    private TextView mStoreName,mStoreTotalOrder,mStoreAddress,mStoreOpenTime,mFirstPay,mAddNum;
     private LinearLayout mStoreDetails,mShoppingCart;
     private ListView mFristList,mSecondList;
     private String telephone;
     private String StoreDetials;
     private List<StoreDetailsBean.shopCommoditys> mList = new ArrayList<>();
     private FirstAdapter mFirstAdapter;
+    private SecondAdapter secondAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,9 +99,7 @@ public class StoreDetailsActivity extends BaseActivity{
                 StoreDetials = storeDetailsBean.getShopDatil();
                 //门店二级联动列表数据
                 List<StoreDetailsBean.shopCommoditys> shopCommoditysList = storeDetailsBean.shopCommoditys;
-                Log.i("StoreDetailsActivity", "onResponse: " + shopCommoditysList.get(0).commodityType);
                 mList.addAll(shopCommoditysList);
-                Log.i("StoreDetailsActivity", "onResponse: " + mList.get(0).getCommodityType());
                 mFirstAdapter.setFirst(context,mList);
                 mFristList.setAdapter(mFirstAdapter);
             }
@@ -106,7 +108,7 @@ public class StoreDetailsActivity extends BaseActivity{
     //轮播
     private void initData(String[] rotateShopPics) {
         for (int i = 0; i < rotateShopPics.length; i++) {
-            mSlidShow.addImageTitle(rotateShopPics[i]);
+            mSlidShow.addImageUrl(rotateShopPics[i]);
             Log.i("ShopFragment", "onResponse: " + rotateShopPics[i]);
         }
         mSlidShow.setDotSpace(12);
@@ -115,7 +117,7 @@ public class StoreDetailsActivity extends BaseActivity{
         mSlidShow.setOnItemClickListener(new ImageSlideshow.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                //轮播图点击事件
             }
         });
         mSlidShow.commit();
@@ -138,9 +140,30 @@ public class StoreDetailsActivity extends BaseActivity{
         mFirstPay.setOnClickListener(this);
         mShoppingCart = (LinearLayout) findViewById(R.id.linear_shopping_cart);
         mShoppingCart.setOnClickListener(this);
+
+        mAddNum = (TextView) findViewById(R.id.text_add_num);
         mFristList = (ListView) findViewById(R.id.list_first_choose);
+        mSecondList = (ListView) findViewById(R.id.list_second_choose);
         mFirstAdapter = new FirstAdapter(this);
         mFristList.setAdapter(mFirstAdapter);
+
+        secondAdapter = new SecondAdapter(this);
+        mSecondList.setAdapter(secondAdapter);
+        secondAdapter.setOnNumClickListener(new SecondAdapter.OnNumClickListener() {
+            @Override
+            public void onNumClick(String num) {
+                mAddNum.setVisibility(View.VISIBLE);
+                mAddNum.setText(num);
+            }
+        });
+        mFristList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                secondAdapter.setSecond(context,mList.get(position).getCommoditys(),shopid);
+                mSecondList.setAdapter(secondAdapter);
+                secondAdapter.notifyDataSetChanged();
+            }
+        });
     }
     @Override
     public void onClick(View v) {
@@ -161,10 +184,34 @@ public class StoreDetailsActivity extends BaseActivity{
                 startActivity(intent1);
                 break;
             case R.id.text_immediately_pay:
-                Intent intent3 = new Intent(StoreDetailsActivity.this, OrderPaymentActivity.class);
-                startActivity(intent3);
+                AlertDialog alert = new AlertDialog.Builder(context).create();
+                alert.setTitle("操作提示");
+                alert.setMessage("请选择服务方式");
+                alert.setButton(DialogInterface.BUTTON_NEGATIVE, "在线支付",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String flag = "0";
+                                Intent intent = new Intent(StoreDetailsActivity.this, OrderPaymentActivity.class);
+                                intent.putExtra("flag",flag);
+                                startActivity(intent);
+                                return;
+                            }
+                        });
+                alert.setButton(DialogInterface.BUTTON_POSITIVE, "到店取货",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String flag = "1";
+                                Intent intent = new Intent(StoreDetailsActivity.this, OrderPaymentActivity.class);
+                                intent.putExtra("flag",flag);
+                                startActivity(intent);
+                            }
+                        });
+                alert.show();
                 break;
             case R.id.linear_shopping_cart:
+                startActivity(new Intent(StoreDetailsActivity.this,ShoppingCartActivity.class));
                 break;
         }
     }

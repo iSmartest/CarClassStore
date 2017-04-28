@@ -9,14 +9,19 @@ import android.widget.ListView;
 
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.adapter.CollectionAdapter;
 import com.lixin.carclassstore.bean.ShoppingCollectionFootBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +45,7 @@ public class MyCollectionFootActivity extends BaseActivity
     private List<ShoppingCollectionFootBean.commoditys> mList = new ArrayList<>();
     private PullToRefreshListView list_collection;
     private String handleType;//"1"收藏"2"足迹
-    private String uid = "123";
+    private String uid ;
     private int nowPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,7 @@ public class MyCollectionFootActivity extends BaseActivity
         hideBack(false);
         Intent intent = getIntent();
         handleType = intent.getStringExtra("handleType");
+        uid = (String) SPUtils.get(MyCollectionFootActivity.this,"uid","");
         if (handleType.equals("1"))
             setTitleText("我的收藏");
         else
@@ -114,10 +120,19 @@ public class MyCollectionFootActivity extends BaseActivity
                             ToastUtils.showMessageShort(context, shoppingCollectionFootBean.resultNote);
                             return;
                         }
-                        if (Integer.parseInt(shoppingCollectionFootBean.totalPage) < nowPage) {
-                            ToastUtils.showMessageShort(context, "没有更多了");
-                            return;
-                        }
+                        try {
+                            JSONObject jsonObject = new JSONObject("jjj");
+                            if (shoppingCollectionFootBean.totalPage.equals("")) {
+                                ToastUtils.showMessageShort(context, "空空如也");
+                            } else {
+                                if (Integer.parseInt(shoppingCollectionFootBean.totalPage) < nowPage) {
+                                    ToastUtils.showMessageShort(context, "没有更多了");
+                                    return;
+                                }
+                            }
+                            }catch(JSONException e){
+                                e.printStackTrace();
+                            }
                         List<ShoppingCollectionFootBean.commoditys> commodityslist = shoppingCollectionFootBean.commoditys;
                         mList.addAll(commodityslist);
                         mAdapter.setCollection(mList);

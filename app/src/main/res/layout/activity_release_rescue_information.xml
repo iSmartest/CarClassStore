@@ -70,8 +70,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:gravity="right" />
-
+            android:gravity="right"/>
         <ImageView
             android:layout_width="12dp"
             android:layout_height="12dp"

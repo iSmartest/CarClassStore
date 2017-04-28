@@ -16,6 +16,7 @@ import com.lixin.carclassstore.adapter.RoadRescueAdapter;
 import com.lixin.carclassstore.bean.RoadRescueBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.lixin.carclassstore.view.ProgressDialog;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import okhttp3.Call;
  * Created by 小火
  * Create time on  2017/3/31
  * My mailbox is 1403241630@qq.com
+ * 道路救援
  */
 
 public class RoadRescueActivity extends Activity implements View.OnClickListener{
@@ -38,7 +40,7 @@ public class RoadRescueActivity extends Activity implements View.OnClickListener
     private RoadRescueAdapter mRoadRescueAdapter;
     private List<RoadRescueBean.rescueList> mList = new ArrayList<>();
     private List<RoadRescueBean.accidentTypes> accidenttypesList = new ArrayList<>();
-    private String uid = "123";
+    private String uid;
     protected Context context;
     protected Dialog dialog1;
     @Override
@@ -47,11 +49,12 @@ public class RoadRescueActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.activity_road_rescue);
         context = this;
         dialog1 = ProgressDialog.createLoadingDialog(context, "加载中.....");
+        uid = (String) SPUtils.get(context,"uid","");
         initView();
         getdata();
     }
     private void initView() {
-        Iv_base_back = (ImageView) findViewById(R.id.Iv_base_back);
+        Iv_base_back = (ImageView) findViewById(R.id.Iv_base_back1);
         Iv_base_back.setOnClickListener(this);
         iv_edit = (ImageView) findViewById(R.id.iv_edit);
         iv_edit.setOnClickListener(this);
@@ -71,7 +74,7 @@ public class RoadRescueActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.Iv_base_back:
+            case R.id.Iv_base_back1:
                 finish();
                 break;
             case R.id.iv_edit:
@@ -115,6 +118,4 @@ public class RoadRescueActivity extends Activity implements View.OnClickListener
                     }
                 });
     }
-
-
 }

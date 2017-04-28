@@ -2,6 +2,7 @@ package com.lixin.carclassstore.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,10 @@ public class QuestionAnswerAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         final QuestionAnswerBean.consults consults = list.get(position);
-//        Picasso.with(context).load(consults.getUserIcon()).into(viewHolder.iv_user_icon);
+        if (TextUtils.isEmpty(consults.getUserIcon())){
+            viewHolder.iv_user_icon.setImageResource(R.drawable.head_img_default);
+        }else
+        Picasso.with(context).load(consults.getUserIcon()).into(viewHolder.iv_user_icon);
         viewHolder.text_user_name.setText(consults.getUserName());
         viewHolder.text_talk_time.setText(consults.getTalkTime());
         viewHolder.text_user_talk.setText(consults.getUserTalk());
@@ -74,7 +78,7 @@ public class QuestionAnswerAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,ReplyQuestionActivity.class);
-//                intent.putExtra("userIcon",consults.getUserIcon());
+                intent.putExtra("userIcon",consults.getUserIcon());
                 intent.putExtra("userName",consults.getUserName());
                 intent.putExtra("userTalk",consults.getUserTalk());
                 intent.putExtra("questionReplyNum",consults.getQuestionReplyNum());

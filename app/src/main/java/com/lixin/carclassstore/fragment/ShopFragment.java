@@ -75,7 +75,7 @@ public class ShopFragment extends BaseFragment{
             commodityShopid = bundle.getString("commodityShopid");
             commodityBrandid = bundle.getString("commodityBrandid");
         }
-        uid = (String) SPUtils.get(context,"uid","");
+        uid = (String) SPUtils.get(getActivity(),"uid","");
         initView();
         getdata();
         return view;

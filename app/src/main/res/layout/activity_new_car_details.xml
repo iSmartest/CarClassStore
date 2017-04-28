@@ -3,11 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/include_new_car_details"/>
-    </ScrollView>
+        <ListView
+            android:id="@+id/list_sales_cars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+        </ListView>
     <LinearLayout
         android:id="@+id/asking_for_the_lowest_price"
         android:layout_width="match_parent"
@@ -31,5 +32,4 @@
             android:textColor="@color/white_smoke"
             android:gravity="center"/>
     </LinearLayout>
-
 </RelativeLayout>

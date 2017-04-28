@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lixin.carclassstore.R;
@@ -51,19 +50,15 @@ public class FirstAdapter extends BaseAdapter{
             convertView = LayoutInflater.from(context).inflate(R.layout.item_text,null);
             viewHolder = new ViewHolder();
             viewHolder.mTextStoreShop = (TextView) convertView.findViewById(R.id.text_store_shop);
-            viewHolder.mListStoreShop = (ListView) convertView.findViewById(R.id.list_second_shop);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         StoreDetailsBean.shopCommoditys shopCommoditysList = mList.get(position);
         viewHolder.mTextStoreShop.setText(shopCommoditysList.getCommodityType());
-        SecondAdapter commodityAdapter = new SecondAdapter(shopCommoditysList.commoditys,context);
-        viewHolder.mListStoreShop.setAdapter(commodityAdapter);
         return convertView;
     }
     class ViewHolder{
         TextView mTextStoreShop;
-        ListView mListStoreShop;
     }
 }

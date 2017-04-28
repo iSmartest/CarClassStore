@@ -1,7 +1,9 @@
 package com.lixin.carclassstore.view.viewPage;
 
 /**
- * Created by Jun on 2016/8/4.
+ * Created by 小火
+ * Create time on  2017/4/7
+ * My mailbox is 1403241630@qq.com
  */
 public class ImageTitleBean {
 

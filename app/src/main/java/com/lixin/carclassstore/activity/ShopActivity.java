@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -117,12 +118,55 @@ public class ShopActivity extends Activity implements View.OnClickListener{
             case R.id.text_comprehensive:
                 meunid = "";
                 getdata();
+                textComprehensive.setTextColor(getResources().getColor(R.color.btn_login_color));
+                textSalesVolume.setTextColor(getResources().getColor(R.color.black));
+                textPrice.setTextColor(getResources().getColor(R.color.black));
                 break;
             case R.id.text_sales_volume:
-
+                textComprehensive.setTextColor(getResources().getColor(R.color.black));
+                textSalesVolume.setTextColor(getResources().getColor(R.color.btn_login_color));
+                textPrice.setTextColor(getResources().getColor(R.color.black));
+                if (meunType == 0){
+                    if (meunSort == 0){
+                        meunSort =1;
+                        getdata();
+                    }else {
+                        meunSort = 0;
+                        getdata();
+                    }
+                }else {
+                    meunType = 0;
+                    if (meunSort == 0){
+                        meunSort =1;
+                        getdata();
+                    }else {
+                        meunSort = 0;
+                        getdata();
+                    }
+                }
                 break;
             case R.id.text_price:
-
+                textComprehensive.setTextColor(getResources().getColor(R.color.black));
+                textSalesVolume.setTextColor(getResources().getColor(R.color.black));
+                textPrice.setTextColor(getResources().getColor(R.color.btn_login_color));
+                if (meunType == 1){
+                    if (meunSort == 0){
+                        meunSort =1;
+                        getdata();
+                    }else {
+                        meunSort = 0;
+                        getdata();
+                    }
+                }else {
+                    meunType = 1;
+                    if (meunSort == 0){
+                        meunSort =1;
+                        getdata();
+                    }else {
+                        meunSort = 0;
+                        getdata();
+                    }
+                }
                 break;
             case R.id.iv_back:
                 finish();

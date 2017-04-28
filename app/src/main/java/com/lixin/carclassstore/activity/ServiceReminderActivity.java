@@ -11,6 +11,7 @@ import com.lixin.carclassstore.bean.MineMenuBean;
 import com.lixin.carclassstore.bean.ReplyBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 
 import java.util.HashMap;
@@ -30,11 +31,12 @@ public class ServiceReminderActivity extends BaseActivity implements CompoundBut
     Switch switch_01,switch_02,switch_03;
     private String remindOpen;
     private String remindType;
-    private String uid = "123";
+    private String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_reminder);
+        uid = (String) SPUtils.get(ServiceReminderActivity.this,"uid","");
         hideBack(false);
         setTitleText("服务提醒");
         initView();

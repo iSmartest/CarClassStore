@@ -23,6 +23,8 @@ import com.lixin.carclassstore.tools.UpdateUserInfoHttp;
 import com.lixin.carclassstore.utils.CommonLog;
 import com.lixin.carclassstore.utils.GlobalMethod;
 import com.lixin.carclassstore.utils.ImageUtil;
+import com.lixin.carclassstore.utils.SPUtils;
+import com.lixin.carclassstore.utils.ToastUtils;
 
 import java.io.File;
 
@@ -45,11 +47,11 @@ public class SetUpActivity extends BaseActivity implements View.OnClickListener{
         hideBack(false);
         initView();
     }
-
     private void initView() {
         a_my_info_password_question = (LinearLayout) findViewById(R.id.a_my_info_password_question);
         a_my_info_password_question.setOnClickListener(this);
         a_my_info_lay_username = (LinearLayout) findViewById(R.id.a_my_info_lay_username);
+        a_my_info_lay_username.setOnClickListener(this);
         a_my_info_password = (LinearLayout) findViewById(R.id.a_my_info_password);
         a_my_info_password.setOnClickListener(this);
         text_sumit = (TextView) findViewById(R.id.text_sumit);
@@ -88,12 +90,24 @@ public class SetUpActivity extends BaseActivity implements View.OnClickListener{
                 }
                 uploadDialog.show();
                 break;
+            case R.id.a_my_info_lay_username:
+                SPUtils.put(context,"uid","");//用户ID
+                SPUtils.put(context,"nickName","");//用户昵称
+                SPUtils.put(context,"phoneNum","");//手机号码
+                SPUtils.put(context,"userIcon","");//用户头像
+                SPUtils.put(context,"myProfess","");//职位名称
+                SPUtils.put(context,"positionType","");
+                //0 专家已注册没有提交资质文件 1已注册且提交资质文件等待审核2未通过审核 3资质通过审核可以登录
+                SPUtils.put(context,"isLogin",false);//登录状态
+                ToastUtils.showMessageShort(context,"已安全退出账号");
+                MyApplication.openActivity(context,LoginActivity.class);
+                finish();
+                break;
         }
     }
     private String photoPath64String;
     private Uri mPhotoUri;
     private String photoPath = "";
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

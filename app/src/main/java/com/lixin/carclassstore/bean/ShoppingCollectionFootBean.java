@@ -77,6 +77,15 @@ public class ShoppingCollectionFootBean {
         public String  commodityCommendNum;//"7837"//商品的评论数
         public String  commoditysellerNum;//"324"//商品的售出数目
         public String  commodityShooCarNum;//""//商品加入购物车的数目
+        public String  commodityDescription;//""//商品加入购物车的数目
+
+        public String getCommodityDescription() {
+            return commodityDescription;
+        }
+
+        public void setCommodityDescription(String commodityDescription) {
+            this.commodityDescription = commodityDescription;
+        }
 
         public String getCommodityid() {
             return commodityid;

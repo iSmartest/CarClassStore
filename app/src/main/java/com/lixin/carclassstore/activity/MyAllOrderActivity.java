@@ -206,6 +206,12 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(unSelectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
+
+                    imageView.setVisibility(View.VISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.INVISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     type=0;
                     break;
                 case 1:
@@ -214,6 +220,12 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(unSelectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
+
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.VISIBLE);
+                    imageView2.setVisibility(View.INVISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     type=1;
                     break;
                 case 2:
@@ -222,6 +234,12 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(selectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
+
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.VISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     type=2;
                     break;
                 case 3:
@@ -231,6 +249,12 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_evaluate.setTextColor(selectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
 
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.VISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
+
                     type=3;
                     break;
                 case 4:
@@ -239,6 +263,12 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(unSelectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(selectedColor);
+
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.INVISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.VISIBLE);
                     type=4;
                     break;
             }
@@ -264,11 +294,11 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
         }
 
         public void onPageSelected(int index) {
-            Animation animation = new TranslateAnimation(one * currIndex, one
-                    * index, 0, 0);// 显然这个比较简洁，只有一行代码。
-            currIndex = index;
-            animation.setFillAfter(true);// True:图片停在动画结束位置
-            animation.setDuration(300);
+//            Animation animation = new TranslateAnimation(one * currIndex, one
+//                    * index, 0, 0);// 显然这个比较简洁，只有一行代码。
+//            currIndex = index;
+//            animation.setFillAfter(true);// True:图片停在动画结束位置
+//            animation.setDuration(300);
             switch (index) {
                 case 0:
                     tv_all_order.setTextColor(selectedColor);
@@ -276,7 +306,13 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(unSelectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
-                    imageView.startAnimation(animation);
+//                    imageView.startAnimation(animation);
+
+                    imageView.setVisibility(View.VISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.INVISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     type=0;
                     break;
                 case 1:
@@ -285,7 +321,13 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(unSelectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
-                    imageView1.startAnimation(animation);
+//                    imageView1.startAnimation(animation);
+
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.VISIBLE);
+                    imageView2.setVisibility(View.INVISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     type=1;
                     break;
                 case 2:
@@ -294,7 +336,14 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(selectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
-                    imageView2.startAnimation(animation);
+//                    imageView2.startAnimation(animation);
+
+
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.VISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     type=2;
                     break;
                 case 3:
@@ -303,7 +352,13 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(unSelectedColor);
                     tv_wait_evaluate.setTextColor(selectedColor);
                     tv_is_complete.setTextColor(unSelectedColor);
-                    imageView3.startAnimation(animation);
+//                    imageView3.startAnimation(animation);
+
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.INVISIBLE);
+                    imageView3.setVisibility(View.VISIBLE);
+                    imageView4.setVisibility(View.INVISIBLE);
                     type=3;
                     break;
                 case 4:
@@ -312,7 +367,14 @@ public class MyAllOrderActivity extends BaseActivity implements View.OnClickList
                     tv_wait_goods.setTextColor(unSelectedColor);
                     tv_wait_evaluate.setTextColor(unSelectedColor);
                     tv_is_complete.setTextColor(selectedColor);
-                    imageView4.startAnimation(animation);
+//                    imageView4.startAnimation(animation);
+
+
+                    imageView.setVisibility(View.INVISIBLE);
+                    imageView1.setVisibility(View.INVISIBLE);
+                    imageView2.setVisibility(View.INVISIBLE);
+                    imageView3.setVisibility(View.INVISIBLE);
+                    imageView4.setVisibility(View.VISIBLE);
                     type=4;
                     break;
             }

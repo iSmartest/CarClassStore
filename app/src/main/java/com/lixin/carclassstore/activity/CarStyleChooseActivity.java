@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.adapter.SortAdapter;
 import com.lixin.carclassstore.bean.CarStyleBean;
-import com.lixin.carclassstore.bean.JavaBean;
 import com.lixin.carclassstore.bean.SortModel;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.CharacterParser;
@@ -65,10 +64,13 @@ public class CarStyleChooseActivity extends BaseActivity {
     private View[] funcViews = new View[8];
     private PinyinComparator pinyinComparator;
     private TextView tvHotCar;
+    private String flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_car);
+        Intent intent = getIntent();
+        flag = intent.getStringExtra("flag");
         setTitleText("车型选择");
         hideBack(false);
         initViews();
@@ -246,6 +248,7 @@ public class CarStyleChooseActivity extends BaseActivity {
         Collections.sort(SourceDateList, (Comparator<? super SortModel>) pinyinComparator);
         adapter = new SortAdapter(this, SourceDateList);
         sortListView.setAdapter(adapter);
+        adapter.setData(carsSelect);
         sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -254,10 +257,15 @@ public class CarStyleChooseActivity extends BaseActivity {
                 //这里要利用adapter.getItem(position)来获取当前position所对应的对象
                 Toast.makeText(getApplication(), ((SortModel) adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context,CarSeriesActivity.class);
-                intent.putExtra("carbrandId",carsSelect.get(position-1).getCarBrandId());
-                intent.putExtra("carname",carsSelect.get(position-1).getCarName());
-                intent.putExtra("carleader",carsSelect.get(position - 1).getCarleader());
-                Log.i("carbrandId", "onItemClick: " + carsSelect.get(position-1).getCarBrandId());
+                for (int i = 0; i < carsSelect.size(); i++) {
+                    if (((SortModel) adapter.getItem(position)).getName().equals(carsSelect.get(i).getCarName())){
+                        intent.putExtra("carbrandId",carsSelect.get(i).getCarBrandId());
+                        intent.putExtra("carleader",carsSelect.get(i).getCarleader());
+                    }
+                }
+                intent.putExtra("carname",((SortModel) adapter.getItem(position)).getName());
+                intent.putExtra("flag",flag);
+//                Log.i("carbrandId", "onItemClick: " + carsSelect.get(position-1).getCarBrandId());
                 startActivity(intent);
             }
         });

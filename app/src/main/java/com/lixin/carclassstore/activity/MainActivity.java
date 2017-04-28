@@ -12,12 +12,13 @@ import com.lixin.carclassstore.fragment.HomeFragment;
 import com.lixin.carclassstore.fragment.MineFragment;
 import com.lixin.carclassstore.fragment.StoreFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements HomeFragment.CallBackValue{
     private ImageView[] mTextView;
     private Fragment[] mFragments;
     private FragmentTransaction transaction;
     private int current = 0;
     private String [] titles;
+    private String temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,5 +106,11 @@ public class MainActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void SendMessageValue(String strValue) {
+        temp = strValue;
+        if (temp.equals("6")) setCurrent(1);
     }
 }

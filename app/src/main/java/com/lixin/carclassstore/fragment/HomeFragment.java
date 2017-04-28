@@ -1,4 +1,5 @@
 package com.lixin.carclassstore.fragment;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,15 +16,16 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.activity.BuyInsuranceActivity;
+import com.lixin.carclassstore.activity.CarStyleChooseActivity;
 import com.lixin.carclassstore.activity.CheckViolationWebActivity;
 import com.lixin.carclassstore.activity.CustomerServiceActivity;
-import com.lixin.carclassstore.activity.NewCarActivity;
 import com.lixin.carclassstore.activity.ShopActivity;
 import com.lixin.carclassstore.adapter.GridAdapter;
 import com.lixin.carclassstore.bean.ContentBean;
 import com.lixin.carclassstore.bean.JavaBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.lixin.carclassstore.view.viewPage.ImageSlideshow;
 import com.squareup.picasso.Picasso;
@@ -45,9 +47,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private String[] funcTxts;
     private JavaBean javaBean;
     private View view;
-    private String result;
-    private String resultNote;
-    private String serve;
     private List<JavaBean.rotateAdvertisement> rotateAdvertisement = new ArrayList<>();
     private List<JavaBean.filtrate> filtrateList = new ArrayList<>();
     private List<JavaBean.serveTop> topList = new ArrayList<>();
@@ -56,23 +55,25 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private List<ContentBean.commoditysList> mList = new ArrayList<>();
     private JavaBean.CheckAdvertisement checkAdvertisements ;
     private ImageView iv_car;
-    private ListView list_activity;
-    private View head;
     private int nowPage = 1;
     private ImageSlideshow imageSlideshow;
-    private List<String> imageUrlList;
-    private List<String> titleList ;
     TextView recommended,recommendedPrice,recommendedContent,boutique,boutiquePrice,boutiqueContent,dayKill;
     ImageView ivRecommended,ivBoutique;
     GridView gridKill;
     GridAdapter gridAdapter;
     LinearLayout linear01,linear02,linear03;
+    CallBackValue callBackValue;
+    @Override
+    public void onAttach(Activity activity) {
+        // TODO Auto-generated method stub
+        super.onAttach(activity);
+        //当前fragment从activity重写了回调接口  得到接口的实例化对象
+        callBackValue =(HomeFragment.CallBackValue) getActivity();
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home,container,false);
-        imageUrlList = new ArrayList<>();
-        titleList = new ArrayList<>();
         initView();
         getdata();
         getCommoditysData();
@@ -136,7 +137,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     }
 
     //轮播
-    private void initViewData(List<JavaBean.rotateAdvertisement> rotateAdvertisement) {
+    private void initViewData(final List<JavaBean.rotateAdvertisement> rotateAdvertisement) {
         for (int i = 0; i < rotateAdvertisement.size(); i++) {
             imageSlideshow.addImageTitle(rotateAdvertisement.get(i).getServeIcon());
         }
@@ -146,7 +147,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         imageSlideshow.setOnItemClickListener(new ImageSlideshow.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(getActivity(),ShopActivity.class);
+                intent.putExtra("serveTypeId",rotateAdvertisement.get(position).getServeTypeId() );
+                startActivity(intent);
             }
         });
         imageSlideshow.commit();
@@ -333,12 +336,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 transaction1.add(R.id.activity_new_main_layout_content, storeFragment1);
                 transaction1.addToBackStack(null);
                 transaction1.commit();
+                callBackValue.SendMessageValue("6");
+                break;
             case 7:
                 StoreFragment storeFragment2 = StoreFragment.newInstance("serveType");
                 FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
                 transaction2.add(R.id.activity_new_main_layout_content, storeFragment2);
                 transaction2.addToBackStack(null);
                 transaction2.commit();
+                callBackValue.SendMessageValue("6");
                 break;
             //跳转到客服
             case R.id.text_customer_service:
@@ -346,11 +352,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 break;
             //跳转到新车
             case 4:
-                startActivity(new Intent(getActivity(),NewCarActivity.class).putExtra(NewCarActivity.TAG, 1));
+                startActivity(new Intent(getActivity(),CarStyleChooseActivity.class).putExtra("flag", "2"));
                 break;
             //跳转到二手车
             case 5:
-                startActivity(new Intent(getActivity(),NewCarActivity.class).putExtra(NewCarActivity.TAG, 0));
+                startActivity(new Intent(getActivity(),CarStyleChooseActivity.class).putExtra("flag", "3"));
                 break;
             //跳转到查违章
             case 8:
@@ -390,6 +396,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 List<JavaBean.rotateAdvertisement> rotateAdvertisementList = javaBean.rotateAdvertisement;//轮播图集合
                 List<JavaBean.filtrate> filtrate = javaBean.filtrate;
                 filtrateList.addAll(filtrate);
+//                SPUtils.put(getActivity(),"filtrateList",filtrateList);
                 rotateAdvertisement.addAll(rotateAdvertisementList);
                 List<JavaBean.serveTop> serveTopList = javaBean.serveTop;
                 topList.addAll(serveTopList);
@@ -402,5 +409,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
             }
         });
     }
-
+    //写一个回调接口
+    public interface CallBackValue{
+        public void SendMessageValue(String strValue);
+    }
 }

@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.bean.ShoppingCollectionFootBean;
+import com.lixin.carclassstore.tools.ImageManager;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -84,13 +86,17 @@ public class ShoppingCartAdapter extends BaseAdapter {
         }
         final ShoppingCollectionFootBean.commoditys commoditysList = mList.get(position);
         holder.tv_commodity_name.setText(commoditysList.getCommodityTitle());
-//        holder.tv_fabric.setText("" + commoditysList.getFabric());
+        holder.tv_fabric.setText("" + commoditysList.getCommodityDescription());
         holder.tv_pants.setText("销量" + commoditysList.getCommoditysellerNum());
         holder.tv_price.setText("￥" + commoditysList.getCommodityNewPrice());
         holder.ck_chose.setChecked(commoditysList.isChoosed());
-        holder.tv_show_num.setText(commoditysList.getCount() + "");
+        holder.tv_show_num.setText(commoditysList.getCommodityShooCarNum() + "");
         holder.tv_num.setText("X" + commoditysList.getCount());
-
+        if (commoditysList.getCommodityIcon().equals("")){
+            holder.iv_show_pic.setImageResource(R.drawable.image_fail_empty);
+        }else {
+            Picasso.with(context).load(commoditysList.getCommodityIcon()).placeholder(R.drawable.image_fail_empty).into(holder.iv_show_pic);
+        }
         //单选框按钮
         holder.ck_chose.setOnClickListener(
                 new View.OnClickListener() {
@@ -143,19 +149,6 @@ public class ShoppingCartAdapter extends BaseAdapter {
                 alert.show();
             }
         });
-
-        //判断是否在编辑状态下
-//        if (isShow) {
-//            holder.tv_commodity_name.setVisibility(View.VISIBLE);
-//            holder.tv_fabric.setVisibility(View.VISIBLE);
-//            holder.rl_edit.setVisibility(View.GONE);
-//            holder.tv_delete.setVisibility(View.GONE);
-//        } else {
-//            holder.tv_commodity_name.setVisibility(View.GONE);
-//            holder.tv_fabric.setVisibility(View.GONE);
-//            holder.rl_edit.setVisibility(View.VISIBLE);
-//            holder.tv_delete.setVisibility(View.VISIBLE);
-//        }
 
         return convertView;
     }

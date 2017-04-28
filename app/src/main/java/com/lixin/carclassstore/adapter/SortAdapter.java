@@ -10,22 +10,25 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.lixin.carclassstore.R;
-
+import com.lixin.carclassstore.bean.CarStyleBean;
 import com.lixin.carclassstore.bean.SortModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	private List<SortModel> list = null;
 	private Context mContext;
-	
+	List<CarStyleBean.carsSelectList> carsSelect = new ArrayList<>();
 	public SortAdapter(Context mContext, List<SortModel> list) {
 		this.mContext = mContext;
 		this.list = list;
 	}
-	
+	public void setData(List<CarStyleBean.carsSelectList> carsSelect){
+              this.carsSelect = carsSelect;
+	}
 	/**
 	 * 当ListView数据发生变化时,调用此方法来更新ListView
 	 * @param list
@@ -73,7 +76,12 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 		}
 	
 		viewHolder.tvTitle.setText(this.list.get(position).getName());
-		Picasso.with(mContext).load(list.get(position).getLeader()).into(viewHolder.imPicture);
+		for (int i = 0; i < carsSelect.size(); i++) {
+            if ((this.list.get(position).getName()).equals(carsSelect.get(i).getCarName())){
+				Picasso.with(mContext).load(carsSelect.get(i).getCarleader()).into(viewHolder.imPicture);
+			}
+		}
+
 		return view;
 
 	}

@@ -15,7 +15,13 @@ import com.lixin.carclassstore.adapter.ShoppingCartAdapter;
 import com.lixin.carclassstore.bean.ShoppingCollectionFootBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
+import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
+import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,18 +39,19 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
         ,ShoppingCartAdapter.CheckInterface, ShoppingCartAdapter.ModifyCountInterface {
     public TextView tv_title, tv_settlement, tv_show_price;
     private CheckBox ck_all;
-    private ListView list_shopping_cart;
+    private PullToRefreshListView list_shopping_cart;
     private ShoppingCartAdapter shoppingCartAdapter;
     private List<ShoppingCollectionFootBean.commoditys> mList = new ArrayList<>();
     private double totalPrice = 0.00;// 购买的商品总价
     private int totalCount = 0;// 购买的商品总数量
     private String handleType = "0";
-    private String uid = "123";
+    private String uid ;
     private int nowPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
+        uid = (String) SPUtils.get(ShoppingCartActivity.this,"uid","");
         hideBack(false);
         setTitleText("购物车");
         initView();
@@ -52,7 +59,7 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView() {
-        list_shopping_cart = (ListView) findViewById(R.id.list_shopping_cart);
+        list_shopping_cart = (PullToRefreshListView) findViewById(R.id.list_shopping_cart);
         ck_all = (CheckBox) findViewById(R.id.ck_all);
         ck_all.setOnClickListener(this);
         tv_show_price = (TextView) findViewById(R.id.tv_show_price);
@@ -63,6 +70,20 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
         shoppingCartAdapter.setModifyCountInterface(this);
         list_shopping_cart.setAdapter(shoppingCartAdapter);
         shoppingCartAdapter.setShoppingCartBeanList(mList);
+        list_shopping_cart.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                mList.clear();
+                nowPage = 1;
+                getdata();
+            }
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                nowPage++;
+                getdata();
+            }
+        });
+
     }
 
     //请求参数
@@ -77,6 +98,7 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showMessageLong(context, "网络异常");
                 dialog1.dismiss();
+                list_shopping_cart.onRefreshComplete();
             }
             @Override
             public void onResponse(String response, int id) {
@@ -87,15 +109,26 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
                 if (shoppingCollectionFootBean.getResult().equals("1")){
                     ToastUtils.showMessageLong(context,shoppingCollectionFootBean.getResultNote());
                 }
+                try {
+                    JSONObject jsonObject = new JSONObject("jj");
+                    if (shoppingCollectionFootBean.totalPage.equals("")){
+                        ToastUtils.showMessageShort(context, "没有更多了");
+                    }else {
+                        if (nowPage > Integer.parseInt(shoppingCollectionFootBean.totalPage)) {
+                            ToastUtils.showMessageShort(context, "没有更多了");
+                            return;
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 List<ShoppingCollectionFootBean.commoditys> commoditys = shoppingCollectionFootBean.commoditys;
                 Log.i("commoditys", "commoditys: " + commoditys.toString());
                 mList.addAll(commoditys);
-
+                list_shopping_cart.onRefreshComplete();
             }
         });
     }
-
-
 
     @Override
     public void onClick(View v) {

@@ -22,6 +22,7 @@ import com.lixin.carclassstore.bean.ReplyBean;
 import com.lixin.carclassstore.dialog.TipsDialog;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.SharedPreferencesUtil;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.lixin.carclassstore.view.ChangeAddressPopwindow;
@@ -45,7 +46,7 @@ public class MoneySafeActivity extends BaseActivity implements View.OnClickListe
     private TextView text_city_name,text_yes_or_no,text_choose_time,text_sumit;
     private EditText edi_input_car_licence_num,edi_car_price;
     int mYear, mMonth, mDay;
-    private String uid = "123";
+    private String uid;
     private String insuranceIsNum;
     final int DATE_DIALOG = 1;
     @Override
@@ -53,6 +54,7 @@ public class MoneySafeActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money_safe);
         setTitleText("金融保险");
+        uid = (String) SPUtils.get(MoneySafeActivity.this,"uid","");
         hideBack(false);
         initView();
     }

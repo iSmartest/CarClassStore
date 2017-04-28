@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.lixin.carclassstore.R;
@@ -16,71 +17,40 @@ import com.lixin.carclassstore.R;
  * My mailbox is 1403241630@qq.com
  */
 
-public class FaultCategoryActivity extends BaseActivity implements View.OnClickListener{
+public class FaultCategoryActivity extends BaseActivity {
     private TextView text_car_no_oil,text_car_tire_bad,text_other_car_question;
     private CheckBox ck_chose1,ck_chose2,ck_chose3;
     private Button a_sure_chose;
-    String context;
-    String context1;
-    String context2;
-    String context3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fault_category);
+        hideBack(false);
         setTitleText("故障类别");
         initView();
     }
-
     private void initView() {
         text_car_no_oil = (TextView) findViewById(R.id.text_car_no_oil);
         text_car_tire_bad = (TextView) findViewById(R.id.text_car_tire_bad);
         text_other_car_question = (TextView) findViewById(R.id.text_other_car_question);
         ck_chose1 = (CheckBox) findViewById(R.id.ck_chose1);
-        ck_chose1.setOnClickListener(this);
         ck_chose2 = (CheckBox) findViewById(R.id.ck_chose2);
-        ck_chose2.setOnClickListener(this);
         ck_chose3 = (CheckBox) findViewById(R.id.ck_chose3);
-        ck_chose3.setOnClickListener(this);
         a_sure_chose = (Button) findViewById(R.id.a_sure_chose);
-        a_sure_chose.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.ck_chose1:
-               if (ck_chose1.isChecked()){
-                   context1 = text_car_no_oil.getText().toString().trim();
-               }else {
-                   context1 = "";
-               }
-                break;
-            case R.id.ck_chose2:
-                if (ck_chose1.isChecked()){
-                    context2 = text_car_tire_bad.getText().toString().trim();
-                }else {
-                    context2 = "";
-                }
-                break;
-            case R.id.ck_chose3:
-                if (ck_chose1.isChecked()){
-                    context3 = text_other_car_question.getText().toString().trim();
-                }else {
-                    context3 = "";
-                }
-                break;
-            case R.id.a_sure_chose:
+        a_sure_chose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 sumit();
-                break;
-        }
+            }
+        });
     }
-
     private void sumit() {
-
-        context = context1 + context2 + context3;
-        Intent intent = new Intent();
-        intent.putExtra("result", context);
+        String r = "";
+        if(ck_chose1.isChecked())   r = r + text_car_no_oil.getText().toString().trim() + " ";
+        if(ck_chose2.isChecked())    r = r + text_car_tire_bad.getText().toString().trim() +" ";
+        if(ck_chose3.isChecked())    r = r + text_other_car_question.getText().toString().trim() + " ";
+        Intent intent = new Intent(FaultCategoryActivity.this,ReleaseRescueInformationActivity.class);
+        intent.putExtra("result", r);
         setResult(1001, intent);
         finish();
     }

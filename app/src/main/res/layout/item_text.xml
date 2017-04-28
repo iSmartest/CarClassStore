@@ -12,10 +12,4 @@
         android:textSize="16sp"
         android:background="@color/white_smoke"
         android:text="轮胎保养"/>
-    <ListView
-        android:id="@+id/list_second_shop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-    </ListView>
 </LinearLayout>

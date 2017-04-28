@@ -4,6 +4,7 @@ package com.lixin.carclassstore.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +15,18 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
+import com.lixin.carclassstore.activity.CarFilesActivity;
 import com.lixin.carclassstore.activity.CustomerComplaintActivity;
 import com.lixin.carclassstore.activity.CustomerServiceActivity;
+import com.lixin.carclassstore.activity.ExchangeZoneActivity;
 import com.lixin.carclassstore.activity.FeedbackActivity;
+import com.lixin.carclassstore.activity.IntegralCenter;
 import com.lixin.carclassstore.activity.LoginActivity;
 import com.lixin.carclassstore.activity.MoneySafeActivity;
 import com.lixin.carclassstore.activity.MyAllOrderActivity;
 import com.lixin.carclassstore.activity.MyCollectionFootActivity;
 import com.lixin.carclassstore.activity.MyReleaseActivity;
+import com.lixin.carclassstore.activity.RecommendCourtesyActivity;
 import com.lixin.carclassstore.activity.RoadRescueActivity;
 import com.lixin.carclassstore.activity.ServiceReminderActivity;
 import com.lixin.carclassstore.activity.SetUpActivity;
@@ -29,7 +34,10 @@ import com.lixin.carclassstore.activity.ShoppingCartActivity;
 import com.lixin.carclassstore.bean.MineMenuBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
+import com.lixin.carclassstore.utils.SharedPreferencesUtil;
 import com.lixin.carclassstore.utils.ToastUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +63,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     private List<MineMenuBean.hpleMenu> hpleMenuList = new ArrayList<>();
     private List<MineMenuBean.aboutMenu> aboutMenuList = new ArrayList<>();
     private String remmondCode;
+    private String uid;
+    private String userIcon;
+    private String nickName;
     private int[] bigBGs = new int[]{
             R.drawable.m_shopping_cat,
             R.drawable.m_collection,
@@ -82,6 +93,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine,container,false);
+        uid = (String) SPUtils.get(getActivity(),"uid","");
+        userIcon = (String) SPUtils.get(getActivity(),"userIcon","");
+        nickName = (String) SPUtils.get(getActivity(),"nickName","");
         initView();
         getdata();
         return view;
@@ -91,10 +105,21 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         linear_all_order = (LinearLayout) view.findViewById(R.id.linear_all_order);
         linear_all_order.setOnClickListener(this);
         iv_set_up = (ImageView) view.findViewById(R.id.iv_set_up);
+        if (TextUtils.isEmpty(uid)){
+            iv_set_up.setVisibility(View.GONE);
+        }else {
+            iv_set_up.setVisibility(View.VISIBLE);
+        }
         iv_set_up.setOnClickListener(this);
         head_image = (ImageView) view.findViewById(R.id.head_image);
         head_image.setOnClickListener(this);
+        if (!TextUtils.isEmpty(userIcon)){
+            Picasso.with(getActivity()).load(userIcon).into(head_image);
+        }
         head_text = (TextView) view.findViewById(R.id.head_text);
+        if (!TextUtils.isEmpty(nickName)){
+            head_text.setText(nickName);
+        }
         head_text.setOnClickListener(this);
         funcTxts = getActivity().getResources().getStringArray(R.array.mine_functions);
         funcViews[0] = view.findViewById(R.id.text_shopping_cart);
@@ -136,8 +161,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
         switch (v.getId()){
             case R.id.head_image:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-//                ImageManager.imageLoader.displayImage(userLoginBean.nickName,head_image);
+                if (TextUtils.isEmpty(uid)){
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
             //跳转到设置
             case R.id.iv_set_up:
@@ -215,18 +241,19 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case 13:
                 //爱车档案
-                Log.i("TAG", "messageMenuList: " + messageMenuList.get(0).getMeunType());
-                Log.i("TAG", "hpleMenuList: " + hpleMenuList.get(0).getMeunType());
-                Log.i("TAG", "aboutMenuList: " + aboutMenuList.get(0).getMeunType());
+                startActivity(new Intent(getActivity(),CarFilesActivity.class));
                 break;
             case 14:
                 //积分中心
+                startActivity(new Intent(getActivity(),IntegralCenter.class));
                 break;
             case 15:
                 //兑换专区
+                startActivity(new Intent(getActivity(),ExchangeZoneActivity.class));
                 break;
             case 16:
                 //推荐有礼
+                startActivity(new Intent(getActivity(),RecommendCourtesyActivity.class));
                 break;
             case 17:
                 //意见反馈

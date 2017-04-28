@@ -1,32 +1,31 @@
 package com.lixin.carclassstore.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
-import com.lixin.carclassstore.activity.ShopDetailsActivity;
 import com.lixin.carclassstore.activity.StoreDetailsActivity;
 import com.lixin.carclassstore.adapter.StoreAdapter;
+import com.lixin.carclassstore.bean.ContentBean;
+import com.lixin.carclassstore.bean.JavaBean;
 import com.lixin.carclassstore.bean.StoreBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
@@ -59,9 +58,9 @@ public class StoreFragment extends BaseFragment {
     private PopupWindow popupWindow;
     private ListView lv_group;
     private List<String> mListType = new ArrayList<String>();  //类型列表
-
     String[] strs = {};
     JSONObject json2;
+    private List<JavaBean.filtrate> filtrate = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,10 +75,6 @@ public class StoreFragment extends BaseFragment {
         }
         sort = "1";
         serveType = "0";
-//        JSONArray array = new JSONArray(Arrays.asList(strs));
-//        Map<String, Object> map2 = new HashMap<>();
-//        map2.put("fliter", array);
-//        json2 = new JSONObject(map2);
         getdata();
         textClass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,19 +90,18 @@ public class StoreFragment extends BaseFragment {
         });
         textSort.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View view) {
+                showPopupWindow(view);
             }
         });
-
         mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mAdapter = new StoreAdapter(getActivity());
         mListView.setAdapter(mAdapter);
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                nowPage = 1;
                 mList.clear();
+                nowPage = 1;
                 getdata();
             }
             @Override
@@ -126,46 +120,6 @@ public class StoreFragment extends BaseFragment {
         });
         return view;
     }
-
-//    private void showPopupMenu(final TextView text) {
-//        ListView contentView = new ListView(context);
-//        if (popupWindow!=null){
-//            popupWindow.dismiss();
-//        }
-//        popupWindow = new PopupWindow(contentView,getActivity().getWindowManager().getDefaultDisplay().getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT, true);
-//        contentView.setBackgroundColor(0XFFEEEEEE);
-//        contentView.setDivider(new ColorDrawable(getResources().getColor(R.color.white_smoke)));
-//        contentView.setDividerHeight(getResources().getDimensionPixelSize(R.dimen.high));
-//        final ArrayAdapter<String> adapter = new ArrayAdapter<>(context,R.layout.item_main_popup_list, mListType);
-//        contentView.setAdapter(adapter);
-//        contentView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String item = adapter.getItem(position);
-//                text.setText(item);
-//                popupWindow.dismiss();
-//                nowPage=1;
-////                code = 2;
-////                fujinId = fujinlist.get(position).fujinId;
-////                getjulidata(fujinId);
-//            }
-//        });
-//        popupWindow.setOutsideTouchable(true);// 设置此数获得焦点，否则无法参点击
-//        popupWindow.setFocusable(true);
-//        popupWindow.setBackgroundDrawable(new ColorDrawable());
-//        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//                WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-//                lp.alpha = 1f;
-//                getActivity().getWindow().setAttributes(lp);
-//            }
-//
-//        });
-//        int[] location = new int[2];
-//        text.getLocationOnScreen(location);
-//        popupWindow.showAtLocation(text, Gravity.NO_GRAVITY, location[0], location[1]-popupWindow.getHeight());
-//    }
 
     public static StoreFragment newInstance(String text) {
         StoreFragment fragment = new StoreFragment();
@@ -212,11 +166,61 @@ public class StoreFragment extends BaseFragment {
                 }
                 List<StoreBean.shop> shopList = storeBean.shop;
                 mList.addAll(shopList);
-                mAdapter.setStoreBeanList(mList);
+                Log.i("shopList", "onResponse: " + mList.get(0).getShopName());
+                mAdapter.setStoreBeanList(context,mList);
                 mListView.setAdapter(mAdapter);
             }
         });
     }
+    private void showPopupWindow(View view) {
+        // 一个自定义的布局，作为显示的内容
+        View contentView = LayoutInflater.from(getActivity()).inflate(
+                R.layout.pop_window, null);
+        // 设置按钮的点击事件
+        final TextView text1 = (TextView) contentView.findViewById(R.id.text_default_sort);
+        final TextView text2 = (TextView) contentView.findViewById(R.id.source_good);
+        final TextView text3 = (TextView) contentView.findViewById(R.id.selas_height);
+        text1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sort = "0";
+                textSort.setText(text1.getText().toString().trim());
+                getdata();
+            }
+        });text2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sort = "1";
+                textSort.setText(text2.getText().toString().trim());
+                getdata();
+            }
+        });text3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sort = "2";
+                textSort.setText(text3.getText().toString().trim());
+                getdata();
+            }
+        });
+        final PopupWindow popupWindow = new PopupWindow(contentView,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
+        popupWindow.setTouchable(true);
 
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.i("mengdd", "onTouch : ");
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        // 我觉得这里是API的一个bug
+//        popupWindow.setBackgroundDrawable(getResources().get(R.color.text_color_choose));
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        // 设置好参数之后再show
+        popupWindow.showAsDropDown(view);
+    }
 }

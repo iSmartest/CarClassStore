@@ -47,7 +47,7 @@ import okhttp3.Call;
  * Created by 小火
  * Create time on  2017/3/29
  * My mailbox is 1403241630@qq.com
- * 门店详情
+ * 商品详情
  */
 
 public class ShopDetailsActivity extends BaseActivity implements View.OnClickListener,ShopFragment.CallBackValue{

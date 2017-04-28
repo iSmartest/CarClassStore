@@ -21,7 +21,7 @@
     android:orientation="horizontal">
     <ImageView
         android:id="@+id/iv_sort_car_picture"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@mipmap/ic_launcher"/>
     <TextView

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/activity_base"/>
+    <com.lixin.carclassstore.view.RoundedImageView
+        android:id="@+id/love_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/head_pic_bg"
+        android:padding="1.5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/love"
+        android:visibility="visible"
+        app:is_oval="true"
+        tools:ignore="ContentDescription"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"/>
+</LinearLayout>

@@ -14,9 +14,13 @@ import com.lixin.carclassstore.adapter.ShoppingCartAdapter;
 import com.lixin.carclassstore.bean.MyReleaseBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,15 +40,17 @@ public class MyReleaseActivity extends BaseActivity implements View.OnClickListe
     private PullToRefreshListView list_my_release;
     private MyReleaseAdapter myReleaseAdapter;
     private List<MyReleaseBean.qusetions> myReleaseBeanList = new ArrayList<>();
-    private String uid = "123";
+    private String uid ;
     private int nowPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_release);
+        uid = (String) SPUtils.get(MyReleaseActivity.this,"uid","");
         hideBack(false);
         setTitleText("我的发布");
         initView();
+        getdata();
     }
 
     private void initView() {
@@ -66,7 +72,6 @@ public class MyReleaseActivity extends BaseActivity implements View.OnClickListe
                 getdata();
             }
         });
-
     }
 
     @Override
@@ -103,9 +108,17 @@ public class MyReleaseActivity extends BaseActivity implements View.OnClickListe
                             ToastUtils.showMessageShort(context, myReleaseBean.getResultNote());
                             return;
                         }
-                        if (Integer.parseInt(myReleaseBean.getTotalPage()) < nowPage) {
-                            ToastUtils.showMessageShort(context, "没有更多了");
-                            return;
+                        try {
+                            JSONObject jsonObject = new JSONObject("hhh");
+                            if (myReleaseBean.getTotalPage().equals("")){
+                                ToastUtils.showMessageShort(context,"空空如也");
+                            }else {
+                                if (Integer.parseInt(myReleaseBean.getTotalPage()) < nowPage){
+                                    ToastUtils.showMessageShort(context,"没有更多了");
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                         List<MyReleaseBean.qusetions> qusetionslist = myReleaseBean.qusetions;
                         myReleaseBeanList.addAll(qusetionslist);

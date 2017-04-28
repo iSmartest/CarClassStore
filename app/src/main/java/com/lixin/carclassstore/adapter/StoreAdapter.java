@@ -1,6 +1,7 @@
 package com.lixin.carclassstore.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,24 +25,25 @@ import java.util.List;
 
 public class StoreAdapter extends BaseAdapter{
 
-    private List<StoreBean.shop> storeBeanList;
+    private List<StoreBean.shop> storeBean;
     private Context context;
 
     public StoreAdapter(Context context) {
         this.context = context;
     }
-    public void setStoreBeanList(List<StoreBean.shop> storeBean){
-        this.storeBeanList = storeBean;
+    public void setStoreBeanList(Context context,List<StoreBean.shop> storeBean){
+        this.context = context;
+        this.storeBean = storeBean;
     }
 
     @Override
     public int getCount() {
-        return storeBeanList == null ? 0 : storeBeanList.size();
+        return storeBean == null ? 0 : storeBean.size();
     }
 
     @Override
     public StoreBean.shop getItem(int position) {
-        return storeBeanList.get(position);
+        return storeBean.get(position);
     }
 
     @Override
@@ -55,17 +57,17 @@ public class StoreAdapter extends BaseAdapter{
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_store,parent,false);
             viewHolder = new ViewHolder();
-            viewHolder.iv_car_picture = (ImageView) convertView.findViewById(R.id.iv_car_picture);
+            viewHolder.iv_car_picture = (ImageView) convertView.findViewById(R.id.iv_car_picture1);
             viewHolder.text_sales_num = (TextView) convertView.findViewById(R.id.text_sales_num);
-            viewHolder.text_store_name = (TextView) convertView.findViewById(R.id.text_store_name);
+            viewHolder.text_store_name = (TextView) convertView.findViewById(R.id.text_store_name1);
             viewHolder.text_store_score = (TextView) convertView.findViewById(R.id.text_store_score);
-            viewHolder.text_store_address = (TextView) convertView.findViewById(R.id.text_store_address);
+            viewHolder.text_store_address = (TextView) convertView.findViewById(R.id.text_store_address1);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            final StoreBean.shop mShopList = storeBeanList.get(position);
+            final StoreBean.shop mShopList = storeBean.get(position);
             String imag = mShopList.getShopIcon();
-            Picasso.with(context).load(imag).into(viewHolder.iv_car_picture);
+            Picasso.with(context).load(imag).placeholder(R.drawable.image_car_defult).into(viewHolder.iv_car_picture);
             viewHolder.text_sales_num.setText("销量" + mShopList.getSellerNum());
             viewHolder.text_store_name.setText(mShopList.getShopName());
             viewHolder.text_store_score.setText(mShopList.getShopCommentNum());
@@ -79,9 +81,9 @@ public class StoreAdapter extends BaseAdapter{
     }
     public void updateList(List<StoreBean.shop> newList) {
         if (newList == null)
-            storeBeanList = new ArrayList<>();
+            storeBean = new ArrayList<>();
         else
-            storeBeanList = newList;
+            storeBean = newList;
         notifyDataSetChanged();
     }
 }

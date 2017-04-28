@@ -2,26 +2,21 @@ package com.lixin.carclassstore.activity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
-
 import com.google.gson.Gson;
 import com.lixin.carclassstore.R;
-import com.lixin.carclassstore.adapter.CusromerComplaintAdapter;
 import com.lixin.carclassstore.adapter.CustomerComplaintAdapter;
 import com.lixin.carclassstore.bean.CustomerComplaint;
-import com.lixin.carclassstore.bean.ShoppingCollectionFootBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshBase;
 import com.xfb.user.custom.view.pulltofresh.library.PullToRefreshListView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import okhttp3.Call;
 
 
@@ -36,11 +31,12 @@ public class CustomerComplaintActivity extends BaseActivity{
     private List<CustomerComplaint.complains> mList = new ArrayList<>();
     private CustomerComplaintAdapter mAdapter;
     private int nowPage = 1;
-    private String uid = "123";
+    private String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_complaint);
+        uid = (String) SPUtils.get(CustomerComplaintActivity.this,"uid","");
         hideBack(false);
         setTitleText("客户投诉");
         initView();

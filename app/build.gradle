@@ -46,4 +46,6 @@ dependencies {
     compile project(':pulltofresh')
     compile files('libs/BaiduLBS_Android.jar')
     compile 'com.zhy:flowlayout-lib:1.0.3'
+    compile files('libs/libammsdk.jar')
+    compile files('libs/open_sdk_r5756_lite.jar')
 }

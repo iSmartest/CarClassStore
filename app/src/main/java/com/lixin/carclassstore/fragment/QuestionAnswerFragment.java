@@ -15,6 +15,7 @@ import com.lixin.carclassstore.adapter.QuestionAnswerAdapter;
 import com.lixin.carclassstore.bean.QuestionAnswerBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class QuestionAnswerFragment extends BaseFragment{
     private QuestionAnswerAdapter mAdapter;
     private List<QuestionAnswerBean.consults> mList = new ArrayList<>();
     private int nowPage = 1 ;//当前页数（10个每页）是第一页需要服务位和广告位信息
-    private String uid = "123";
+    private String uid ;
     private View view;
     private ImageView addQuestion;
     @Nullable
@@ -52,6 +53,7 @@ public class QuestionAnswerFragment extends BaseFragment{
         });
         mAdapter = new QuestionAnswerAdapter(context);
         mListView.setAdapter(mAdapter);
+        uid = (String) SPUtils.get(getActivity(),"uid","");
         getdata();
         return view;
     }
@@ -60,6 +62,7 @@ public class QuestionAnswerFragment extends BaseFragment{
         String json = "{\"cmd\":\"getForumConsultInfo\",\"nowPage\":\"" + nowPage + "\"" + ",\"uid\":\"" + uid + "\"}";
         params.put("json", json);
         dialog.show();
+        Log.i("111", "onResponse: " + json.toString());
         OkHttpUtils//
                 .post()//
                 .url(context.getString(R.string.url))//

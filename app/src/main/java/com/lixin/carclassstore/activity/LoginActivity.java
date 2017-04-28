@@ -63,6 +63,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mShareAPI = UMShareAPI.get(this);
         context = this;
         dialog1 = com.lixin.carclassstore.view.ProgressDialog.createLoadingDialog(context, "加载中.....");
         initView();
@@ -265,32 +266,33 @@ public class LoginActivity extends Activity implements View.OnClickListener{
      * @param nickName
      * @param userIcon
      */
-    private void thirdLogin(String thirdUid, final String nickName, String userIcon,String phoneNum) {
+    private void thirdLogin(String thirdUid, final String nickName, final String userIcon, String phoneNum) {
         Map<String, String> params = new HashMap<>();
         String json="{\"cmd\":\"thirdLogin\",\"thirdUid\":\"" + thirdUid + "\",\"nickName\":\""
-                + nickName + "\",\"userIcon\":\"" + userIcon + "\",\"phoneNum\":\"" + phoneNum + "\"}";
+                + nickName + "\",\"userIcon\":\"" + userIcon + "\"}";
         params.put("json", json);
-
+        Log.i("thirdLogin", "thirdLogin: " + json);
         OkHttpUtils.post().url(getString(R.string.url)).params(params).build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         ToastUtils.showMessageShort(context, e.getMessage());
-
                     }
                     @Override
                     public void onResponse(String response, int id) {
                         Gson gson = new Gson();
                         UserLoginBean bean = gson.fromJson(response, UserLoginBean.class);
+                        Log.i("thirdLogin", "onResponse: "+ response.toString());
                         if ("0".equals(bean.result)) {
-                            SharedPreferencesUtil.putSharePre(context, "uid", bean.uid);
+                            SPUtils.put(context, "uid", bean.uid);
                             SharedPreferencesUtil.putSharePre(context, "isFirst", bean.isFirst);
+                            SPUtils.put(context,"userIcon",userIcon);
+                            SPUtils.put(context,"nickName",nickName);
                             ToastUtils.showMessageShort(context, "登录成功");
                             MyApplication.openActivity(context, MainActivity.class);
                             finish();
                         } else {
                             ToastUtils.showMessageShort(context, bean.resultNote);
-
                         }
                     }
                 });

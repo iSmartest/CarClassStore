@@ -12,25 +12,21 @@ import com.lixin.carclassstore.BuildConfig;
 import com.lixin.carclassstore.R;
 import com.lixin.carclassstore.tools.ImageManager;
 import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 public class MyApplication extends Application {
-
+    public static Context CONTEXT;
     private static MyApplication myApplication;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        PlatformConfig.setWeixin("","");
-        PlatformConfig.setQQZone("1106082546","");
-//        PlatformConfig.setSinaWeibo("","","");
-        // CrashHandler crashHandler = CrashHandler.getInstance();
-        // crashHandler.init(getApplicationContext());
+        CONTEXT=getApplicationContext();
+        UMShareAPI.get(this);
+        SDKInitializer.initialize(CONTEXT);
+        PlatformConfig.setWeixin("wxf4d512f8f11f566f","81acb0fcccd4e0ea7c835f4da19155d3");
+        PlatformConfig.setQQZone("1106099962","5uJtjOb1VD5b4zwJ");
         myApplication = this;
-//        initImageLoader(this);
-        //初始化sharesdk
-//        ShareSDK.initSDK(this);
-//        initJPush();
-
 }
     public static MyApplication getApplication() {
         return myApplication;

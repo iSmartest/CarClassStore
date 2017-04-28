@@ -62,7 +62,9 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(BaseActivity.this, "点击了添加", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(BaseActivity.this,CarStyleChooseActivity.class));
+                    Intent intent = new Intent(BaseActivity.this,CarStyleChooseActivity.class);
+                    intent.putExtra("flag","1");
+                    startActivity(intent);
                 }
             });
         }else{

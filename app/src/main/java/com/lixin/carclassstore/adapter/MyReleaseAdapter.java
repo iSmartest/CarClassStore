@@ -87,7 +87,7 @@ public class MyReleaseAdapter extends BaseAdapter {
             public void onClick(View v) {
                 AlertDialog alert = new AlertDialog.Builder(context).create();
                 alert.setTitle("操作提示");
-                alert.setMessage("您确定要将这些商品从购物车中移除吗？");
+                alert.setMessage("您确定要将这些移除吗？");
                 alert.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
                         new DialogInterface.OnClickListener() {
                             @Override

@@ -12,6 +12,7 @@ import com.lixin.carclassstore.adapter.MyAllOrderAdapter;
 import com.lixin.carclassstore.bean.RoadRescueBean;
 import com.lixin.carclassstore.http.StringCallback;
 import com.lixin.carclassstore.utils.OkHttpUtils;
+import com.lixin.carclassstore.utils.SPUtils;
 import com.lixin.carclassstore.utils.ToastUtils;
 
 import org.json.JSONArray;
@@ -34,7 +35,7 @@ import okhttp3.Call;
 public class RescueInformationActivity extends BaseActivity{
     private String accidentid;
     private TextView text_accident_type,text_accident_dec,text_accident_address,text_accident_handle_type,text_accident_rceply;
-    private String uid = "123";
+    private String uid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class RescueInformationActivity extends BaseActivity{
         setTitleText("救援信息详情");
         Intent intent = getIntent();
         accidentid = intent.getStringExtra("rescueList");
+        uid = (String) SPUtils.get(RescueInformationActivity.this,"uid","");
         initView();
         getdata();
     }
